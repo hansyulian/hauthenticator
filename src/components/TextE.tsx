@@ -1,0 +1,31 @@
+
+import { useStyleConstants } from "@hooks/useStyleConstants";
+import { useMemo } from "react";
+import { StyleSheet, Text as NativeText } from "react-native"
+import { Text, TextProps } from 'react-native-paper';
+
+type FontWeights = 'bold' | 'normal';
+export type TextETypes = 'screenHeader' | 'normal' | 'otpValue';
+export type TextEProps = TextProps<NativeText> & {
+  type?: TextETypes;
+  weight?: FontWeights;
+}
+export const TextE = (props: TextEProps) => {
+  const { type = 'normal', weight, style, ...rest } = props;
+  const styles = useStyles(type, weight);
+  const memoedStyle = useMemo(() => {
+    return [styles.text, style]
+  }, [styles.text, style])
+  return <Text {...rest} style={memoedStyle} />
+}
+
+const useStyles = (type: TextETypes, weight?: FontWeights) => {
+  const constants = useStyleConstants();
+
+  return useMemo(() => StyleSheet.create({
+    text: {
+      fontSize: constants.textSizes[type],
+      fontWeight: weight ? constants.fontWeight[weight] : constants.textWeight[type] as any,
+    }
+  }), [type, constants, weight])
+}
