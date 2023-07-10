@@ -1,4 +1,4 @@
-import { useAppInfo } from "@hooks/useAppInfo";
+import { useAppInfoContext } from "@hooks/useAppInfoContext";
 import { useAuthenticatorDataContext } from "@hooks/useAuthenticatorDataContext";
 import { SplashScreen } from "@screens/SplashScreen";
 import React, { createContext, PropsWithChildren, useMemo, FC } from "react";
@@ -10,7 +10,7 @@ export const InitializationContext = createContext<InitializationContextValue | 
 
 export const InitializationProvider: FC<PropsWithChildren> = ({ children }) => {
   const { state: authenticatorState } = useAuthenticatorDataContext();
-  const { state: appInfoState } = useAppInfo();
+  const { state: appInfoState } = useAppInfoContext();
 
   const initialized = useMemo(() => {
     return authenticatorState === 'LOADED'

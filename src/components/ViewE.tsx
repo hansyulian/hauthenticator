@@ -2,10 +2,11 @@
 import { useMemo } from "react";
 import { View, StyleSheet, ViewStyle, ViewProps } from "react-native"
 import { useCommonStyles } from "@hooks/useCommonStyles";
-import { useStyleConstants } from "@hooks/useStyleConstants";
 import { SpacingValues, useSpacingExtractor } from "@hooks/useSpacingExtractor";
+import { ColorTokens, useStyleConstants } from "@hooks/useStyleConstants";
 export type ViewEFloating = 'top-left' | 'bottom-left' | 'top-right' | 'bottom-right';
 export type ViewEProps = ViewProps & SpacingValues & {
+  backgroundColor?: ColorTokens;
   floating?: ViewEFloating;
   row?: boolean;
   shadow?: boolean;
@@ -21,9 +22,10 @@ export const ViewE = (props: ViewEProps) => {
   const {
     padding,
     margin,
-    props: { floating, alignItems, fullHeight, fullSize, fullWidth, justifyContent, row, shadow, style, ...rest }
+    props: { backgroundColor, floating, alignItems, fullHeight, fullSize, fullWidth, justifyContent, row, shadow, style, ...rest }
   } = processedProps;
   const styles = useStyles(
+    backgroundColor,
     floating,
     alignItems,
     fullSize,
@@ -43,6 +45,7 @@ export const ViewE = (props: ViewEProps) => {
 
 
 const useStyles = (
+  backgroundColor?: ColorTokens,
   floating?: ViewEFloating,
   alignItems?: string,
   fullSize?: boolean,
@@ -54,8 +57,8 @@ const useStyles = (
   padding?: ViewStyle,
   margin?: ViewStyle
 ) => {
-  const constants = useStyleConstants();
   const commonStyles = useCommonStyles();
+  const styleConstants = useStyleConstants();
 
   return useMemo(() => {
     const view: ViewStyle = {
@@ -64,6 +67,9 @@ const useStyles = (
       justifyContent: justifyContent as any,
       alignItems: alignItems as any,
     };
+    if (backgroundColor) {
+      view.backgroundColor = styleConstants.colors[backgroundColor] as any;
+    }
     if (shadow) {
       Object.assign(view, commonStyles.shadow);
     }
@@ -97,6 +103,7 @@ const useStyles = (
       view,
     })
   }, [
+    backgroundColor,
     padding,
     margin,
     floating,

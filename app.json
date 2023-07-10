@@ -2,7 +2,7 @@
   "expo": {
     "name": "HAuthenticator",
     "slug": "hauthenticator",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -40,6 +40,12 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera.",
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
         }
       ]
     ],

@@ -8,4 +8,3 @@ type JsonData = {
   | [string | number | boolean | JsonData | undefined];
 };
 type AsyncLoadState = 'UNLOADED' | 'LOADING' | 'LOADED' | 'ERROR';
-type Spacings = 'small' | 'medium' | 'large'

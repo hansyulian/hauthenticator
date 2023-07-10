@@ -1,21 +1,21 @@
 import { useCallback, useMemo } from "react";
-import { useStyleConstants } from "./useStyleConstants";
+import { SpacingTokens, useStyleConstants } from "./useStyleConstants";
 
 export type SpacingValues = {
-  margin?: Spacings | true;
-  marginLeft?: Spacings | true;
-  marginRight?: Spacings | true;
-  marginTop?: Spacings | true;
-  marginBottom?: Spacings | true;
-  marginVertical?: Spacings | true;
-  marginHorizontal?: Spacings | true;
-  padding?: Spacings | true;
-  paddingLeft?: Spacings | true;
-  paddingRight?: Spacings | true;
-  paddingTop?: Spacings | true;
-  paddingBottom?: Spacings | true;
-  paddingVertical?: Spacings | true;
-  paddingHorizontal?: Spacings | true;
+  margin?: SpacingTokens | true;
+  marginLeft?: SpacingTokens | true;
+  marginRight?: SpacingTokens | true;
+  marginTop?: SpacingTokens | true;
+  marginBottom?: SpacingTokens | true;
+  marginVertical?: SpacingTokens | true;
+  marginHorizontal?: SpacingTokens | true;
+  padding?: SpacingTokens | true;
+  paddingLeft?: SpacingTokens | true;
+  paddingRight?: SpacingTokens | true;
+  paddingTop?: SpacingTokens | true;
+  paddingBottom?: SpacingTokens | true;
+  paddingVertical?: SpacingTokens | true;
+  paddingHorizontal?: SpacingTokens | true;
 }
 
 export const useSpacingExtractor = <T extends SpacingValues>(props: T) => {
@@ -38,7 +38,7 @@ export const useSpacingExtractor = <T extends SpacingValues>(props: T) => {
     ...rest
   } = props;
 
-  const spacingValuePriority = useCallback((values: (Spacings | true | undefined)[]) => {
+  const spacingValuePriority = useCallback((values: (SpacingTokens | true | undefined)[]) => {
     for (const value of values) {
       if (value === true) {
         return constants.spacing.medium;

@@ -21,7 +21,7 @@ export function App() {
                 <InitializationProvider>
                   <Navigation />
                 </InitializationProvider>
-              </NavigationContainer>
+              </NavigationContainer >
             </SnackbarProvider>
           </SafeAreaProvider>
         </AuthenticationProvider>

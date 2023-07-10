@@ -61,12 +61,13 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
 }
 
 const useStyles = (contentHeight: number, insets: EdgeInsets) => {
-  // const constants = useStyleConstants();
+  const constants = useStyleConstants();
   const commonStyles = useCommonStyles();
   return useMemo(() => StyleSheet.create({
     contentContainer: {
       ...commonStyles.fullWidth,
       height: contentHeight,
+      backgroundColor: constants.colors.background,
     }
   }), [
     contentHeight,

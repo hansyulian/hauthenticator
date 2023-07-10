@@ -15,7 +15,7 @@ export const DataProvider: FC<PropsWithChildren> = ({ children }) => {
   const authenticator = useLoadable(useCallback(async () => {
     const data = await AuthenticatorStore.get();
     if (config.isDevMode && config.authenticatorsDataReplacement) {
-      console.log(config.isDevMode, config.authenticatorsDataReplacement)
+      console.log('devmode override authenticator data', !!config.authenticatorsDataReplacement)
       data.authenticators = config.authenticatorsDataReplacement;
     }
     return data;
@@ -26,7 +26,12 @@ export const DataProvider: FC<PropsWithChildren> = ({ children }) => {
       await AuthenticatorStore.set(data);
     }, [])
   });
-  const appInfo = useLoadable(useCallback(() => AppInfoStore.get(), []), { id: 'appInfo' });
+  const appInfo = useLoadable(useCallback(() => AppInfoStore.get(), []), {
+    id: 'appInfo',
+    onSet: useCallback(async (data: AppInfoStoreData) => {
+      await AppInfoStore.set(data);
+    }, [])
+  });
   const value = useMemo<DataContextValue>(() => {
     return {
       authenticator,

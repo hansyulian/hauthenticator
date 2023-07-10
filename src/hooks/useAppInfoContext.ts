@@ -1,6 +1,6 @@
 import { useDataContext } from "./useDataContext";
 
-export function useAppInfo() {
+export function useAppInfoContext() {
   const dataContext = useDataContext();
   return dataContext.appInfo;
 }

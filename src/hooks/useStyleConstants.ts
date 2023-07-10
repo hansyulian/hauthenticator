@@ -9,6 +9,8 @@ export function useStyleConstants() {
       screenHeader: 40,
     },
     spacing: {
+      negativeSmall: -8,
+      negativeMedium: -16,
       small: 8,
       medium: 16,
       large: 24,
@@ -32,3 +34,6 @@ export function useStyleConstants() {
     }
   }), [theme])
 }
+export type StyleConstants = ReturnType<typeof useStyleConstants>;
+export type ColorTokens = keyof StyleConstants['colors'];
+export type SpacingTokens = keyof StyleConstants['spacing']

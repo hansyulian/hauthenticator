@@ -39,7 +39,6 @@ export const SnackbarProvider: FC<PropsWithChildren> = ({ children }) => {
       dismiss,
     };
   }, [visible, show, dismiss]);
-  console.log('SnakcbarProvider');
 
   return <SnackbarContext.Provider value={value}>
     {children}
