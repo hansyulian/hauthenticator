@@ -15,10 +15,10 @@ function encode(authenticator: Authenticator): string {
 function decode(uriString: string): Authenticator {
   const urlString = decodeURIComponent(uriString);
   const url = new URL(urlString);
-  const name = urlString.split(':')[2].split('?')[0] || '';
+  const type = url.host;
+  const name = urlString.replace(`otpauth://${type}/`, '').split('?')[0] || '';
   const secret = url.searchParams.get('secret');
   const issuer = url.searchParams.get('issuer') || '';
-  const type = url.host;
   if (!secret) {
     throw new BaseException('MissingSecret', {}, 'asldfb32yflajsdf');
   }

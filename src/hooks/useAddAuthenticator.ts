@@ -13,7 +13,6 @@ export const useAddAuthenticator = () => {
       }
       return a.issuer < b.issuer ? -1 : 1;
     });
-    console.log(data?.authenticators, newAuthenticators);
     await set({
       authenticators: newAuthenticators,
     })
