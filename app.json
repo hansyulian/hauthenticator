@@ -2,7 +2,8 @@
   "expo": {
     "name": "HAuthenticator",
     "slug": "hauthenticator",
-    "version": "0.6.0",
+    "jsEngine": "hermes",
+    "version": "0.7.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -16,6 +17,7 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "jsEngine": "jsc",
       "infoPlist": {
         "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera.",
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"

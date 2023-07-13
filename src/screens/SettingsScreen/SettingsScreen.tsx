@@ -7,11 +7,14 @@ import { useSetAppInfo } from "@hooks/useSetAppInfo"
 import { SettingsScreenRow } from "./SettingsScreen.Row"
 import ExpoConstants from "expo-constants"
 import { TextE } from "@components/TextE"
+import { SettingsScreenActionRow } from "./SettingsScreen.ActionRow"
+import { useNavigate } from "@hooks/useNavigate"
 
 export const SettingsScreen = () => {
   const { data } = useAppInfoContext();
   const [authentication, setAuthentication] = useState(false);
   const setAppInfo = useSetAppInfo();
+  const navigate = useNavigate();
 
   useFocusedEffect(() => {
     if (!data) {
@@ -25,7 +28,9 @@ export const SettingsScreen = () => {
     })
   }
   return <ScreenLayout headerText='Settings'>
-    <SettingsScreenToggleRow text="Authentication" value={authentication} onChange={setAuthenticationExtended} />
+    <SettingsScreenToggleRow icon='lock' text="Authentication" value={authentication} onChange={setAuthenticationExtended} />
+    <SettingsScreenActionRow icon='import' text="Import" onPress={() => navigate('Import', {})} />
+    {/* <SettingsScreenActionRow icon='export' text="Export" onPress={()=>navigate()}/> */}
     <SettingsScreenRow justifyContent="space-between" row>
       <TextE>App version</TextE>
       <TextE>{ExpoConstants.manifest?.version || '-'}</TextE>

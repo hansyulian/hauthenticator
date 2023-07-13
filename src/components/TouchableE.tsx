@@ -5,6 +5,7 @@ import { TouchableRipple } from "react-native-paper";
 export type TouchableEProps = PropsWithChildren & {
   type?: 'ripple' | 'opacity' | 'native' | 'withoutFeedback' | 'highlight';
   onPress?: () => void;
+  onLongPress?: () => void;
 };
 
 export const TouchableE = (props: TouchableEProps) => {

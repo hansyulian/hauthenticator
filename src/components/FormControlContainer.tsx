@@ -1,5 +1,7 @@
 import { ViewE, ViewEProps } from "./ViewE";
 
-export const FormControlContainer = (props: ViewEProps) => {
+export type FormControlContainerProps = ViewEProps;
+
+export const FormControlContainer = (props: FormControlContainerProps) => {
   return <ViewE marginBottom {...props} />
 }

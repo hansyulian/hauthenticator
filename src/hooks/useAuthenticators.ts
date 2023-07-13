@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import { useAuthenticatorDataContext } from "./useAuthenticatorDataContext"
 
 export const useAuthenticators = () => {
-  const authenticatorDataContext = useAuthenticatorDataContext();
+  const { data: authenticatorData } = useAuthenticatorDataContext();
   return useMemo(() => {
-    return authenticatorDataContext.data?.authenticators || [];
-  }, [authenticatorDataContext.data?.authenticators])
+    return authenticatorData?.authenticators.filter(record => record.status === 'ACTIVE') || [];
+  }, [authenticatorData?.authenticators])
 }

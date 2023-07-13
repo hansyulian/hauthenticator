@@ -1,13 +1,14 @@
 import { SecondsProgressCircle } from "@components/SecondsProgressCircle";
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
+import { useEncryption } from "@hooks/useEncryption";
 import { useStyleConstants } from "@hooks/useStyleConstants";
 import { calculateOtp } from "@utils/calculateOtp";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 
 export type AuthenticatorPreviewProps = {
-  authenticator: Authenticator;
+  authenticatorExtended: AuthenticatorExtended;
   seconds: number;
   hideTimer?: boolean;
   onChangeOtp?: (value: string) => void;
@@ -15,9 +16,14 @@ export type AuthenticatorPreviewProps = {
 }
 
 export const AuthenticatorPreview = (props: AuthenticatorPreviewProps) => {
-  const { seconds, authenticator, onChangeNextOtp, onChangeOtp, hideTimer = false } = props;
+  const { seconds, authenticatorExtended, onChangeNextOtp, onChangeOtp, hideTimer = false } = props;
+  const { authenticator } = authenticatorExtended;
   const [otp, setOtp] = useState('');
   const [nextOtp, setNextOtp] = useState('');
+  const encryption = useEncryption();
+  const secret = useMemo(() => {
+    return encryption.decrypt(authenticatorExtended.encryptedSecret);
+  }, [authenticatorExtended.encryptedSecret, encryption])
   const styleStage = useMemo(() => {
     if (seconds < 20) {
       return 0;
@@ -34,11 +40,11 @@ export const AuthenticatorPreview = (props: AuthenticatorPreviewProps) => {
 
   const calculateValues = useCallback(() => {
     const now = new Date().getTime();
-    setOtp(calculateOtp(authenticator.secret));
-    setNextOtp(calculateOtp(authenticator.secret, {
+    setOtp(calculateOtp(secret));
+    setNextOtp(calculateOtp(secret, {
       epoch: now + 30000,
     }))
-  }, [authenticator.secret]);
+  }, [secret]);
 
   useEffect(() => {
     onChangeOtp?.(otp);

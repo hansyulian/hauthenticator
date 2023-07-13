@@ -16,3 +16,12 @@ type Authenticator = {
   }
 }
 type AuthenticatorFormData = Partial<Authenticator> & Pick<Authenticator, 'issuer' | 'name' | 'secret'>;
+type AuthenticatorExtended = {
+  authenticator: Omit<Authenticator, 'secret'>;
+  id: string;
+  status: 'ACTIVE' | 'DELETED';
+  encryptedSecret: string;
+  createdAt: string;
+  updatedAt: string;
+}
+type AuthenticatorExtendedFormData = Partial<AuthenticatorExtended> & Pick<AuthenticatorExtended, 'authenticator'>;

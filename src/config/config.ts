@@ -1,11 +1,13 @@
-import { NavigationTargets } from "./NavigationConfig";
+import { NavigationTargets } from "@modules/Navigation";
 
 export const config = {
   isDevMode: false,
-  initialScreen: 'AuthenticatorList' as NavigationTargets,
 
   // dev mode only
-  authenticatorsDataReplacement: undefined as Authenticator[] | undefined,
+  authenticatorsDataReplacement: undefined as AuthenticatorExtended[] | undefined,
+  devTools: false,
+  devInitialScreen: '' as NavigationTargets,
+  devInitialScreenParams: {} as any,
 }
 export type Config = typeof config;
 if (__DEV__) {

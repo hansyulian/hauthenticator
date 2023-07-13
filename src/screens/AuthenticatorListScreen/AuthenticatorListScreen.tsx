@@ -10,6 +10,7 @@ import { AppBarAction } from '@components/AppBarAction';
 import { useNavigate } from '@hooks/useNavigate';
 import { useFocusedEffect } from '@hooks/useFocusedEffect';
 import { useAuthenticators } from '@hooks/useAuthenticators';
+import { SecondsProgressCircle } from '@components/SecondsProgressCircle';
 
 export const AuthenticatorListScreen = () => {
   const authenticators = useAuthenticators();
@@ -24,8 +25,8 @@ export const AuthenticatorListScreen = () => {
     }
     const searchTextLowerCase = searchText.toLowerCase();
     return authenticators.filter(record => {
-      const issuerLowerCase = record.issuer.toLowerCase();
-      const nameLowerCase = record.name.toLowerCase();
+      const issuerLowerCase = record.authenticator.issuer.toLowerCase();
+      const nameLowerCase = record.authenticator.name.toLowerCase();
       return issuerLowerCase.includes(searchTextLowerCase) ||
         nameLowerCase.includes(searchTextLowerCase);
     });
@@ -38,24 +39,29 @@ export const AuthenticatorListScreen = () => {
     } else {
       stop();
     }
-  }, [])
+  }, []);
 
   return <ScreenLayout
     disableBack
     headerText='Authenticator'
     leftSection={<AppBarAction icon='cog' onPress={() => navigate('Settings', {})} />}
     rightSection={<>
-      {/* <AppBarAction icon='alert-outline' onPress={() => { }} /> */}
       <AppBarAction icon='plus' onPress={() => navigate('AuthenticatorAdd', {})} />
     </>}
   >
-    <FlatList ListFooterComponent={<ViewE style={styles.flatListFooter} />} data={filteredAuthenticators} renderItem={({ item }) => <AuthenticatorListScreenRow authenticator={item} seconds={seconds} />} />
-    {authenticators.length > 0 &&
-      <ViewE padding='small' style={styles.searchBarContainer}>
-        <SearchBarE value={searchText} onChangeText={setSearchText} />
-      </ViewE>
+    <FlatList ListFooterComponent={<ViewE style={styles.flatListFooter} />} data={filteredAuthenticators} renderItem={({ item, index }) => <AuthenticatorListScreenRow key={`authenticator-list-screen-row-${index}`} authenticatorExtended={item} seconds={seconds} />} />
+    {
+      authenticators.length > 0 &&
+      <>
+        <ViewE style={styles.timerContainer} padding>
+          <SecondsProgressCircle seconds={30 - seconds} max={30} />
+        </ViewE>
+        <ViewE padding style={styles.searchBarContainer}>
+          <SearchBarE value={searchText} onChangeText={setSearchText} />
+        </ViewE>
+      </>
     }
-  </ScreenLayout>
+  </ScreenLayout >
 }
 
 const useStyles = () => {

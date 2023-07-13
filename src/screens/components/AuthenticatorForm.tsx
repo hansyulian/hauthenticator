@@ -5,6 +5,9 @@ import { useSecondsTimer } from "@hooks/useSecondsTimer";
 import { useEffect, useMemo, useState } from "react";
 import { AuthenticatorPreview } from "./AuthenticatorPreview";
 import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorValues";
+import { validateAuthenticatorForm } from "@utils/validateAuthenticatorForm";
+import { withDefaultAuthenticatorExtendedValues } from "@utils/withDefaultAuthenticatorExtendedValues";
+import { useEncryption } from "@hooks/useEncryption";
 
 export type AuthenticatorFormProps = {
   form?: AuthenticatorFormData;
@@ -18,8 +21,16 @@ export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
   const [secret, setSecret] = useState(form?.secret || '');
   const [issuer, setIssuer] = useState(form?.issuer || '');
   const { seconds, start, stop } = useSecondsTimer(30, false);
-  const validSecret = secret.length === 16;
-  const showPreview = validSecret && !hidePreview;
+  const encryption = useEncryption();
+  const validAuthenticator = validateAuthenticatorForm({
+    name,
+    secret,
+    issuer,
+  });
+  const showPreview = validAuthenticator && !hidePreview;
+  const encryptedSecret = useMemo(() => {
+    return encryption.encrypt(secret);
+  }, [secret, encryption])
 
   useEffect(() => {
     onChange?.({
@@ -62,11 +73,14 @@ export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
         <TextE weight="bold">Authenticator preview:</TextE>
       </ViewE>
       <AuthenticatorPreview
-        authenticator={withDefaultAuthenticatorValues({
-          issuer,
-          name,
-          secret,
-        })}
+        authenticatorExtended={withDefaultAuthenticatorExtendedValues(({
+          authenticator: withDefaultAuthenticatorValues({
+            issuer,
+            name,
+            secret,
+          }),
+          encryptedSecret,
+        }))}
         seconds={seconds}
       />
     </ViewE>}

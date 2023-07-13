@@ -1,9 +1,9 @@
-import { SecureStoreBase } from "./SecureStoreBase";
+import { BasicStoreBase } from "./BasicStoreBase";
 
 export type AuthenticatorStoreData = {
-  authenticators: Authenticator[];
+  authenticators: AuthenticatorExtended[];
 }
 
-export const AuthenticatorStore = new SecureStoreBase<AuthenticatorStoreData>('authenticators', {
+export const AuthenticatorStore = new BasicStoreBase<AuthenticatorStoreData>('authenticators', {
   authenticators: [],
 })

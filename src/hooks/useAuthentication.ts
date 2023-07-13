@@ -1,7 +1,7 @@
 import { AuthenticationContext } from "@modules/AuthenticationContext";
 import { useContext } from "react";
 
-export const useAuthentication = () => {
+export const useAuthenticationContext = () => {
   const context = useContext(AuthenticationContext);
 
   if (context === undefined) {

@@ -25,7 +25,7 @@ export function useCommonStyles() {
       top: 0,
       right: 0,
     },
-    centerHorizontal: {
+    center: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
@@ -43,6 +43,10 @@ export function useCommonStyles() {
     row: {
       display: 'flex',
       flexDirection: 'row',
+    },
+    column: {
+      display: 'flex',
+      flexDirection: 'column',
     },
     // https://ethercreative.github.io/react-native-shadow-generator/
     shadow: {

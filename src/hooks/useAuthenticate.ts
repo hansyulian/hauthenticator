@@ -1,6 +1,6 @@
-import { useAuthentication } from "./useAuthentication";
+import { useAuthenticationContext } from "./useAuthentication";
 
-const useAuthenticate = () => {
-  const { authenticate } = useAuthentication();
+export const useAuthenticate = () => {
+  const { authenticate } = useAuthenticationContext();
   return authenticate
 }

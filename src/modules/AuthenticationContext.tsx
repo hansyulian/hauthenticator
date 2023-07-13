@@ -1,6 +1,5 @@
 import React, { createContext, PropsWithChildren, useMemo, FC, useEffect, useState, useCallback, useRef } from "react";
 import { LocalAuthenticationOptions, SecurityLevel, authenticateAsync } from 'expo-local-authentication';
-import { useAuthenticatorDataContext } from "@hooks/useAuthenticatorDataContext";
 import { useAppInfoContext } from "@hooks/useAppInfoContext";
 import { ViewE } from "@components/ViewE";
 import { checkDeviceAuthentication } from "@utils/checkDeviceAuthentication";
@@ -9,21 +8,22 @@ import { AppState, AppStateStatus } from "react-native";
 export type AuthenticationContextValue = {
   authenticate: () => Promise<boolean>;
   deviceAuthenticationLevel: SecurityLevel | undefined;
+  preventAuthenticate: <T>(callback: AsyncCallback<T>) => Promise<T>
 };
 
 export const AuthenticationContext = createContext<AuthenticationContextValue | undefined>(undefined);
 export type AuthenticateOptions = LocalAuthenticationOptions & { privacyGuard: boolean }
 
 export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { reload: reloadAuthenticators } = useAuthenticatorDataContext();
   const [requireInitialization, setRequireInitialization] = useState(true);
   const [deviceAuthenticationLevel, setDeviceAuthenticationLevel] = useState<SecurityLevel>();
   const [privacyGuard, setPrivacyGuard] = useState(true);
   const lastAppState = useRef<AppStateStatus>();
   const { data: appInfo, state: appInfoState } = useAppInfoContext();
+  const authenticationMutex = useRef<boolean>(false)
 
   const authenticate = useCallback(async (options: Partial<AuthenticateOptions> = {}) => {
-    const { privacyGuard, ...rest } = options;
+    const { privacyGuard = true, ...rest } = options;
     if (privacyGuard) {
       setPrivacyGuard(true);
     }
@@ -34,25 +34,32 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
       setPrivacyGuard(false);
     }
     return result.success;
+  }, []);
+
+  const preventAuthenticate = useCallback(async function <T>(fn: AsyncCallback<T>) {
+    authenticationMutex.current = true;
+    const result = await fn();
+    authenticationMutex.current = false;
+    return result;
   }, [])
 
   const initializeAuthenticated = useCallback(async () => {
     setRequireInitialization(false);
     setPrivacyGuard(false);
     return await Promise.all([
-      reloadAuthenticators()
+
     ]);
   }, []);
 
   useEffect(() => {
-    return AppState.addEventListener('change', async (state: AppStateStatus) => {
-      if (state === 'background' && deviceAuthenticationLevel && deviceAuthenticationLevel > 0) {
-        setPrivacyGuard(true);
-      }
-      if (state === 'active' && lastAppState.current === 'background' && appInfo?.authenticationEnabled) {
+    return AppState.addEventListener('change', async (nextState: AppStateStatus) => {
+      if (nextState === 'active'
+        && lastAppState.current === 'background'
+        && appInfo?.authenticationEnabled
+        && !authenticationMutex.current) {
         authenticate();
       }
-      lastAppState.current = state;
+      lastAppState.current = nextState;
     }).remove
   }, [appInfo?.authenticationEnabled, deviceAuthenticationLevel, authenticate])
 
@@ -86,8 +93,9 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
     return {
       authenticate,
       deviceAuthenticationLevel,
+      preventAuthenticate,
     };
-  }, [authenticate]);
+  }, [authenticate, deviceAuthenticationLevel, preventAuthenticate]);
 
   if (appInfoState !== 'LOADED') {
     return null;

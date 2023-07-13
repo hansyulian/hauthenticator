@@ -1,6 +1,7 @@
 import { ButtonE } from "@components/ButtonE";
+import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
 import { ViewE } from "@components/ViewE";
-import { useAddAuthenticator } from "@hooks/useAddAuthenticator";
+import { useAddAuthenticators } from "@hooks/useAddAuthenticator";
 import { useBack } from "@hooks/useBack";
 import { useNavigate } from "@hooks/useNavigate";
 import { AuthenticatorForm } from "@screens/components/AuthenticatorForm";
@@ -13,7 +14,7 @@ export type AuthenticatorAddScreenFormProps = {
 
 export const AuthenticatorAddScreenForm = () => {
   const [form, setForm] = useState<AuthenticatorFormData>();
-  const addAuthenticator = useAddAuthenticator();
+  const addAuthenticators = useAddAuthenticators();
   const back = useBack();
   const valid = validateAuthenticatorForm(form);
 
@@ -21,18 +22,21 @@ export const AuthenticatorAddScreenForm = () => {
     if (!form || !valid) {
       return;
     }
-    await addAuthenticator(form);
+    await addAuthenticators([form]);
     back(1);
   }
 
-  return <ViewE padding='medium'>
-    <AuthenticatorForm
-      onChange={setForm}
-    />
-    <ButtonE
-      disabled={!valid}
-      title="Confirm"
-      onPress={save}
-    />
-  </ViewE>
+  return <>
+    <ViewE paddingHorizontal>
+      <AuthenticatorForm
+        onChange={setForm}
+      />
+    </ViewE>
+    <FloatingBottomContainer padding>
+      <ButtonE
+        disabled={!valid}
+        onPress={save}
+      >Confirm</ButtonE>
+    </FloatingBottomContainer>
+  </>
 }

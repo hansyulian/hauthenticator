@@ -1,20 +1,20 @@
 import { ViewE } from "@components/ViewE";
-import { SettingsScreenRow } from "./SettingsScreen.Row";
 import { TextE } from "@components/TextE";
 import { SwitchE } from "@components/SwitchE";
+import { SettingsScreenIconRow, SettingsScreenIconRowProps } from "./SettingsScreen.IconRow";
 
-export type SettingsScreenRowProps = {
+export type SettingsScreenToggleRowProps = SettingsScreenIconRowProps & {
   text: string;
   value: boolean;
   onChange: (value: boolean) => void;
 }
 
-export const SettingsScreenToggleRow = (props: SettingsScreenRowProps) => {
-  const { text, onChange, value } = props;
-  return <SettingsScreenRow >
+export const SettingsScreenToggleRow = (props: SettingsScreenToggleRowProps) => {
+  const { text, onChange, value, children, ...rest } = props;
+  return <SettingsScreenIconRow {...rest}>
     <ViewE row justifyContent="space-between" alignItems="center">
       <TextE>{text}</TextE>
       <SwitchE value={value} onValueChange={onChange} />
     </ViewE>
-  </SettingsScreenRow>
+  </SettingsScreenIconRow>
 }

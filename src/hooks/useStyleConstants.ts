@@ -20,14 +20,18 @@ export function useStyleConstants() {
       normal: '400',
     },
     textSizes: {
+      error: 16,
       normal: 16,
       otpValue: 24,
       screenHeader: 28,
+      menuHeader: 24,
     },
     textWeight: {
+      error: '400',
       normal: '400',
       otpValue: '600',
       screenHeader: '600',
+      menuHeader: '600',
     },
     colors: {
       ...theme.colors,

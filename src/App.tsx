@@ -9,22 +9,28 @@ import { ThemeProvider } from '@modules/ThemeProvider';
 import { InitializationProvider } from '@modules/InitializationContext';
 import { DataProvider } from '@modules/DataContext';
 import { AuthenticationProvider } from '@modules/AuthenticationContext';
+import { MenuProvider } from '@modules/MenuContext';
+import { DialogProvider } from '@modules/DialogContext';
 
 export function App() {
   return (
     <DataProvider>
       <ThemeProvider>
-        <AuthenticationProvider>
-          <SafeAreaProvider>
-            <SnackbarProvider>
-              <NavigationContainer>
-                <InitializationProvider>
-                  <Navigation />
-                </InitializationProvider>
-              </NavigationContainer >
-            </SnackbarProvider>
-          </SafeAreaProvider>
-        </AuthenticationProvider>
+        <SnackbarProvider>
+          <DialogProvider>
+            <AuthenticationProvider>
+              <SafeAreaProvider>
+                <MenuProvider>
+                  <NavigationContainer>
+                    <InitializationProvider>
+                      <Navigation />
+                    </InitializationProvider>
+                  </NavigationContainer >
+                </MenuProvider>
+              </SafeAreaProvider>
+            </AuthenticationProvider>
+          </DialogProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </DataProvider>
   );

@@ -1,14 +1,13 @@
 import { useCommonStyles } from "@hooks/useCommonStyles";
 import { PropsWithChildren, ReactNode, useMemo, useState } from "react"
 import { LayoutChangeEvent, LayoutRectangle, StyleSheet, View } from "react-native"
-import { EdgeInsets, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBarE } from "./StatusBarE";
 import { useStyleConstants } from "@hooks/useStyleConstants";
 import { Appbar } from "react-native-paper";
 import { useBack } from "@hooks/useBack";
 import { useCanBack } from "@hooks/useCanBack";
 import { useIsFocused } from "@react-navigation/native";
-import { TextE } from "./TextE";
 import { ViewE } from "./ViewE";
 
 export type ScreenLayoutProps = PropsWithChildren & {
