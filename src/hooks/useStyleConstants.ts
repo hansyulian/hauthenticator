@@ -25,6 +25,9 @@ export function useStyleConstants() {
       otpValue: 24,
       screenHeader: 28,
       menuHeader: 24,
+      code: 12,
+      pairLabel: 16,
+      pairValue: 16,
     },
     textWeight: {
       error: '400',
@@ -32,6 +35,9 @@ export function useStyleConstants() {
       otpValue: '600',
       screenHeader: '600',
       menuHeader: '600',
+      code: '400',
+      pairLabel: '600',
+      pairValue: '400',
     },
     colors: {
       ...theme.colors,

@@ -1,6 +1,7 @@
 import { DividerE } from "@components/DividerE";
 import { TouchableE } from "@components/TouchableE";
 import { ViewE } from "@components/ViewE";
+import { useAuthenticate } from "@hooks/useAuthenticate";
 import { useConfirmationDialog } from "@hooks/useConfirmationDialog";
 import { useDeleteAuthenticator } from "@hooks/useDeleteAuthenticator";
 import { useMenu } from "@hooks/useMenu";
@@ -18,6 +19,7 @@ export type AuthenticatorListScreenRowProps = {
 export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProps) => {
   const { seconds, authenticatorExtended } = props;
   const { authenticator } = authenticatorExtended;
+  const authenticate = useAuthenticate();
   const [otp, setOtp] = useState('');
   const snackbar = useSnackbar();
   const navigate = useNavigate();
@@ -40,6 +42,17 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
           navigate('AuthenticatorEdit', {
             authenticatorExtended,
           })
+        }
+      }, {
+        text: 'Show QR',
+        icon: 'qrcode',
+        onPress: async () => {
+          const result = await authenticate();
+          if (result) {
+            navigate('AuthenticatorDetail', {
+              authenticatorExtended,
+            })
+          }
         }
       }, {
         onPress: () => {

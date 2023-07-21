@@ -13,10 +13,14 @@ const Stack = createNativeStackNavigator<NavigationParams>();
 const initialScreen = config.devTools ? 'DevTools' : 'AuthenticatorList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthenticatorEditScreen } from '@screens/AuthenticatorEditScreen/AuthenticatorEditScreen';
+import { AuthenticatorDetailScreen } from '@screens/AuthenticatorDetailScreen/AuthenticatorDetailScreen';
 
 export type NavigationParams = {
   AuthenticatorList: {},
   AuthenticatorAdd: {},
+  AuthenticatorDetail: {
+    authenticatorExtended: AuthenticatorExtended;
+  },
   AuthenticatorAddFormConfirmation: {
     form: AuthenticatorFormData;
   },
@@ -41,6 +45,7 @@ export const Navigation: FC<PropsWithChildren> = () => {
     <Stack.Screen name='AuthenticatorList' component={AuthenticatorListScreen} />
     <Stack.Screen name='AuthenticatorAdd' component={AuthenticatorAddScreen} />
     <Stack.Screen name='AuthenticatorEdit' component={AuthenticatorEditScreen} />
+    <Stack.Screen name='AuthenticatorDetail' component={AuthenticatorDetailScreen} />
     <Stack.Screen name='AuthenticatorAddFormConfirmation' component={AuthenticatorAddFormConfirmationScreen} />
     <Stack.Screen name='Import' component={ImportScreen} />
     <Stack.Screen name='ImportConfirmation' component={ImportConfirmationScreen} />

@@ -24,6 +24,9 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const authenticate = useCallback(async (options: Partial<AuthenticateOptions> = {}) => {
     const { privacyGuard = true, ...rest } = options;
+    if (!deviceAuthenticationLevel || deviceAuthenticationLevel < 1) {
+      return true;
+    }
     if (privacyGuard) {
       setPrivacyGuard(true);
     }
@@ -34,7 +37,7 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
       setPrivacyGuard(false);
     }
     return result.success;
-  }, []);
+  }, [deviceAuthenticationLevel]);
 
   const preventAuthenticate = useCallback(async function <T>(fn: AsyncCallback<T>) {
     authenticationMutex.current = true;
@@ -57,6 +60,8 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
         && lastAppState.current === 'background'
         && appInfo?.authenticationEnabled
         && !authenticationMutex.current) {
+
+        console.log(lastAppState.current, nextState, appInfo?.authenticationEnabled, authenticationMutex.current)
         authenticate();
       }
       lastAppState.current = nextState;

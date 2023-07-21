@@ -69,6 +69,7 @@ const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewSty
       alignItems: alignItems as any,
       minHeight,
       minWidth,
+      maxWidth: '100%',
     };
     if (gap) {
       if (gap === true) {

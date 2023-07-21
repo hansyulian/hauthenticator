@@ -49,7 +49,15 @@ export const AuthenticatorListScreen = () => {
       <AppBarAction icon='plus' onPress={() => navigate('AuthenticatorAdd', {})} />
     </>}
   >
-    <FlatList ListFooterComponent={<ViewE style={styles.flatListFooter} />} data={filteredAuthenticators} renderItem={({ item, index }) => <AuthenticatorListScreenRow key={`authenticator-list-screen-row-${index}`} authenticatorExtended={item} seconds={seconds} />} />
+    <FlatList
+      ListFooterComponent={<ViewE style={styles.flatListFooter} />}
+      data={filteredAuthenticators} renderItem={({ item, index }) =>
+        <AuthenticatorListScreenRow
+          key={`authenticator-list-screen-row-${index}`}
+          authenticatorExtended={item}
+          seconds={seconds}
+        />}
+    />
     {
       authenticators.length > 0 &&
       <>
@@ -61,6 +69,7 @@ export const AuthenticatorListScreen = () => {
         </ViewE>
       </>
     }
+
   </ScreenLayout >
 }
 
