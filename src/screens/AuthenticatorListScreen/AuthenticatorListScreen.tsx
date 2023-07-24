@@ -11,11 +11,13 @@ import { useNavigate } from '@hooks/useNavigate';
 import { useFocusedEffect } from '@hooks/useFocusedEffect';
 import { useAuthenticators } from '@hooks/useAuthenticators';
 import { SecondsProgressCircle } from '@components/SecondsProgressCircle';
+import { useIsAppActive } from '@hooks/useIsAppActive';
 
 export const AuthenticatorListScreen = () => {
   const authenticators = useAuthenticators();
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
+  const isAppActive = useIsAppActive();
   const filteredAuthenticators = useMemo(() => {
     if (!authenticators) {
       return [];
@@ -40,6 +42,10 @@ export const AuthenticatorListScreen = () => {
       stop();
     }
   }, []);
+
+  if (!isAppActive) {
+    return null;
+  }
 
   return <ScreenLayout
     disableBack
