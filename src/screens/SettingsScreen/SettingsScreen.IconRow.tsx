@@ -1,6 +1,6 @@
 import { ViewE } from "@components/ViewE";
 import { SettingsScreenRow, SettingsScreenRowProps } from "./SettingsScreen.Row";
-import { IconButton } from "react-native-paper";
+import { IconE } from "@components/IconE";
 
 export type SettingsScreenIconRowProps = SettingsScreenRowProps & {
   icon: string;
@@ -12,7 +12,7 @@ export const SettingsScreenIconRow = (props: SettingsScreenIconRowProps) => {
     <ViewE row justifyContent="space-between" alignItems="center">
       <ViewE row alignItems="center">
         <ViewE marginVertical='negativeMedium'>
-          <IconButton icon={icon} />
+          <IconE icon={icon} />
         </ViewE>
         <ViewE flex>
           {children}

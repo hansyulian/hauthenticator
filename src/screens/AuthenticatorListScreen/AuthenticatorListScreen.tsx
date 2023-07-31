@@ -27,8 +27,8 @@ export const AuthenticatorListScreen = () => {
     }
     const searchTextLowerCase = searchText.toLowerCase();
     return authenticators.filter(record => {
-      const issuerLowerCase = record.authenticator.issuer.toLowerCase();
-      const nameLowerCase = record.authenticator.name.toLowerCase();
+      const issuerLowerCase = record.authenticator.issuer?.toLowerCase() || '';
+      const nameLowerCase = record.authenticator.name?.toLowerCase() || '';
       return issuerLowerCase.includes(searchTextLowerCase) ||
         nameLowerCase.includes(searchTextLowerCase);
     });
@@ -57,7 +57,8 @@ export const AuthenticatorListScreen = () => {
   >
     <FlatList
       ListFooterComponent={<ViewE style={styles.flatListFooter} />}
-      data={filteredAuthenticators} renderItem={({ item, index }) =>
+      data={filteredAuthenticators}
+      renderItem={({ item, index }) =>
         <AuthenticatorListScreenRow
           key={`authenticator-list-screen-row-${index}`}
           authenticatorExtended={item}

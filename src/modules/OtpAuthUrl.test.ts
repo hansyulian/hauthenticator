@@ -1,4 +1,4 @@
-import { OtpAuthUrl } from "./OthAuthUrl";
+import { OtpAuthUrl } from "./OtpAuthUrl";
 
 describe('OthAuthUrl', () => {
   describe('OthAuthUrl.decode', () => {
@@ -38,6 +38,21 @@ describe('OthAuthUrl', () => {
     })
   });
   describe('OtpAuthUrl.encode', () => {
-
+    it('should be able to encode', () => {
+      const result = OtpAuthUrl.encode({
+        algorithm: 'sha1',
+        type: 'totp',
+        digits: 6,
+        issuer: 'issuertest',
+        name: 'nametest',
+        secret: 'secrettest',
+        counter: {
+          high: 0,
+          low: 0,
+          unsigned: false,
+        }
+      });
+      expect(result).toStrictEqual('otpauth://totp/issuertest%3Anametest?secret=secrettest&issuer=issuertest');
+    })
   })
 })

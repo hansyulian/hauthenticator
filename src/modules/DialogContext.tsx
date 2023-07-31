@@ -1,6 +1,4 @@
 import { TextE } from "@components/TextE";
-import { useStyleConstants } from "@hooks/useStyleConstants";
-import { StyleSheet } from 'react-native';
 import React, { createContext, useState, PropsWithChildren, useMemo, FC, useCallback } from "react";
 import { Dialog, Portal } from "react-native-paper";
 import { ButtonE } from "@components/ButtonE";
@@ -16,6 +14,9 @@ export type ShowDialogOptions = {
   title?: string;
   content: string;
   buttons?: DialogButton[];
+  hideCloseButton?: boolean;
+  closeButtonText?: string;
+  closeButtonIcon?: string;
 }
 
 export type DialogContextValue = {
@@ -45,15 +46,16 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [show, hide]);
 
   const buttonsCalculated = useMemo<DialogButton[]>(() => {
-    if (!options?.buttons) {
-      return [{
-        text: 'Close',
-        icon: 'close',
+    const result = [...options?.buttons || []];
+    if (!options?.hideCloseButton) {
+      result.push({
+        text: options?.closeButtonText || 'Close',
+        icon: options?.closeButtonIcon || 'close',
         onPress: hide,
-      }]
+      });
     }
-    return options.buttons;
-  }, [options?.buttons])
+    return result;
+  }, [options?.buttons, options?.closeButtonText, options?.hideCloseButton, options?.closeButtonIcon])
 
   const handleButtonPress = async (fn: AsyncCallback<void>) => {
     await fn();
@@ -69,7 +71,7 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
           <TextE>{options?.content}</TextE>
         </Dialog.Content>
         <Dialog.Actions>
-          {buttonsCalculated.map((button, index) => <ButtonE key={`dialog-provider-item-key-${index}`} icon={button.icon} onPress={() => handleButtonPress(button.onPress)}>
+          {buttonsCalculated.map((button, index) => <ButtonE mode="elevated" key={`dialog-provider-item-key-${index}`} icon={button.icon} onPress={() => handleButtonPress(button.onPress)}>
             {button.text}
           </ButtonE>)}
         </Dialog.Actions>

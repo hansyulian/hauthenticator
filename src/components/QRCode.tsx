@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { LayoutChangeEvent, StyleSheet } from 'react-native';
+import { useState } from "react";
+import { LayoutChangeEvent } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { ViewE } from "./ViewE";
 

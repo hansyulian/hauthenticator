@@ -18,8 +18,15 @@ export type QRScannerProps = {
 export const QRScanner = (props: QRScannerProps) => {
   const { disabled, onScan, onEnable, size } = props;
   const [permissionResponse, requestPermission] = BarCodeScanner.usePermissions();
+  const [isDisabled, setIsDisabled] = useState(false);
   const [width, setWidth] = useState(0);
   const styles = useStyles(size || width);
+
+  useEffect(() => {
+    if (disabled !== undefined) {
+      setIsDisabled(disabled);
+    }
+  }, [disabled])
 
   useEffect(() => {
     if (!permissionResponse?.canAskAgain) {
@@ -39,8 +46,18 @@ export const QRScanner = (props: QRScannerProps) => {
     if (type !== 256) { // qr type code
       return;
     }
-    onScan(data)
+    onScan(data);
+    if (disabled === undefined) {
+      setIsDisabled(true);
+    }
   };
+
+  const onEnableProxy = () => {
+    if (disabled === undefined) {
+      setIsDisabled(false);
+    }
+    onEnable?.();
+  }
 
   return (
     <ViewE fullSize style={styles.container}
@@ -51,12 +68,12 @@ export const QRScanner = (props: QRScannerProps) => {
         <ViewE style={styles.scannerContainer}>
           <BarCodeScanner
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-            onBarCodeScanned={disabled ? undefined : handleScanned}
+            onBarCodeScanned={isDisabled ? undefined : handleScanned}
             style={styles.scanner}
           />
         </ViewE>
-        {disabled && <ViewE style={styles.disableScannerOverlay}>
-          <ButtonE onPress={onEnable} >Rescan</ButtonE>
+        {isDisabled && <ViewE style={styles.disableScannerOverlay}>
+          <ButtonE onPress={onEnableProxy} >Rescan</ButtonE>
         </ViewE>
         }
       </>

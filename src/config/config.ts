@@ -2,6 +2,7 @@ import { NavigationTargets } from "@modules/Navigation";
 
 export const config = {
   isDevMode: false,
+  exportCountPerPage: 10,
 
   // dev mode only
   authenticatorsDataReplacement: undefined as AuthenticatorExtended[] | undefined,

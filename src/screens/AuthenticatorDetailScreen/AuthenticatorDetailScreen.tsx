@@ -6,7 +6,7 @@ import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
 import { useEncryption } from "@hooks/useEncryption";
 import { NavigationProps } from "@modules/Navigation";
-import { OtpAuthUrl } from "@modules/OthAuthUrl";
+import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useMemo } from "react";
 
 export const AuthenticatorDetailScreen = (

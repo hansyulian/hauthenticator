@@ -28,6 +28,7 @@ export function useStyleConstants() {
       code: 12,
       pairLabel: 16,
       pairValue: 16,
+      paragraphHeader: 20,
     },
     textWeight: {
       error: '400',
@@ -36,8 +37,9 @@ export function useStyleConstants() {
       screenHeader: '600',
       menuHeader: '600',
       code: '400',
-      pairLabel: '600',
+      pairLabel: '800',
       pairValue: '400',
+      paragraphHeader: '700',
     },
     colors: {
       ...theme.colors,

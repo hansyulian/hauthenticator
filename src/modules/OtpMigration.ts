@@ -6,25 +6,50 @@ const jsonDescriptor = require('@assets/authenticatorProto.json');
 const protobufRoot = protobuf.Root.fromJSON(jsonDescriptor);
 const migrationPayload = protobufRoot.lookupType("MigrationPayload");
 
-const ALGORITHM: any = {
-  0: "unspecified",
-  1: "sha1",
-  2: "sha256",
-  3: "sha512",
-  4: "md5",
+type OtpParameter = {
+  secret: Uint8Array;
+  name?: string;
+  issuer?: string;
+  algorithm: OtpParameterAlgorithm;
+  digits: OtpParameterDigitCount;
+  type: OtpParameterType;
+}
+
+export type MigrationPayload = {
+  otpParameters: OtpParameter[];
+  version: number;
+  batchSize: number;
+  batchIndex: number;
+  batchId: number;
+}
+
+export type ParsedMigrationPayload = {
+  otpParameters: Authenticator[];
+  version: number;
+  batchSize: number;
+  batchIndex: number;
+  batchId: number;
+}
+enum OtpParameterAlgorithm {
+  "unspecified" = 0,
+  "sha1" = 1,
+  "sha256" = 2,
+  "sha512" = 3,
+  "md5" = 4,
 };
 
-const DIGIT_COUNT: any = {
-  0: "unspecified",
-  1: 6,
-  2: 8,
+enum OtpParameterDigitCount {
+  "unspecified" = 0,
+  'six' = 1,
+  'eight' = 2,
 };
 
-const OTP_TYPE: any = {
-  0: "unspecified",
-  1: "hotp",
-  2: "totp",
+enum OtpParameterType {
+  "unspecified" = 0,
+  "hotp" = 1,
+  "totp" = 2,
 };
+
 export type AuthenticationMigrationProtobuf = {
   otpParameters: Authenticator[]
 }
@@ -34,7 +59,7 @@ export const OtpMigration = {
   encode,
 }
 
-async function decode(sourceUrl: string) {
+function decode(sourceUrl: string) {
   if (sourceUrl.indexOf("otpauth-migration://offline") !== 0) {
     throw new BaseException('InvalidMigrationUrl');
   }
@@ -43,24 +68,78 @@ async function decode(sourceUrl: string) {
     throw new BaseException('MissingMigrationData');
   }
   const buffer = Buffer.from(dataBase64, "base64");
-  const decodedOtpPayload: any = migrationPayload.decode(buffer);
-
+  const decodedOtpPayload = migrationPayload.decode(buffer) as unknown as MigrationPayload;
   const otpParameters: Authenticator[] = [];
   for (let otpParameter of decodedOtpPayload.otpParameters) {
     otpParameters.push({
-      secret: base32.stringify(otpParameter.secret),
+      secret: base32.stringify(otpParameter.secret as any),
       name: otpParameter.name,
       issuer: otpParameter.issuer,
-      algorithm: ALGORITHM[otpParameter.algorithm] as AuthenticatorAlgorithms,
-      digits: DIGIT_COUNT[otpParameter.digits] as AuthenticatorDigitCount,
-      type: OTP_TYPE[otpParameter.type] as AuthenticatorType,
-      counter: otpParameter.counter,
+      algorithm: OtpParameterAlgorithm[otpParameter.algorithm] as AuthenticatorAlgorithms,
+      digits: parseDigitCount(otpParameter.digits),
+      type: OtpParameterType[otpParameter.type] as AuthenticatorType,
     });
   }
-
-  return otpParameters;
+  const parsed: ParsedMigrationPayload = {
+    batchId: decodedOtpPayload.batchId,
+    batchIndex: decodedOtpPayload.batchIndex,
+    batchSize: decodedOtpPayload.batchSize,
+    otpParameters,
+    version: decodedOtpPayload.version,
+  }
+  return parsed;
 }
 
-async function encode(otpParameters: Authenticator[]) {
-  throw new BaseException('Unimplemented')
+function encode(payload: Partial<ParsedMigrationPayload>) {
+  const {
+    batchId = Math.ceil(Math.random() * 1000000),
+    batchIndex = 1,
+    batchSize = 1,
+    version = 1,
+    otpParameters: parsedOtpParameters = [],
+  } = payload
+  const otpParameters: OtpParameter[] = [];
+  for (const parsedOtpParameter of parsedOtpParameters) {
+    const otpParameter: OtpParameter = {
+      secret: base32.parse(parsedOtpParameter.secret),
+      algorithm: OtpParameterAlgorithm[parsedOtpParameter.algorithm],
+      digits: serializeDigitCount(parsedOtpParameter.digits),
+      type: OtpParameterType[parsedOtpParameter.type],
+    };
+    if (parsedOtpParameter.name) {
+      otpParameter.name = parsedOtpParameter.name
+    }
+    if (parsedOtpParameter.issuer) {
+      otpParameter.issuer = parsedOtpParameter.issuer
+    }
+    otpParameters.push(otpParameter)
+  }
+  const serializedPayload = {
+    batchId,
+    batchIndex,
+    batchSize,
+    version,
+    otpParameters,
+  }
+  const message = migrationPayload.fromObject(serializedPayload)
+  const encodedUint8Array = migrationPayload.encode(message).finish();
+  const dataBase64 = encodeURIComponent(Buffer.from(encodedUint8Array).toString('base64'));
+  const result = `otpauth-migration://offline?data=${dataBase64}`;
+  return result;
+}
+
+function parseDigitCount(value: OtpParameterDigitCount): AuthenticatorDigitCount {
+  switch (value) {
+    case OtpParameterDigitCount.eight: return 8;
+    case OtpParameterDigitCount.six: return 6;
+    case OtpParameterDigitCount.unspecified: return 'unspecified';
+  }
+}
+
+function serializeDigitCount(value: AuthenticatorDigitCount): OtpParameterDigitCount {
+  switch (value) {
+    case "unspecified": return OtpParameterDigitCount.unspecified;
+    case 6: return OtpParameterDigitCount.six;
+    case 8: return OtpParameterDigitCount.eight;
+  }
 }

@@ -1,15 +1,13 @@
+import { ButtonE } from "@components/ButtonE";
 import { ScreenLayout } from "@components/ScreenLayout"
+import { ScrollViewE } from "@components/ScrollViewE";
 import { config } from "@config/config";
 import { useNavigate } from "@hooks/useNavigate"
-import { uuid } from "@utils/uuid";
 import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
 
 export const DevToolsScreen = () => {
   const navigate = useNavigate();
   const [shouldTriggerNavigate, setShouldTriggerNavigate] = useState(true);
-
-  console.log(uuid());
 
   useEffect(() => {
     if (config.devInitialScreen) {
@@ -19,8 +17,15 @@ export const DevToolsScreen = () => {
     }
   }, [navigate, shouldTriggerNavigate]);
 
+  const goToHome = () => {
+    navigate('AuthenticatorList', {});
+  }
+
   return <ScreenLayout headerText='Dev Tools'>
-    <ScrollView>
-    </ScrollView>
+    <ScrollViewE padding>
+      <ButtonE onPress={goToHome}>
+        Go to home screen
+      </ButtonE>
+    </ScrollViewE>
   </ScreenLayout>
 } 

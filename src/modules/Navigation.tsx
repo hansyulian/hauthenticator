@@ -14,6 +14,8 @@ const initialScreen = config.devTools ? 'DevTools' : 'AuthenticatorList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AuthenticatorEditScreen } from '@screens/AuthenticatorEditScreen/AuthenticatorEditScreen';
 import { AuthenticatorDetailScreen } from '@screens/AuthenticatorDetailScreen/AuthenticatorDetailScreen';
+import { ExportSelectionScreen } from '@screens/ExportSelectionScreen/ExportSelectionScreen';
+import { ExportScreen } from '@screens/ExportScreen/ExportScreen';
 
 export type NavigationParams = {
   AuthenticatorList: {},
@@ -28,6 +30,10 @@ export type NavigationParams = {
     authenticatorExtended: AuthenticatorExtended;
   },
   Import: {},
+  ExportSelection: {},
+  Export: {
+    authenticatorExtendeds: AuthenticatorExtended[];
+  },
   ImportConfirmation: {
     authenticators: Authenticator[],
   },
@@ -50,6 +56,8 @@ export const Navigation: FC<PropsWithChildren> = () => {
     <Stack.Screen name='Import' component={ImportScreen} />
     <Stack.Screen name='ImportConfirmation' component={ImportConfirmationScreen} />
     <Stack.Screen name='Settings' component={SettingsScreen} />
+    <Stack.Screen name="ExportSelection" component={ExportSelectionScreen} />
+    <Stack.Screen name="Export" component={ExportScreen} />
     {config.isDevMode && <Stack.Screen name='DevTools' component={DevToolsScreen} />}
   </Stack.Navigator>
 }

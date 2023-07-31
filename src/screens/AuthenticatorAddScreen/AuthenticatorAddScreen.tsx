@@ -5,8 +5,6 @@ import { ViewE } from "@components/ViewE";
 import { AuthenticatorAddScreenScan } from "./AuthenticatorAddScreen.Scan";
 import { AuthenticatorAddScreenForm } from "./AuthenticatorAddScreen.Form";
 import { ScrollViewE } from "@components/ScrollViewE";
-import { ButtonE } from "@components/ButtonE";
-import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
 
 export type AuthenticatorAddScreenProps = {
 

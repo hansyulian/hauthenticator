@@ -5,7 +5,7 @@ import { TextBox } from "@components/TextBox";
 import { ViewE } from "@components/ViewE"
 import { useFocusedEffect } from "@hooks/useFocusedEffect";
 import { useNavigate } from "@hooks/useNavigate";
-import { OtpAuthUrl } from "@modules/OthAuthUrl";
+import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useEffect, useState } from "react";
 
 export type AuthenticatorAddScreenScanProps = {
