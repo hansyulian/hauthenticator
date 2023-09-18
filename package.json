@@ -12,6 +12,7 @@
     "test:ci": "npm run test --coverage",
     "test:badges": "npm run test:ci  && jest-coverage-badges --input coverage/coverage-summary.json --output __badges__",
     "proto:compile": "node scripts/compileProto",
+    "build:android:development": "eas build -p android --profile development",
     "build:android:apk": "eas build -p android --profile apk",
     "build:android:apk:local": "eas build -p android --profile apk --local"
   },
@@ -22,6 +23,7 @@
     "@otplib/plugin-base32-enc-dec": "^12.0.1",
     "@otplib/plugin-crypto-js": "^12.0.1",
     "@react-native-async-storage/async-storage": "1.17.11",
+    "@react-native-google-signin/google-signin": "^10.0.1",
     "@react-navigation/native": "6.1.7",
     "@react-navigation/native-stack": "6.9.13",
     "crypto-js": "3.3.0",
@@ -29,6 +31,7 @@
     "expo-barcode-scanner": "~12.3.2",
     "expo-clipboard": "~4.1.2",
     "expo-constants": "~14.2.1",
+    "expo-google-drive-api-wrapper": "^1.0.2",
     "expo-local-authentication": "~13.3.0",
     "expo-secure-store": "~12.1.1",
     "expo-status-bar": "1.4.4",
@@ -44,7 +47,8 @@
     "react-native-screens": "3.20.0",
     "react-native-svg": "13.4.0",
     "react-native-uuid": "^2.0.1",
-    "rfc4648": "^1.5.2"
+    "rfc4648": "^1.5.2",
+    "expo-dev-client": "~2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
