@@ -20,3 +20,9 @@ type AuthenticatorExtended = {
   updatedAt: string;
 }
 type AuthenticatorExtendedFormData = Partial<AuthenticatorExtended> & Pick<AuthenticatorExtended, 'authenticator'>;
+
+type AuthenticatorBackupData = {
+  authenticators: AuthenticatorExtended[];
+  timestamp: string;
+  version: number;
+};

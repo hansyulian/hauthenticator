@@ -14,6 +14,8 @@ export const DevToolsScreen = () => {
       console.log('navigating to', config.devInitialScreen)
       navigate(config.devInitialScreen, config.devInitialScreenParams || {})
       setShouldTriggerNavigate(false);
+    } else {
+      goToHome();
     }
   }, [navigate, shouldTriggerNavigate]);
 
