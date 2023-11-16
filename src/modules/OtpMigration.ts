@@ -1,7 +1,8 @@
-import { base32 } from "rfc4648";
 import { Buffer } from "@craftzdog/react-native-buffer";
 import protobuf from 'protobufjs';
 import { BaseException } from "./BaseException";
+import { uint8ArrayToBase32 } from "@utils/uint8ArrayToBase32";
+import { base32ToUint8Array } from "@utils/base32ToUint8Array";
 const jsonDescriptor = require('@assets/authenticatorProto.json');
 const protobufRoot = protobuf.Root.fromJSON(jsonDescriptor);
 const migrationPayload = protobufRoot.lookupType("MigrationPayload");
@@ -72,7 +73,7 @@ function decode(sourceUrl: string) {
   const otpParameters: Authenticator[] = [];
   for (let otpParameter of decodedOtpPayload.otpParameters) {
     otpParameters.push({
-      secret: base32.stringify(otpParameter.secret as any),
+      secret: uint8ArrayToBase32(otpParameter.secret as any),
       name: otpParameter.name,
       issuer: otpParameter.issuer,
       algorithm: OtpParameterAlgorithm[otpParameter.algorithm] as AuthenticatorAlgorithms,
@@ -101,7 +102,7 @@ function encode(payload: Partial<ParsedMigrationPayload>) {
   const otpParameters: OtpParameter[] = [];
   for (const parsedOtpParameter of parsedOtpParameters) {
     const otpParameter: OtpParameter = {
-      secret: base32.parse(parsedOtpParameter.secret),
+      secret: base32ToUint8Array(parsedOtpParameter.secret),
       algorithm: OtpParameterAlgorithm[parsedOtpParameter.algorithm],
       digits: serializeDigitCount(parsedOtpParameter.digits),
       type: OtpParameterType[parsedOtpParameter.type],
