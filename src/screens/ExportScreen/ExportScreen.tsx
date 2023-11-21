@@ -13,7 +13,6 @@ import { OtpMigration } from "@modules/OtpMigration";
 import { copyClipboard } from "@utils/copyClipboard";
 import { useMemo, useState } from "react";
 
-
 export const ExportScreen = (
   props: NavigationProps<'Export'>
 ) => {
@@ -43,7 +42,7 @@ export const ExportScreen = (
       }));
       result.push(OtpMigration.encode({
         batchId,
-        batchIndex: i + 1,
+        batchIndex: i,
         batchSize: totalPages,
         otpParameters: authenticators,
         version: 1,
@@ -71,7 +70,7 @@ export const ExportScreen = (
   return <ScreenLayout headerText='Export'
     rightSection={<IconE icon='check' onPress={onFinished} />}
   >
-    <ViewE justifyContent="center" padding gap='large'>
+    <ViewE justifyContent="center" gap='large' padding>
       <QRCodeE
         value={exportUri[page]}
       />

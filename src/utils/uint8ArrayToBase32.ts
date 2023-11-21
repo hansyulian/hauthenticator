@@ -1,5 +1,6 @@
+const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32 character set
+
 export function uint8ArrayToBase32(uint8Array: Uint8Array) {
-  const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32 character set
   const base32Array = [];
   let bits = 0;
   let bitsCount = 0;
