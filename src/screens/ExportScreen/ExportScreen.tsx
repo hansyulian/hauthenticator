@@ -2,6 +2,7 @@ import { ButtonE } from "@components/ButtonE";
 import { IconE } from "@components/IconE";
 import { QRCodeE } from "@components/QRCode";
 import { ScreenLayout } from "@components/ScreenLayout"
+import { SwitchE } from "@components/SwitchE";
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
 import { config } from "@config/config";
@@ -70,17 +71,19 @@ export const ExportScreen = (
   return <ScreenLayout headerText='Export'
     rightSection={<IconE icon='check' onPress={onFinished} />}
   >
-    <ViewE justifyContent="center" gap='large' padding>
+    <ViewE gap='large' padding fullSize>
       <QRCodeE
         value={exportUri[page]}
       />
       <ButtonE icon='content-copy' onPress={onCopyToClipboard}>
         Copy to clipboard
       </ButtonE>
-      <ViewE justifyContent="center" row alignItems="center">
-        <IconE icon='chevron-left' onPress={onPreviousPage} disabled={!canPrevious} />
-        <TextE>Page {page + 1} of {totalPages}</TextE>
-        <IconE icon='chevron-right' onPress={onNextPage} disabled={!canNext} />
+      <ViewE justifyContent="center" row alignItems="flex-end" flex={1}>
+        <ViewE row justifyContent="center" alignItems="center">
+          <IconE icon='chevron-left' onPress={onPreviousPage} disabled={!canPrevious} />
+          <TextE>Page {page + 1} of {totalPages}</TextE>
+          <IconE icon='chevron-right' onPress={onNextPage} disabled={!canNext} />
+        </ViewE>
       </ViewE>
     </ViewE>
   </ScreenLayout>

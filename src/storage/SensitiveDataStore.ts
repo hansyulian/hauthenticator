@@ -1,9 +1,9 @@
-import { BasicStoreBase } from "./BasicStoreBase";
+import { SecureStoreBase } from "./SecureStoreBase";
 
 export type SensitiveDataStoreData = {
   encryptionKey: string;
 }
 
-export const SensitiveDataStore = new BasicStoreBase<SensitiveDataStoreData>('sensitiveData', {
+export const SensitiveDataStore = new SecureStoreBase<SensitiveDataStoreData>('sensitiveData', {
   encryptionKey: '',
 })
