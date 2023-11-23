@@ -11,6 +11,6 @@ export function useSetAppInfo() {
     set({
       ...data,
       ...appInfo,
-    })
-  }, [data, set])
+    });
+  }, [data, set]);
 }

@@ -1,5 +1,5 @@
-import { useStyleConstants } from '@hooks/useStyleConstants';
-import * as Progress from 'react-native-progress';
+import { useStyleConstants } from "@hooks/useStyleConstants";
+import * as Progress from "react-native-progress";
 
 export type SecondsProgressCircleProps = {
   seconds: number;
@@ -21,5 +21,5 @@ export const SecondsProgressCircle = (props: SecondsProgressCircleProps) => {
     showsText
     borderWidth={0}
     formatText={(progress) => Math.round(progress * max)}
-    textStyle={{ fontSize: small ? 16 : 32 }} />
-}
+    textStyle={{ fontSize: small ? 16 : 32 }} />;
+};

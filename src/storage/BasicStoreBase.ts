@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class BasicStoreBase<T extends object>{
   public key: string;
@@ -15,7 +15,7 @@ export class BasicStoreBase<T extends object>{
       ...this.defaultValues,
       ...storedValues,
       ...values
-    }
+    };
     return this.nativeSet(setValues);
   }
 
@@ -24,12 +24,12 @@ export class BasicStoreBase<T extends object>{
     if (!readValues) {
       return {
         ...this.defaultValues,
-      }
+      };
     }
     return {
       ...this.defaultValues,
       ...readValues,
-    }
+    };
   }
 
   private nativeSet(value: T) {

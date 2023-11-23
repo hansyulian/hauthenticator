@@ -4,9 +4,9 @@ import { useLoadable } from "./useLoadable";
 
 export const useLoadableAppInfoDataContext = () => {
   return useLoadable(useCallback(() => AppInfoStore.get(), []), {
-    id: 'appInfo',
+    id: "appInfo",
     onSet: useCallback(async (data: AppInfoStoreData) => {
       await AppInfoStore.set(data);
     }, [])
   });
-}
+};

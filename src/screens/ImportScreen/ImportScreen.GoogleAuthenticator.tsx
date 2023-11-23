@@ -3,10 +3,10 @@ import { DividerE } from "@components/DividerE";
 import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
 import { IconE } from "@components/IconE";
 import { LabelValuePair } from "@components/LabelValuePair";
-import { QRScanner } from "@components/QRScanner"
+import { QRScanner } from "@components/QRScanner";
 import { TextBox } from "@components/TextBox";
 import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE"
+import { ViewE } from "@components/ViewE";
 import { useDialog } from "@hooks/useDialog";
 import { useNavigate } from "@hooks/useNavigate";
 import { useSnackbar } from "@hooks/useSnackbar";
@@ -19,7 +19,7 @@ export type ImportScreenGoogleAuthenticatorProps = {
 }
 
 export const ImportScreenGoogleAuthenticator = (props: ImportScreenGoogleAuthenticatorProps) => {
-  const [migrationString, setMigrationString] = useState('');
+  const [migrationString, setMigrationString] = useState("");
   const [validatedMigrationPayloads, setValidatedMigrationPayloads] = useState<ParsedMigrationPayload[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
   const snackbar = useSnackbar();
@@ -42,52 +42,52 @@ export const ImportScreenGoogleAuthenticator = (props: ImportScreenGoogleAuthent
       }
       if (!exists) {
         setValidatedMigrationPayloads([...validatedMigrationPayloads, newMigrationPayload]);
-        snackbar.show(`Successfully parsed migration payload with id ${newMigrationPayload.batchId} and index ${newMigrationPayload.batchIndex + 1} from total of ${newMigrationPayload.batchSize}`)
+        snackbar.show(`Successfully parsed migration payload with id ${newMigrationPayload.batchId} and index ${newMigrationPayload.batchIndex + 1} from total of ${newMigrationPayload.batchSize}`);
       } else {
-        snackbar.show(`Duplicated migration payload with id ${newMigrationPayload.batchId} and index ${newMigrationPayload.batchIndex + 1}`)
+        snackbar.show(`Duplicated migration payload with id ${newMigrationPayload.batchId} and index ${newMigrationPayload.batchIndex + 1}`);
       }
-      setMigrationString('');
+      setMigrationString("");
       setErrors([]);
     } catch (err) {
-      setErrors(['Invalid authenticator migration'])
+      setErrors(["Invalid authenticator migration"]);
     }
-  }, [validatedMigrationPayloads])
+  }, [snackbar, validatedMigrationPayloads]);
 
   useEffect(() => {
     if (migrationString) {
       validateString(migrationString);
     }
-  }, [validateString, migrationString])
+  }, [validateString, migrationString]);
 
   const onPaste = async () => {
     const stringValue = await pasteClipboard();
-    setMigrationString(stringValue)
-  }
+    setMigrationString(stringValue);
+  };
 
   const showDeleteConfirmation = (migrationPayload: ParsedMigrationPayload) => {
     dialog.show({
-      title: 'Delete confirmation',
+      title: "Delete confirmation",
       content: `Are you sure to delete ${migrationPayload.batchId} index ${migrationPayload.batchIndex}?`,
       buttons: [{
-        text: 'Yes',
-        icon: 'delete',
+        text: "Yes",
+        icon: "delete",
         onPress: () => {
           const filteredPayload = validatedMigrationPayloads.filter(record => record !== migrationPayload);
           setValidatedMigrationPayloads(filteredPayload);
         }
       }]
-    })
-  }
+    });
+  };
 
   const onContinue = () => {
     const importRecords = [];
     for (const validatedMigrationPayload of validatedMigrationPayloads) {
       importRecords.push(...validatedMigrationPayload.otpParameters);
     }
-    navigate('ImportConfirmation', {
+    navigate("ImportConfirmation", {
       authenticators: importRecords,
-    })
-  }
+    });
+  };
 
   return <>
     <ViewE fullSize>
@@ -124,5 +124,5 @@ export const ImportScreenGoogleAuthenticator = (props: ImportScreenGoogleAuthent
         Continue
       </ButtonE>
     </FloatingBottomContainer>
-  </>
-}
+  </>;
+};

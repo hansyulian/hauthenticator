@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { LayoutChangeEvent } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
+import { LayoutChangeEvent } from "react-native";
+import QRCode from "react-native-qrcode-svg";
 import { ViewE } from "./ViewE";
 
 export type QRCodeProps = {
@@ -13,11 +13,11 @@ export const QRCodeE = (props: QRCodeProps) => {
   const [width, setWidth] = useState(0);
   const onLayout = (event: LayoutChangeEvent) => {
     setWidth(event.nativeEvent.layout.width);
-  }
+  };
   return <ViewE fullWidth onLayout={onLayout}>
     <QRCode
       size={size || width}
       value={value}
     />
-  </ViewE>
-}
+  </ViewE>;
+};

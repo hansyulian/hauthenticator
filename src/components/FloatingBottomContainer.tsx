@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { LayoutChangeEvent, StyleSheet } from 'react-native';
+import { LayoutChangeEvent, StyleSheet } from "react-native";
 import { ViewE, ViewEProps } from "./ViewE";
 
 export type FloatingBottomContainerProps = ViewEProps & {
@@ -13,12 +13,12 @@ export const FloatingBottomContainer = (props: FloatingBottomContainerProps) => 
   const onLayoutBottom = (event: LayoutChangeEvent) => {
     const { height } = event.nativeEvent.layout;
     setBottomHeight(height);
-  }
+  };
   return <>
     <ViewE style={styles.bottomPadding} />
     <ViewE floating="bottom-left" onLayout={onLayoutBottom} {...rest} fullWidth />
   </>;
-}
+};
 
 
 const useStyles = (bottomHeight: number) => {
@@ -27,5 +27,5 @@ const useStyles = (bottomHeight: number) => {
     bottomPadding: {
       paddingBottom: bottomHeight,
     },
-  }), [bottomHeight])
-}
+  }), [bottomHeight]);
+};

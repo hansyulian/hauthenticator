@@ -23,7 +23,7 @@ export const InitializationProvider: FC<PropsWithChildren> = ({ children }) => {
         authenticatorState,
         appInfoState,
         sensitiveDataState,
-      ].filter((state) => state !== 'LOADED');
+      ].filter((state) => state !== "LOADED");
       if (statesInitialized.length > 0) {
         return setInitialized(false);
       };
@@ -36,13 +36,13 @@ export const InitializationProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [authenticatorState, appInfoState, sensitiveDataState, sensitiveData]);
 
   useEffect(() => {
-    if (sensitiveDataState === 'LOADED' && !sensitiveData?.encryptionKey) {
+    if (sensitiveDataState === "LOADED" && !sensitiveData?.encryptionKey) {
       setSensitiveData({
         ...sensitiveData,
         encryptionKey: md5(uuid()),
       });
     }
-  }, [sensitiveData, sensitiveDataState])
+  }, [sensitiveData, sensitiveDataState, setSensitiveData]);
 
   const value = useMemo(() => {
     return {
@@ -51,7 +51,7 @@ export const InitializationProvider: FC<PropsWithChildren> = ({ children }) => {
 
   if (!initialized) {
     return <SplashScreen>
-    </SplashScreen>
+    </SplashScreen>;
   }
 
   return <InitializationContext.Provider value={value}>

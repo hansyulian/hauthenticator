@@ -1,4 +1,4 @@
-import { ScreenLayout } from "@components/ScreenLayout"
+import { ScreenLayout } from "@components/ScreenLayout";
 import { NavigationProps } from "@modules/Navigation";
 import { FlatList } from "react-native";
 import { AuthenticatorImportForm, ImportConfirmationScreenRow } from "./ImportConfirmationScreen.Row";
@@ -8,7 +8,7 @@ import { useAddAuthenticators } from "@hooks/useAddAuthenticator";
 import { useNavigate } from "@hooks/useNavigate";
 
 export const ImportConfirmationScreen = (
-  props: NavigationProps<'ImportConfirmation'>
+  props: NavigationProps<"ImportConfirmation">
 ) => {
   const { authenticators: authenticatorsImport } = props.route.params;
   const navigate = useNavigate();
@@ -19,15 +19,15 @@ export const ImportConfirmationScreen = (
     setImportForms(authenticatorsImport.map(record => ({
       authenticator: record,
       selected: true,
-    })))
-  }, [authenticatorsImport])
+    })));
+  }, [authenticatorsImport]);
 
   const confirm = () => {
     addAuthenticators(importForms.map(record => record.authenticator));
-    navigate('AuthenticatorList', {}, {
+    navigate("AuthenticatorList", {}, {
       popTo: true,
     });
-  }
+  };
 
   return <ScreenLayout headerText='Import Confirmation' rightSection={
     <AppBarAction icon='check' onPress={confirm} />
@@ -39,5 +39,5 @@ export const ImportConfirmationScreen = (
         authenticatorForm={item}
       />}
     />
-  </ScreenLayout>
-} 
+  </ScreenLayout>;
+}; 

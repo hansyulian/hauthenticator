@@ -4,6 +4,6 @@ export type AppInfoStoreData = {
   authenticationEnabled: boolean,
 }
 
-export const AppInfoStore = new BasicStoreBase<AppInfoStoreData>('appInfo', {
+export const AppInfoStore = new BasicStoreBase<AppInfoStoreData>("appInfo", {
   authenticationEnabled: false,
-})
+});

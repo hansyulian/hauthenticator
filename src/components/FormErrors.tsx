@@ -15,5 +15,5 @@ export const FormErrors = (props: FormErrorsProps) => {
   return <>
     {errors.map(error => <TextE key={`${id.current}-${error}`} color='error' type='error'>{error}</TextE>)}
   </>;
-}
+};
 

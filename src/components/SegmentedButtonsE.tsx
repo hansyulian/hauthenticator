@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useStyleConstants } from "@hooks/useStyleConstants";
 import { useMemo } from "react";
-import { ViewStyle } from 'react-native';
+import { ViewStyle } from "react-native";
 import { SegmentedButtons } from "react-native-paper";
 import { IconSource } from "react-native-paper/lib/typescript/src/components/Icon";
 
@@ -29,11 +30,11 @@ export function SegmentedButtonsE<T = string>(props: SegmentedButtonsEProps<T>) 
       button.checkedColor = button.checkedColor || constants.colors.primary;
     }
     return buttons;
-  }, [buttons, constants])
+  }, [buttons, constants]);
 
   return <SegmentedButtons
     value={value as any}
     onValueChange={onChange as any}
     buttons={buttonsExtended as any}
-  />
+  />;
 }

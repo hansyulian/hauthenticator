@@ -1,8 +1,8 @@
-import { Button, ButtonProps } from "react-native-paper"
+import { Button, ButtonProps } from "react-native-paper";
 
 export type ButtonEProps = ButtonProps & {
 
 }
 export const ButtonE = (props: ButtonEProps) => {
-  return <Button mode='contained' {...props} />
-}
+  return <Button mode='contained' {...props} />;
+};

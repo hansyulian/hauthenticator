@@ -1,7 +1,0 @@
-{
-  "extends": "universe/native",
-  "rules": {
-    "eol-last": "warn",
-    "react-hooks/exhaustive-deps": "error"
-  }
-}

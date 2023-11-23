@@ -1,4 +1,4 @@
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from "expo-secure-store";
 
 export class SecureStoreBase<T extends object>{
   public key: string;
@@ -17,7 +17,7 @@ export class SecureStoreBase<T extends object>{
       ...this.defaultValues,
       ...storedValues,
       ...values
-    }
+    };
     return this.nativeSet(setValues, options);
   }
 
@@ -26,12 +26,12 @@ export class SecureStoreBase<T extends object>{
     if (!readValues) {
       return {
         ...this.defaultValues,
-      }
+      };
     }
     return {
       ...this.defaultValues,
       ...readValues,
-    }
+    };
   }
 
   private nativeSet(value: T, options: SecureStore.SecureStoreOptions = {}) {

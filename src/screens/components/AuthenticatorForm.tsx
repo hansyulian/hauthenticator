@@ -17,9 +17,9 @@ export type AuthenticatorFormProps = {
 
 export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
   const { form, onChange, hidePreview = false } = props;
-  const [name, setName] = useState(form?.name || '');
-  const [secret, setSecret] = useState(form?.secret || '');
-  const [issuer, setIssuer] = useState(form?.issuer || '');
+  const [name, setName] = useState(form?.name || "");
+  const [secret, setSecret] = useState(form?.secret || "");
+  const [issuer, setIssuer] = useState(form?.issuer || "");
   const { seconds, start, stop } = useSecondsTimer(30, false);
   const encryption = useEncryption();
   const validAuthenticator = validateAuthenticatorForm({
@@ -30,15 +30,15 @@ export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
   const showPreview = validAuthenticator && !hidePreview;
   const encryptedSecret = useMemo(() => {
     return encryption.encrypt(secret);
-  }, [secret, encryption])
+  }, [secret, encryption]);
 
   useEffect(() => {
     onChange?.({
       name,
       secret,
       issuer,
-    })
-  }, [name, secret, issuer])
+    });
+  }, [name, secret, issuer, onChange]);
 
   useEffect(() => {
     if (showPreview) {
@@ -46,8 +46,8 @@ export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
     } else {
       stop();
     }
-    return stop
-  }, [showPreview]);
+    return stop;
+  }, [showPreview, start, stop]);
 
   return <ViewE>
     <TextBox
@@ -84,5 +84,5 @@ export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
         seconds={seconds}
       />
     </ViewE>}
-  </ViewE>
-}
+  </ViewE>;
+};

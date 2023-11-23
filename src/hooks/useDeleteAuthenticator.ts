@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useAuthenticatorDataContext } from "./useAuthenticatorDataContext"
+import { useAuthenticatorDataContext } from "./useAuthenticatorDataContext";
 import { BaseException } from "@modules/BaseException";
 
 export const useDeleteAuthenticator = () => {
@@ -11,12 +11,12 @@ export const useDeleteAuthenticator = () => {
     }
     const authenticator = data.authenticators.find((authenticator) => authenticator.id === id);
     if (!authenticator) {
-      throw new BaseException('AuthenticatorNotFound', { id });
+      throw new BaseException("AuthenticatorNotFound", { id });
     }
-    authenticator.status = 'DELETED';
+    authenticator.status = "DELETED";
     await set({
       ...data,
       authenticators: [...data.authenticators]
-    })
-  }, [data, set])
-}
+    });
+  }, [data, set]);
+};

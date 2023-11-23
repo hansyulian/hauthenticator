@@ -10,7 +10,7 @@ type NavigateOptions = {
 }
 
 export function useNavigate() {
-  const navigation = useNavigation<NativeStackScreenProps<NavigationParams>['navigation']>();
+  const navigation = useNavigation<NativeStackScreenProps<NavigationParams>["navigation"]>();
   return useCallback(<Target extends NavigationTargets>(target: Target, params: NavigationParams[Target], options: Partial<NavigateOptions> = {}) => {
     const { pop, reset, popTo } = options;
     if (pop) {
@@ -31,7 +31,7 @@ export function useNavigate() {
           name: target,
           params,
         }]
-      })
+      });
     }
     return navigation.push(target, params);
   }, [navigation]);

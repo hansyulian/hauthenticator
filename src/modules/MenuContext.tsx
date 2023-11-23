@@ -1,9 +1,8 @@
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
-import { useCommonStyles } from "@hooks/useCommonStyles";
 import React, { createContext, useState, PropsWithChildren, useMemo, FC, useCallback } from "react";
 import { Menu, Modal, Portal } from "react-native-paper";
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 import { useStyleConstants } from "@hooks/useStyleConstants";
 import { DividerE } from "@components/DividerE";
 
@@ -18,7 +17,7 @@ export type MenuItem = {
   icon?: string;
   onPress: AsyncCallback<void | boolean>;
 }
-type MenuConfig = (MenuItem | 'divider')[];
+type MenuConfig = (MenuItem | "divider")[];
 export type ShowMenuOptions = {
   title?: string;
   menu: MenuConfig;
@@ -37,7 +36,7 @@ export const MenuProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
   const hide = useCallback(() => {
     setVisible(false);
-  }, [])
+  }, []);
 
   const value = useMemo(() => {
     return {
@@ -48,20 +47,20 @@ export const MenuProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const calculatedMenu = useMemo<MenuConfig>(() => {
     return [...options?.menu || [],
-      'divider',
+      "divider",
     {
       onPress: () => { },
-      text: 'Close',
-      icon: 'close',
-    }]
-  }, [options?.menu])
+      text: "Close",
+      icon: "close",
+    }];
+  }, [options?.menu]);
 
   const handleOnPress = useCallback(async (fn: AsyncCallback<void | boolean>) => {
     const result = await fn();
     if (!result) {
       hide();
     }
-  }, [hide])
+  }, [hide]);
 
   return <MenuContext.Provider value={value}>
     {children}
@@ -74,11 +73,11 @@ export const MenuProvider: FC<PropsWithChildren> = ({ children }) => {
           <DividerE />
           <ViewE>
             {calculatedMenu.map((item, index) => {
-              const key = `menu-item-key-${index}`
-              if (item === 'divider') {
+              const key = `menu-item-key-${index}`;
+              if (item === "divider") {
                 return <DividerE key={key} />;
               }
-              return <Menu.Item key={key} title={item.text} onPress={() => handleOnPress(item.onPress)} leadingIcon={item.icon} />
+              return <Menu.Item key={key} title={item.text} onPress={() => handleOnPress(item.onPress)} leadingIcon={item.icon} />;
             })}
           </ViewE>
         </ViewE>
@@ -94,8 +93,8 @@ const useStyles = () => {
   return useMemo(() => StyleSheet.create({
     container: {
       backgroundColor: styleConstants.colors.background,
-      width: '75%',
-      marginLeft: '12.5%',
+      width: "75%",
+      marginLeft: "12.5%",
     }
-  }), [])
-}
+  }), [styleConstants.colors.background]);
+};

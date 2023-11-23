@@ -6,5 +6,5 @@ type SearchBarEProps = SearchbarProps & {
 
 export const SearchBarE = (props: SearchBarEProps) => {
   const { ...rest } = props;
-  return <Searchbar {...rest} />
-}
+  return <Searchbar {...rest} />;
+};

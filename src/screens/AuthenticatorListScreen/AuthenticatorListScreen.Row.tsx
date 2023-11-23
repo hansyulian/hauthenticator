@@ -20,7 +20,7 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
   const { seconds, authenticatorExtended } = props;
   const { authenticator } = authenticatorExtended;
   const authenticate = useAuthenticate();
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
   const snackbar = useSnackbar();
   const navigate = useNavigate();
   const deleteAuthenticator = useDeleteAuthenticator();
@@ -29,46 +29,46 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
 
   const onPress = () => {
     copyClipboard(otp);
-    snackbar.show('Copied')
-  }
+    snackbar.show("Copied");
+  };
 
   const onLongPress = () => {
     show({
       title: `${authenticator.issuer} - ${authenticator.name}`,
       menu: [{
-        text: 'Edit',
-        icon: 'pencil',
+        text: "Edit",
+        icon: "pencil",
         onPress: () => {
-          navigate('AuthenticatorEdit', {
+          navigate("AuthenticatorEdit", {
             authenticatorExtended,
-          })
+          });
         }
       }, {
-        text: 'Show QR',
-        icon: 'qrcode',
+        text: "Show QR",
+        icon: "qrcode",
         onPress: async () => {
           const result = await authenticate();
           if (result) {
-            navigate('AuthenticatorDetail', {
+            navigate("AuthenticatorDetail", {
               authenticatorExtended,
-            })
+            });
           }
         }
       }, {
         onPress: () => {
           confirmationDialog({
-            title: 'Delete',
+            title: "Delete",
             content: `Are you sure want to delete ${authenticator.issuer} - ${authenticator.name}? This action is irreversible`,
             onConfirm: async () => {
               await deleteAuthenticator(authenticatorExtended.id);
             }
-          })
+          });
         },
-        text: 'Delete',
-        icon: 'delete',
+        text: "Delete",
+        icon: "delete",
       }]
-    })
-  }
+    });
+  };
 
   return <TouchableE onPress={onPress} onLongPress={onLongPress}>
     <>
@@ -77,5 +77,5 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
       </ViewE>
       <DividerE />
     </>
-  </TouchableE>
-}
+  </TouchableE>;
+};

@@ -10,7 +10,7 @@ export function base32ToUint8Array(base32String: string) {
   // Create a lookup table for decoding Base32 characters
 
   // Remove any padding characters
-  base32String = base32String.replace(/=+$/, '');
+  base32String = base32String.replace(/=+$/, "");
 
   // Convert Base32 string to binary string
   let binaryString = "";

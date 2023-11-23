@@ -1,6 +1,6 @@
-import { DividerE } from "@components/DividerE"
+import { DividerE } from "@components/DividerE";
 import { TouchableE } from "@components/TouchableE";
-import { ViewE, ViewEProps } from "@components/ViewE"
+import { ViewE, ViewEProps } from "@components/ViewE";
 import React from "react";
 
 export type SettingsScreenRowProps = ViewEProps & {
@@ -17,5 +17,5 @@ export const SettingsScreenRow = (props: SettingsScreenRowProps) => {
       </ViewE>
     </Container>
     <DividerE />
-  </ViewE>
-}
+  </ViewE>;
+};

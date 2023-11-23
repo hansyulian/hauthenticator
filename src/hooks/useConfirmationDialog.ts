@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDialog } from "./useDialog"
+import { useDialog } from "./useDialog";
 
 type ConfirmationDialogOptions = {
   title?: string;
@@ -16,12 +16,12 @@ export const useConfirmationDialog = () => {
       title: options.title,
       content: options.content,
       buttons: [{
-        text: 'Confirm',
+        text: "Confirm",
         onPress: options.onConfirm,
       }, {
-        text: 'Cancel',
+        text: "Cancel",
         onPress: () => options.onCancel?.(),
       }]
-    })
+    });
   }, [show]);
-}
+};

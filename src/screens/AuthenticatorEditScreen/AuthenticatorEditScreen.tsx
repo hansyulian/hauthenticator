@@ -1,6 +1,6 @@
 import { ButtonE } from "@components/ButtonE";
 import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
-import { ScreenLayout } from "@components/ScreenLayout"
+import { ScreenLayout } from "@components/ScreenLayout";
 import { TextBox } from "@components/TextBox";
 import { ViewE } from "@components/ViewE";
 import { useNavigate } from "@hooks/useNavigate";
@@ -9,11 +9,11 @@ import { NavigationProps } from "@modules/Navigation";
 import { useEffect, useState } from "react";
 
 export const AuthenticatorEditScreen = (
-  props: NavigationProps<'AuthenticatorEdit'>
+  props: NavigationProps<"AuthenticatorEdit">
 ) => {
   const { authenticatorExtended } = props.route.params;
-  const [name, setName] = useState(authenticatorExtended.authenticator.name || '');
-  const [issuer, setIssuer] = useState(authenticatorExtended.authenticator.issuer || '');
+  const [name, setName] = useState(authenticatorExtended.authenticator.name || "");
+  const [issuer, setIssuer] = useState(authenticatorExtended.authenticator.issuer || "");
   const updateAuthenticator = useUpdateAuthenticator();
   const navigate = useNavigate();
 
@@ -25,17 +25,17 @@ export const AuthenticatorEditScreen = (
         name,
         issuer,
       }
-    })
-    navigate('AuthenticatorList', {
+    });
+    navigate("AuthenticatorList", {
 
     }, {
       popTo: true,
-    })
-  }
+    });
+  };
 
   useEffect(() => {
 
-  }, [authenticatorExtended])
+  }, [authenticatorExtended]);
 
   return <ScreenLayout headerText='AuthenticatorEdit'>
     <ViewE padding>
@@ -55,5 +55,5 @@ export const AuthenticatorEditScreen = (
     <FloatingBottomContainer padding>
       <ButtonE onPress={save}>Save</ButtonE>
     </FloatingBottomContainer>
-  </ScreenLayout>
-} 
+  </ScreenLayout>;
+}; 

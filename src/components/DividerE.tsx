@@ -1,5 +1,5 @@
-import { Divider } from "react-native-paper"
+import { Divider } from "react-native-paper";
 
 export const DividerE = () => {
-  return <Divider bold />
-}
+  return <Divider bold />;
+};

@@ -1,4 +1,4 @@
-import { ScreenLayout } from "@components/ScreenLayout"
+import { ScreenLayout } from "@components/ScreenLayout";
 import { useAuthenticators } from "@hooks/useAuthenticators";
 import { FlatList } from "react-native";
 import { ExportSelectionScreenItemRow } from "./ExportSelectionScreen.ItemRow";
@@ -28,12 +28,12 @@ export const ExportSelectionScreen = (
     const selectedAuthenticatorExtendeds: AuthenticatorExtended[] =
       authenticators.filter(record => selectedAuthenticatorsRef.current[record.id]);
     if (selectedAuthenticatorExtendeds.length === 0) {
-      return show('Please select some authenticator to export');
+      return show("Please select some authenticator to export");
     }
-    navigate('Export', {
+    navigate("Export", {
       authenticatorExtendeds: selectedAuthenticatorExtendeds
-    })
-  }
+    });
+  };
 
 
   return <ScreenLayout headerText='Export Selection' rightSection={<IconButton
@@ -50,5 +50,5 @@ export const ExportSelectionScreen = (
         />
       }
     />}
-  </ScreenLayout>
-} 
+  </ScreenLayout>;
+}; 

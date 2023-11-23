@@ -1,6 +1,6 @@
 
-import { PropsWithChildren, useMemo } from 'react';
-import { PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
+import { PropsWithChildren, useMemo } from "react";
+import { PaperProvider, MD3DarkTheme, MD3LightTheme } from "react-native-paper";
 
 // generated in https://callstack.github.io/react-native-paper/docs/guides/theming/
 
@@ -48,7 +48,7 @@ const lightTheme = {
     "onSurfaceDisabled": "rgba(28, 27, 30, 0.38)",
     "backdrop": "rgba(50, 47, 56, 0.4)"
   }
-}
+};
 
 const darkTheme = {
   ...MD3DarkTheme,
@@ -94,12 +94,12 @@ const darkTheme = {
     "onSurfaceDisabled": "rgba(230, 225, 230, 0.38)",
     "backdrop": "rgba(50, 47, 56, 0.4)"
   }
-}
+};
 
 export const ThemeProvider = (props: PropsWithChildren) => {
   const theme = useMemo(() => {
     return lightTheme;
   }, []);
   return <PaperProvider {...props} theme={theme}>
-  </PaperProvider>
-}
+  </PaperProvider>;
+};

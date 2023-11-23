@@ -36,7 +36,7 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
   const hide = useCallback(() => {
     setVisible(false);
-  }, [])
+  }, []);
 
   const value = useMemo(() => {
     return {
@@ -49,18 +49,18 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
     const result = [...options?.buttons || []];
     if (!options?.hideCloseButton) {
       result.push({
-        text: options?.closeButtonText || 'Close',
-        icon: options?.closeButtonIcon || 'close',
+        text: options?.closeButtonText || "Close",
+        icon: options?.closeButtonIcon || "close",
         onPress: hide,
       });
     }
     return result;
-  }, [options?.buttons, options?.closeButtonText, options?.hideCloseButton, options?.closeButtonIcon])
+  }, [options?.buttons, options?.hideCloseButton, options?.closeButtonText, options?.closeButtonIcon, hide]);
 
   const handleButtonPress = async (fn: AsyncCallback<void>) => {
     await fn();
     hide();
-  }
+  };
 
   return <DialogContext.Provider value={value}>
     {children}

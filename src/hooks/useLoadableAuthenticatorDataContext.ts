@@ -7,12 +7,12 @@ export const useLoadableAuthenticatorDataContext = () => {
   return useLoadable(useCallback(async () => {
     const data = await AuthenticatorStore.get();
     if (config.isDevMode && config.authenticatorsDataReplacement) {
-      console.log('devmode override authenticator data', !!config.authenticatorsDataReplacement)
+      console.log("devmode override authenticator data", !!config.authenticatorsDataReplacement);
       data.authenticators = config.authenticatorsDataReplacement;
     }
     return data;
   }, []), {
-    id: 'authenticator',
+    id: "authenticator",
     onSet: useCallback(async (data: AuthenticatorStoreData) => {
       for (const authenticatorExtended of data.authenticators) {
         authenticatorExtended.createdAt = new Date(authenticatorExtended.createdAt).toISOString();
@@ -21,4 +21,4 @@ export const useLoadableAuthenticatorDataContext = () => {
       await AuthenticatorStore.set(data);
     }, [])
   });
-}
+};

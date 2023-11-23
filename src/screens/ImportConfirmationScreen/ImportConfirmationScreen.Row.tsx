@@ -21,17 +21,17 @@ export const ImportConfirmationScreenRow = (props: ImportConfirmationScreenRowPr
 
   const onToggleSelected = () => {
     setSelected(!selected);
-  }
+  };
 
   useEffect(() => {
     props.authenticatorForm.authenticator.name = name;
-  }, [name])
+  }, [name, props.authenticatorForm.authenticator]);
   useEffect(() => {
     props.authenticatorForm.authenticator.issuer = issuer;
-  }, [issuer])
+  }, [issuer, props.authenticatorForm.authenticator]);
   useEffect(() => {
     props.authenticatorForm.selected = selected;
-  }, [selected])
+  }, [props.authenticatorForm, selected]);
 
   return <ViewE>
     <ViewE padding row>
@@ -47,5 +47,5 @@ export const ImportConfirmationScreenRow = (props: ImportConfirmationScreenRowPr
       </ViewE>
     </ViewE>
     <DividerE />
-  </ViewE>
-}
+  </ViewE>;
+};

@@ -1,8 +1,7 @@
 import { ButtonE } from "@components/ButtonE";
 import { IconE } from "@components/IconE";
 import { QRCodeE } from "@components/QRCode";
-import { ScreenLayout } from "@components/ScreenLayout"
-import { SwitchE } from "@components/SwitchE";
+import { ScreenLayout } from "@components/ScreenLayout";
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
 import { config } from "@config/config";
@@ -15,7 +14,7 @@ import { copyClipboard } from "@utils/copyClipboard";
 import { useMemo, useState } from "react";
 
 export const ExportScreen = (
-  props: NavigationProps<'Export'>
+  props: NavigationProps<"Export">
 ) => {
   const { authenticatorExtendeds } = props.route.params;
   const totalPages = Math.ceil(authenticatorExtendeds.length / config.exportCountPerPage);
@@ -24,12 +23,12 @@ export const ExportScreen = (
   const snackbar = useSnackbar();
   const encryption = useEncryption();
   const authenticatorsSlice = useMemo(() => {
-    const result: AuthenticatorExtended[][] = []
+    const result: AuthenticatorExtended[][] = [];
     for (let i = 0; i < totalPages; i += 1) {
       result.push(authenticatorExtendeds.slice(i * config.exportCountPerPage, (i + 1) * config.exportCountPerPage));
     }
     return result;
-  }, [authenticatorExtendeds]);
+  }, [authenticatorExtendeds, totalPages]);
   const canPrevious = page > 0;
   const canNext = page < totalPages - 1;
   const exportUri = useMemo(() => {
@@ -50,23 +49,23 @@ export const ExportScreen = (
       }));
     }
     return result;
-  }, [authenticatorsSlice]);
+  }, [authenticatorsSlice, encryption, totalPages]);
 
   const onPreviousPage = () => {
     setPage(page - 1);
-  }
+  };
   const onNextPage = () => {
     setPage(page + 1);
-  }
+  };
   const onCopyToClipboard = () => {
     snackbar.dismiss();
     copyClipboard(exportUri[page]);
-    snackbar.show('Copied to clipboard')
-  }
+    snackbar.show("Copied to clipboard");
+  };
 
   const onFinished = () => {
-    navigate('Settings', {}, { popTo: true })
-  }
+    navigate("Settings", {}, { popTo: true });
+  };
 
   return <ScreenLayout headerText='Export'
     rightSection={<IconE icon='check' onPress={onFinished} />}
@@ -86,5 +85,5 @@ export const ExportScreen = (
         </ViewE>
       </ViewE>
     </ViewE>
-  </ScreenLayout>
-} 
+  </ScreenLayout>;
+}; 

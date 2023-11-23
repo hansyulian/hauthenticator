@@ -7,11 +7,11 @@ export function useSecondsTimer(mod: number = 60, lazy: boolean = true) {
 
   const start = useCallback(() => {
     setRunning(true);
-  }, [])
+  }, []);
 
   const stop = useCallback(() => {
     setRunning(false);
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!running) {
@@ -29,8 +29,8 @@ export function useSecondsTimer(mod: number = 60, lazy: boolean = true) {
     init();
     return () => {
       executing = false;
-    }
-  }, [running]);
+    };
+  }, [mod, running]);
 
   return {
     seconds,

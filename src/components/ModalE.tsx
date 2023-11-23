@@ -1,6 +1,6 @@
 import { useStyleConstants } from "@hooks/useStyleConstants";
 import { PropsWithChildren, useMemo } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 import { Modal, Portal } from "react-native-paper";
 import { ViewE } from "./ViewE";
 
@@ -19,7 +19,7 @@ export const ModalE = (props: ModalEProps) => {
       </ViewE>
     </Modal>
   </Portal>;
-}
+};
 
 
 const useStyles = () => {
@@ -31,5 +31,5 @@ const useStyles = () => {
     },
     innerContentContainer: {
     }
-  }), [styleConstants])
-}
+  }), [styleConstants]);
+};

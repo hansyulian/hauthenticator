@@ -4,6 +4,6 @@ export type SensitiveDataStoreData = {
   encryptionKey: string;
 }
 
-export const SensitiveDataStore = new SecureStoreBase<SensitiveDataStoreData>('sensitiveData', {
-  encryptionKey: '',
-})
+export const SensitiveDataStore = new SecureStoreBase<SensitiveDataStoreData>("sensitiveData", {
+  encryptionKey: "",
+});

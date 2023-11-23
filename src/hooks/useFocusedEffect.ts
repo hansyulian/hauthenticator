@@ -1,9 +1,10 @@
-import { useIsFocused } from "@react-navigation/native"
-import { useEffect } from "react"
+import { useIsFocused } from "@react-navigation/native";
+import { useEffect } from "react";
 
-export const useFocusedEffect = (callback: (isFocused: boolean) => void, dependencies: any[]) => {
+export const useFocusedEffect = (callback: (isFocused: boolean) => void, dependencies: never[]) => {
   const isFocused = useIsFocused();
   return useEffect(() => {
     return callback(isFocused);
-  }, [isFocused, ...dependencies])
-}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocused, callback, ...dependencies]);
+};

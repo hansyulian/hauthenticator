@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarCodeScanner } from "expo-barcode-scanner";
 import { ViewE } from "./ViewE";
-import { Dimensions, LayoutChangeEvent, StyleSheet } from 'react-native'
+import { Dimensions, LayoutChangeEvent, StyleSheet } from "react-native";
 import { useCommonStyles } from "@hooks/useCommonStyles";
 import { ButtonE } from "./ButtonE";
 import { useStyleConstants } from "@hooks/useStyleConstants";
@@ -26,7 +26,7 @@ export const QRScanner = (props: QRScannerProps) => {
     if (disabled !== undefined) {
       setIsDisabled(disabled);
     }
-  }, [disabled])
+  }, [disabled]);
 
   useEffect(() => {
     if (!permissionResponse?.canAskAgain) {
@@ -35,13 +35,14 @@ export const QRScanner = (props: QRScannerProps) => {
     if (!permissionResponse?.granted) {
       requestPermission();
     }
-  }, [permissionResponse])
+  }, [permissionResponse, requestPermission]);
 
   const handleLayout = (event: LayoutChangeEvent) => {
     const { width: layoutWidth } = event.nativeEvent.layout;
     setWidth(layoutWidth);
-  }
+  };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleScanned = ({ type, data }: any) => {
     if (type !== 256) { // qr type code
       return;
@@ -57,7 +58,7 @@ export const QRScanner = (props: QRScannerProps) => {
       setIsDisabled(false);
     }
     onEnable?.();
-  }
+  };
 
   return (
     <ViewE fullSize style={styles.container}
@@ -80,14 +81,14 @@ export const QRScanner = (props: QRScannerProps) => {
       }
     </ViewE>
   );
-}
+};
 
 
 const useStyles = (size?: number) => {
   const commonStyles = useCommonStyles();
   const styleConstants = useStyleConstants();
   return useMemo(() => {
-    const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
+    const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
     const sizeCalculated = size || windowWidth;
     const sizeToWidthRatio = windowWidth / sizeCalculated;
     const heightWidthDifference = windowHeight - windowWidth;
@@ -95,9 +96,9 @@ const useStyles = (size?: number) => {
     const heightOffset = scaledHeightWidthDifference / 2;
     return StyleSheet.create({
       container: {
-        height: size ? size : '100%',
-        width: size ? size : '100%',
-        overflow: 'hidden',
+        height: size ? size : "100%",
+        width: size ? size : "100%",
+        overflow: "hidden",
       },
       scanner: {
         ...commonStyles.fullSize,
@@ -117,4 +118,4 @@ const useStyles = (size?: number) => {
       }
     });
   }, [size, commonStyles, styleConstants]);
-}
+};

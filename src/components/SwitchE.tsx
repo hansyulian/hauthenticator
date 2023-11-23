@@ -10,4 +10,4 @@ export const SwitchE = (props: SwitchEProps) => {
   return <ViewE marginVertical='negativeMedium'>
     <Switch {...rest} />
   </ViewE>;
-}
+};

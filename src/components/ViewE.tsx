@@ -1,10 +1,10 @@
 
 import { useMemo } from "react";
-import { View, StyleSheet, ViewStyle, ViewProps } from "react-native"
+import { View, StyleSheet, ViewStyle, ViewProps } from "react-native";
 import { useCommonStyles } from "@hooks/useCommonStyles";
 import { SpacingValues, useSpacingExtractor } from "@hooks/useSpacingExtractor";
 import { ColorTokens, SpacingTokens, useStyleConstants } from "@hooks/useStyleConstants";
-export type ViewEFloating = 'top-left' | 'bottom-left' | 'top-right' | 'bottom-right';
+export type ViewEFloating = "top-left" | "bottom-left" | "top-right" | "bottom-right";
 export type ViewEStyleProps = {
   flex?: number | true;
   backgroundColor?: ColorTokens;
@@ -12,12 +12,12 @@ export type ViewEStyleProps = {
   fullSize?: boolean;
   fullHeight?: boolean;
   fullWidth?: boolean;
-  justifyContent?: 'center' | 'flex-end' | 'flex-start' | 'space-between' | 'space-around';
+  justifyContent?: "center" | "flex-end" | "flex-start" | "space-between" | "space-around";
   row?: boolean;
   column?: boolean;
   shadow?: boolean;
   gap?: boolean | SpacingTokens;
-  alignItems?: 'center' | 'baseline' | 'flex-end' | 'flex-start' | 'stretch';
+  alignItems?: "center" | "baseline" | "flex-end" | "flex-start" | "stretch";
   minHeight?: number;
   minWidth?: number;
 }
@@ -35,10 +35,10 @@ export const ViewE = (props: ViewEProps) => {
   } = processedProps;
   const styles = useStyles(rest, padding, margin);
   const memoedStyle = useMemo(() => {
-    return [styles.view, style]
-  }, [styles.view, style])
-  return <View {...rest} style={memoedStyle} />
-}
+    return [styles.view, style];
+  }, [styles.view, style]);
+  return <View {...rest} style={memoedStyle} />;
+};
 
 const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewStyle) => {
   const commonStyles = useCommonStyles();
@@ -65,11 +65,11 @@ const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewSty
       ...padding,
       ...margin,
       flex: flex === true ? 1 : flex,
-      justifyContent: justifyContent as any,
-      alignItems: alignItems as any,
+      justifyContent: justifyContent as never,
+      alignItems: alignItems as never,
       minHeight,
       minWidth,
-      maxWidth: '100%',
+      maxWidth: "100%",
     };
     if (gap) {
       if (gap === true) {
@@ -79,7 +79,7 @@ const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewSty
       }
     }
     if (backgroundColor) {
-      view.backgroundColor = styleConstants.colors[backgroundColor] as any;
+      view.backgroundColor = styleConstants.colors[backgroundColor] as never;
     }
     if (shadow) {
       Object.assign(view, commonStyles.shadow);
@@ -88,7 +88,7 @@ const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewSty
       Object.assign(view, commonStyles.row);
     }
     if (column) {
-      Object.assign(view, commonStyles.column)
+      Object.assign(view, commonStyles.column);
     }
     if (fullWidth) {
       Object.assign(view, commonStyles.fullWidth);
@@ -100,21 +100,21 @@ const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewSty
       Object.assign(view, commonStyles.fullSize);
     }
     switch (floating) {
-      case 'bottom-left':
+      case "bottom-left":
         Object.assign(view, commonStyles.floatingBottomLeft);
         break;
-      case 'bottom-right':
+      case "bottom-right":
         Object.assign(view, commonStyles.floatingBottomRight);
         break;
-      case 'top-left':
+      case "top-left":
         Object.assign(view, commonStyles.floatingTopLeft);
         break;
-      case 'top-right':
+      case "top-right":
         Object.assign(view, commonStyles.floatingTopRight);
         break;
     }
     return StyleSheet.create({
       view,
-    })
-  }, [props])
-}
+    });
+  }, [commonStyles.column, commonStyles.floatingBottomLeft, commonStyles.floatingBottomRight, commonStyles.floatingTopLeft, commonStyles.floatingTopRight, commonStyles.fullHeight, commonStyles.fullSize, commonStyles.fullWidth, commonStyles.row, commonStyles.shadow, margin, padding, props, styleConstants.colors, styleConstants.spacing]);
+};

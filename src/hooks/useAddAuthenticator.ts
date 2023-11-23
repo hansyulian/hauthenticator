@@ -4,26 +4,22 @@ import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorV
 import { uuid } from "@utils/uuid";
 import { withDefaultAuthenticatorExtendedValues } from "@utils/withDefaultAuthenticatorExtendedValues";
 import { useEncryption } from "./useEncryption";
+import { sortAuthenticators } from "@utils/sortAuthenticators";
 
 export const useAddAuthenticators = () => {
   const { data, set } = useAuthenticatorDataContext();
   const encryption = useEncryption();
   return useCallback(async (forms: AuthenticatorFormData[]) => {
     const newRecords = forms.map(form => withDefaultAuthenticatorExtendedValues({
-      id: uuid(),
-      status: 'ACTIVE',
+      id: uuid() as string,
+      status: "ACTIVE",
       authenticator: withDefaultAuthenticatorValues(form),
       encryptedSecret: encryption.encrypt(form.secret),
     }));
     const newAuthenticators = [...(data?.authenticators || []), ...newRecords];
-    newAuthenticators.sort((a, b) => {
-      if (a.authenticator.issuer === b.authenticator.issuer) {
-        return a.authenticator.name < b.authenticator.name ? -1 : 1;
-      }
-      return a.authenticator.issuer < b.authenticator.issuer ? -1 : 1;
-    });
+    const sortedAuthenticators = sortAuthenticators(newAuthenticators);
     await set({
-      authenticators: newAuthenticators,
-    })
-  }, [data?.authenticators, set])
-}
+      authenticators: sortedAuthenticators,
+    });
+  }, [data?.authenticators, encryption, set]);
+};

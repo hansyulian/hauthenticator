@@ -15,11 +15,11 @@ export const ExportSelectionScreenItemRow = (props: ExportSelectionScreenItemRow
 
   const onToggleSelected = () => {
     setSelected(!selected);
-  }
+  };
 
   useEffect(() => {
     selectedAuthenticatorsRef[authenticatorExtended.id] = selected;
-  }, [selected])
+  }, [authenticatorExtended.id, selected, selectedAuthenticatorsRef]);
 
   return <>
     <ViewE row padding>
@@ -40,5 +40,5 @@ export const ExportSelectionScreenItemRow = (props: ExportSelectionScreenItemRow
       </ViewE>
     </ViewE>
     <DividerE />
-  </>
-}
+  </>;
+};

@@ -1,4 +1,4 @@
-const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; // Base32 character set
+const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"; // Base32 character set
 
 export function uint8ArrayToBase32(uint8Array: Uint8Array) {
   const base32Array = [];
@@ -21,5 +21,5 @@ export function uint8ArrayToBase32(uint8Array: Uint8Array) {
     base32Array.push(base32Chars[index]);
   }
 
-  return base32Array.join('');
+  return base32Array.join("");
 }

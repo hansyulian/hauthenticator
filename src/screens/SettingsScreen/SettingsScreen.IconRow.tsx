@@ -19,5 +19,5 @@ export const SettingsScreenIconRow = (props: SettingsScreenIconRowProps) => {
         </ViewE>
       </ViewE>
     </ViewE>
-  </SettingsScreenRow>
-}
+  </SettingsScreenRow>;
+};

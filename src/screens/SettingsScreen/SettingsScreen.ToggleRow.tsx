@@ -10,11 +10,11 @@ export type SettingsScreenToggleRowProps = SettingsScreenIconRowProps & {
 }
 
 export const SettingsScreenToggleRow = (props: SettingsScreenToggleRowProps) => {
-  const { text, onChange, value, children, ...rest } = props;
+  const { text, onChange, value, ...rest } = props;
   return <SettingsScreenIconRow {...rest}>
     <ViewE row justifyContent="space-between" alignItems="center">
       <TextE>{text}</TextE>
       <SwitchE value={value} onValueChange={onChange} />
     </ViewE>
-  </SettingsScreenIconRow>
-}
+  </SettingsScreenIconRow>;
+};

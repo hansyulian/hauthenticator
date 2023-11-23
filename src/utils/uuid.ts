@@ -1,4 +1,4 @@
-import rnUuid from 'react-native-uuid'
+import rnUuid from "react-native-uuid";
 
 export function uuid() {
   return rnUuid.v4();

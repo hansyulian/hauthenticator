@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useTheme } from 'react-native-paper';
+import { useTheme } from "react-native-paper";
 
 export function useStyleConstants() {
   const theme = useTheme();
@@ -16,8 +16,8 @@ export function useStyleConstants() {
       large: 24,
     },
     fontWeight: {
-      bold: '700',
-      normal: '400',
+      bold: "700",
+      normal: "400",
     },
     textSizes: {
       error: 16,
@@ -31,21 +31,21 @@ export function useStyleConstants() {
       paragraphHeader: 20,
     },
     textWeight: {
-      error: '400',
-      normal: '400',
-      otpValue: '600',
-      screenHeader: '600',
-      menuHeader: '600',
-      code: '400',
-      pairLabel: '800',
-      pairValue: '400',
-      paragraphHeader: '700',
+      error: "400",
+      normal: "400",
+      otpValue: "600",
+      screenHeader: "600",
+      menuHeader: "600",
+      code: "400",
+      pairLabel: "800",
+      pairValue: "400",
+      paragraphHeader: "700",
     },
     colors: {
       ...theme.colors,
     }
-  }), [theme])
+  }), [theme]);
 }
 export type StyleConstants = ReturnType<typeof useStyleConstants>;
-export type ColorTokens = keyof StyleConstants['colors'];
-export type SpacingTokens = keyof StyleConstants['spacing']
+export type ColorTokens = keyof StyleConstants["colors"];
+export type SpacingTokens = keyof StyleConstants["spacing"]

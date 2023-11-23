@@ -5,9 +5,9 @@ export function withDefaultAuthenticatorExtendedValues(values: AuthenticatorExte
   return {
     createdAt: nowString,
     updatedAt: nowString,
-    encryptedSecret: '',
+    encryptedSecret: "",
     id: uuid(),
-    status: 'ACTIVE',
+    status: "ACTIVE",
     ...values,
-  }
+  };
 }

@@ -1,5 +1,5 @@
 import { ButtonE } from "@components/ButtonE";
-import { ScreenLayout } from "@components/ScreenLayout"
+import { ScreenLayout } from "@components/ScreenLayout";
 import { ViewE } from "@components/ViewE";
 import { NavigationProps } from "@modules/Navigation";
 import { useAddAuthenticators } from "@hooks/useAddAuthenticator";
@@ -9,7 +9,7 @@ import { validateAuthenticatorForm } from "@utils/validateAuthenticatorForm";
 import { useState } from "react";
 
 export const AuthenticatorAddFormConfirmationScreen = (
-  props: NavigationProps<'AuthenticatorAddFormConfirmation'>
+  props: NavigationProps<"AuthenticatorAddFormConfirmation">
 ) => {
   const [form, setForm] = useState<AuthenticatorFormData>();
   const addAuthenticators = useAddAuthenticators();
@@ -20,10 +20,10 @@ export const AuthenticatorAddFormConfirmationScreen = (
       return;
     }
     await addAuthenticators([form]);
-    navigate('AuthenticatorList', {
+    navigate("AuthenticatorList", {
       back: true,
     });
-  }
+  };
 
   return <ScreenLayout headerText='Confirmation' >
     <ViewE padding='medium'>
@@ -38,5 +38,5 @@ export const AuthenticatorAddFormConfirmationScreen = (
         Confirm
       </ButtonE>
     </ViewE>
-  </ScreenLayout>
-} 
+  </ScreenLayout>;
+}; 

@@ -7,7 +7,7 @@ export const useCounter = () => {
   const add = useCallback(() => {
     counterRef.current += 1;
     setValue(counterRef.current);
-  }, [])
+  }, []);
 
   return [value, add];
-}
+};

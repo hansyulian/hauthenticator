@@ -2,7 +2,7 @@ import { TextInput, TextInputProps } from "react-native-paper";
 import { FormControlContainer, FormControlContainerProps } from "./FormControlContainer";
 import { FormErrors } from "./FormErrors";
 
-export type TextBoxProps = TextInputProps & Pick<FormControlContainerProps, 'flex'> & {
+export type TextBoxProps = TextInputProps & Pick<FormControlContainerProps, "flex"> & {
   icon?: string;
   onIconPress?: () => void;
   errors?: string[];
@@ -15,8 +15,8 @@ export const TextBox = (props: TextBoxProps) => {
     if (!icon) {
       return null;
     }
-    return <TextInput.Icon icon={icon} onPress={onIconPress} />
-  }
+    return <TextInput.Icon icon={icon} onPress={onIconPress} />;
+  };
 
   return <FormControlContainer flex={flex}>
     <TextInput
@@ -25,5 +25,5 @@ export const TextBox = (props: TextBoxProps) => {
     />
     <FormErrors errors={errors} />
   </FormControlContainer>;
-}
+};
 

@@ -12,5 +12,5 @@ export const SettingsScreenActionRow = (props: SettingsScreenActionRowProps) => 
     <ViewE row justifyContent="space-between" alignItems="center">
       <TextE>{text}</TextE>
     </ViewE>
-  </SettingsScreenIconRow>
-}
+  </SettingsScreenIconRow>;
+};

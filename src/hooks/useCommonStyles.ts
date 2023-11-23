@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useMemo } from "react";
 import { ViewStyle, TextStyle, ImageStyle } from "react-native";
 
 type StyleType = ViewStyle | TextStyle | ImageStyle;
@@ -6,47 +6,47 @@ type StyleType = ViewStyle | TextStyle | ImageStyle;
 export function useCommonStyles() {
   const commonStyles = useMemo(() => ({
     floatingTopLeft: {
-      position: 'absolute',
+      position: "absolute",
       left: 0,
       top: 0,
     },
     floatingBottomRight: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 0,
       right: 0,
     },
     floatingBottomLeft: {
-      position: 'absolute',
+      position: "absolute",
       left: 0,
       bottom: 0,
     },
     floatingTopRight: {
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       right: 0,
     },
     center: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
     },
     fullWidth: {
-      width: '100%',
+      width: "100%",
     },
     fullHeight: {
-      height: '100%',
+      height: "100%",
     },
     fullSize: {
-      width: '100%',
-      height: '100%',
+      width: "100%",
+      height: "100%",
     },
     row: {
-      display: 'flex',
-      flexDirection: 'row',
+      display: "flex",
+      flexDirection: "row",
     },
     column: {
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
     },
     // https://ethercreative.github.io/react-native-shadow-generator/
     shadow: {

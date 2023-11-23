@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export type LoadableData<DataType> = {
   data: DataType | undefined;
@@ -18,24 +18,24 @@ export type LoadableOptions<DataType> = {
 export const useLoadable = <DataType>(loadFunction: () => Promise<DataType>, options: LoadableOptions<DataType> = {}): LoadableData<DataType> => {
   const { lazy = true, clearDataOnError = false, onSet } = options;
   const [data, setData] = useState<DataType>();
-  const [state, setState] = useState<AsyncLoadState>('UNLOADED');
+  const [state, setState] = useState<AsyncLoadState>("UNLOADED");
   const [error, setError] = useState<unknown>();
 
   const reload = useCallback(async () => {
-    setState('LOADING');
+    setState("LOADING");
     try {
       const result = await loadFunction();
       setData(result);
-      setState('LOADED');
+      setState("LOADED");
     } catch (err) {
       if (clearDataOnError) {
         setData(undefined);
       }
-      setState('ERROR');
+      setState("ERROR");
       setError(err);
       console.error(err);
     }
-  }, [loadFunction]);
+  }, [clearDataOnError, loadFunction]);
   useEffect(() => {
     if (!lazy) {
       return;
@@ -46,7 +46,7 @@ export const useLoadable = <DataType>(loadFunction: () => Promise<DataType>, opt
   const set = useCallback(async (_data: DataType) => {
     setData(_data);
     await onSet?.(_data);
-  }, [reload, onSet]);
+  }, [onSet]);
 
   return useMemo(() => ({
     data,
@@ -55,4 +55,4 @@ export const useLoadable = <DataType>(loadFunction: () => Promise<DataType>, opt
     reload,
     set,
   }), [data, state, error, reload, set]);
-}
+};

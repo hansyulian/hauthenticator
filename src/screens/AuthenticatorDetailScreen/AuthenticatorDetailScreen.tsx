@@ -1,6 +1,6 @@
 import { ButtonE } from "@components/ButtonE";
 import { QRCodeE } from "@components/QRCode";
-import { ScreenLayout } from "@components/ScreenLayout"
+import { ScreenLayout } from "@components/ScreenLayout";
 import { ScrollViewE } from "@components/ScrollViewE";
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
@@ -10,23 +10,23 @@ import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useMemo } from "react";
 
 export const AuthenticatorDetailScreen = (
-  props: NavigationProps<'AuthenticatorDetail'>
+  props: NavigationProps<"AuthenticatorDetail">
 ) => {
   const { authenticatorExtended } = props.route.params;
   const encryption = useEncryption();
 
   const displaySecret = useMemo(() => {
     if (!authenticatorExtended) {
-      return '';
+      return "";
     }
     return encryption.decrypt(authenticatorExtended.encryptedSecret);
-  }, [authenticatorExtended]);
+  }, [authenticatorExtended, encryption]);
   const otpUrl = useMemo(() => {
     return OtpAuthUrl.encode({
       ...authenticatorExtended.authenticator,
       secret: displaySecret,
-    })
-  }, [displaySecret, authenticatorExtended.authenticator])
+    });
+  }, [displaySecret, authenticatorExtended.authenticator]);
 
   return <ScreenLayout headerText='Authenticator Detail'>
     <ScrollViewE>
@@ -34,7 +34,7 @@ export const AuthenticatorDetailScreen = (
         <ViewE paddingHorizontal='large' marginBottom gap>
           <QRCodeE value={otpUrl} />
           <TextE type='code' color='tertiary'>{otpUrl}</TextE>
-          <ButtonE icon={'content-copy'}>Copy</ButtonE>
+          <ButtonE icon={"content-copy"}>Copy</ButtonE>
         </ViewE>
         <ViewE row justifyContent='space-between'>
           <ViewE flex>
@@ -62,5 +62,5 @@ export const AuthenticatorDetailScreen = (
         </ViewE>
       </ViewE>
     </ScrollViewE>
-  </ScreenLayout>
-} 
+  </ScreenLayout>;
+}; 

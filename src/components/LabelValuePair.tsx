@@ -15,17 +15,17 @@ export const LabelValuePair = (props: LabelValuePairProps) => {
   if (onPress) {
     return <TouchableE onPress={onPress}>
       <LabelValuePairBase {...props} />
-    </TouchableE>
+    </TouchableE>;
   }
 
-  return <LabelValuePairBase {...props} />
-}
+  return <LabelValuePairBase {...props} />;
+};
 
 export const LabelValuePairBase = (props: LabelValuePairProps) => {
   const { label, children } = props;
   return <ViewE justifyContent="space-between" row>
 
     <TextE type="pairLabel">{label}</TextE>
-    {['string', 'number'].includes(typeof children) ? <TextE type="pairValue">{children}</TextE> : children}
-  </ViewE>
-}
+    {["string", "number"].includes(typeof children) ? <TextE type="pairValue">{children}</TextE> : children}
+  </ViewE>;
+};

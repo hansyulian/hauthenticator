@@ -1,6 +1,6 @@
 import { useCommonStyles } from "@hooks/useCommonStyles";
-import { PropsWithChildren, ReactNode, useMemo, useState } from "react"
-import { LayoutChangeEvent, LayoutRectangle, StyleSheet, View } from "react-native"
+import { PropsWithChildren, ReactNode, useMemo, useState } from "react";
+import { LayoutChangeEvent, LayoutRectangle, StyleSheet, View } from "react-native";
 import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBarE } from "./StatusBarE";
 import { useStyleConstants } from "@hooks/useStyleConstants";
@@ -26,7 +26,7 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
       return 0;
     }
     return containerLayout?.height - headerLayout?.height - headerLayout?.y;
-  }, [headerLayout, containerLayout])
+  }, [headerLayout, containerLayout]);
 
   const canBack = useCanBack();
   const back = useBack();
@@ -36,11 +36,11 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
   const onContainerLayout = (event: LayoutChangeEvent) => {
     setContainerLayout(event.nativeEvent.layout);
 
-  }
+  };
   const onHeaderLayout = (event: LayoutChangeEvent) => {
     setHeaderLayout(event.nativeEvent.layout);
 
-  }
+  };
   if (!isFocused) {
     return null;
   }
@@ -56,8 +56,8 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
       {children}
     </View>
     <StatusBarE />
-  </ViewE>
-}
+  </ViewE>;
+};
 
 const useStyles = (contentHeight: number, insets: EdgeInsets) => {
   const constants = useStyleConstants();
@@ -68,8 +68,5 @@ const useStyles = (contentHeight: number, insets: EdgeInsets) => {
       height: contentHeight,
       backgroundColor: constants.colors.background,
     }
-  }), [
-    contentHeight,
-    insets
-  ])
-}
+  }), [commonStyles.fullWidth, constants.colors.background, contentHeight]);
+};

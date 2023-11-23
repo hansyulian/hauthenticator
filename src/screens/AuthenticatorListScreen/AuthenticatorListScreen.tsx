@@ -1,22 +1,22 @@
-import { ScreenLayout } from '@components/ScreenLayout';
-import { ViewE } from '@components/ViewE';
-import { useCommonStyles } from '@hooks/useCommonStyles';
-import { useSecondsTimer } from '@hooks/useSecondsTimer';
-import { useMemo, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import { AuthenticatorListScreenRow } from './AuthenticatorListScreen.Row';
-import { SearchBarE } from '@components/SearchBarE';
-import { AppBarAction } from '@components/AppBarAction';
-import { useNavigate } from '@hooks/useNavigate';
-import { useFocusedEffect } from '@hooks/useFocusedEffect';
-import { useAuthenticators } from '@hooks/useAuthenticators';
-import { SecondsProgressCircle } from '@components/SecondsProgressCircle';
-import { useIsAppActive } from '@hooks/useIsAppActive';
+import { ScreenLayout } from "@components/ScreenLayout";
+import { ViewE } from "@components/ViewE";
+import { useCommonStyles } from "@hooks/useCommonStyles";
+import { useSecondsTimer } from "@hooks/useSecondsTimer";
+import { useMemo, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { AuthenticatorListScreenRow } from "./AuthenticatorListScreen.Row";
+import { SearchBarE } from "@components/SearchBarE";
+import { AppBarAction } from "@components/AppBarAction";
+import { useNavigate } from "@hooks/useNavigate";
+import { useFocusedEffect } from "@hooks/useFocusedEffect";
+import { useAuthenticators } from "@hooks/useAuthenticators";
+import { SecondsProgressCircle } from "@components/SecondsProgressCircle";
+import { useIsAppActive } from "@hooks/useIsAppActive";
 
 export const AuthenticatorListScreen = () => {
   const authenticators = useAuthenticators();
   const navigate = useNavigate();
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const isAppActive = useIsAppActive();
   const filteredAuthenticators = useMemo(() => {
     if (!authenticators) {
@@ -27,12 +27,12 @@ export const AuthenticatorListScreen = () => {
     }
     const searchTextLowerCase = searchText.toLowerCase();
     return authenticators.filter(record => {
-      const issuerLowerCase = record.authenticator.issuer?.toLowerCase() || '';
-      const nameLowerCase = record.authenticator.name?.toLowerCase() || '';
+      const issuerLowerCase = record.authenticator.issuer?.toLowerCase() || "";
+      const nameLowerCase = record.authenticator.name?.toLowerCase() || "";
       return issuerLowerCase.includes(searchTextLowerCase) ||
         nameLowerCase.includes(searchTextLowerCase);
     });
-  }, [authenticators, searchText])
+  }, [authenticators, searchText]);
   const styles = useStyles();
   const { seconds, start, stop } = useSecondsTimer(30);
   useFocusedEffect((isFocused) => {
@@ -50,9 +50,9 @@ export const AuthenticatorListScreen = () => {
   return <ScreenLayout
     disableBack
     headerText='Authenticator'
-    leftSection={<AppBarAction icon='cog' onPress={() => navigate('Settings', {})} />}
+    leftSection={<AppBarAction icon='cog' onPress={() => navigate("Settings", {})} />}
     rightSection={<>
-      <AppBarAction icon='plus' onPress={() => navigate('AuthenticatorAdd', {})} />
+      <AppBarAction icon='plus' onPress={() => navigate("AuthenticatorAdd", {})} />
     </>}
   >
     <FlatList
@@ -77,8 +77,8 @@ export const AuthenticatorListScreen = () => {
       </>
     }
 
-  </ScreenLayout >
-}
+  </ScreenLayout >;
+};
 
 const useStyles = () => {
   const commonStyles = useCommonStyles();
@@ -96,5 +96,5 @@ const useStyles = () => {
     flatListFooter: {
       paddingBottom: searchBarHeight,
     }
-  }), [])
-}
+  }), [commonStyles.floatingBottomRight, commonStyles.fullWidth]);
+};

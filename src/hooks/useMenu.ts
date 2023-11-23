@@ -1,5 +1,5 @@
-import { useMenuContext } from "./useMenuContext"
+import { useMenuContext } from "./useMenuContext";
 
 export const useMenu = () => {
   return useMenuContext();
-}
+};

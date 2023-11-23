@@ -19,18 +19,18 @@ export const SnackbarContext = createContext<SnackbarContextValue | undefined>(u
 
 export const SnackbarProvider: FC<PropsWithChildren> = ({ children }) => {
   const [visible, setVisible] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [options, setOptions] = useState<ShowSnackbarOptions>({});
   const show = useCallback((text: string, options: ShowSnackbarOptions = {}) => {
     setText(text);
     setOptions(options);
     setVisible(true);
-  }, [text]);
+  }, []);
 
   const dismiss = useCallback(() => {
     options.onDismiss?.();
     setVisible(false);
-  }, [options.onDismiss]);
+  }, [options]);
 
   const value = useMemo(() => {
     return {

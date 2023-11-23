@@ -3,7 +3,6 @@ import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
 import { ViewE } from "@components/ViewE";
 import { useAddAuthenticators } from "@hooks/useAddAuthenticator";
 import { useBack } from "@hooks/useBack";
-import { useNavigate } from "@hooks/useNavigate";
 import { AuthenticatorForm } from "@screens/components/AuthenticatorForm";
 import { validateAuthenticatorForm } from "@utils/validateAuthenticatorForm";
 import { useState } from "react";
@@ -24,7 +23,7 @@ export const AuthenticatorAddScreenForm = () => {
     }
     await addAuthenticators([form]);
     back(1);
-  }
+  };
 
   return <>
     <ViewE paddingHorizontal>
@@ -38,5 +37,5 @@ export const AuthenticatorAddScreenForm = () => {
         onPress={save}
       >Confirm</ButtonE>
     </FloatingBottomContainer>
-  </>
-}
+  </>;
+};

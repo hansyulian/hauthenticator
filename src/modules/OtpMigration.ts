@@ -1,9 +1,10 @@
 import { Buffer } from "@craftzdog/react-native-buffer";
-import protobuf from 'protobufjs';
+import protobuf from "protobufjs";
 import { BaseException } from "./BaseException";
 import { uint8ArrayToBase32 } from "@utils/uint8ArrayToBase32";
 import { base32ToUint8Array } from "@utils/base32ToUint8Array";
-const jsonDescriptor = require('@assets/authenticatorProto.json');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const jsonDescriptor = require("@assets/authenticatorProto.json");
 const protobufRoot = protobuf.Root.fromJSON(jsonDescriptor);
 const migrationPayload = protobufRoot.lookupType("MigrationPayload");
 
@@ -41,8 +42,8 @@ enum OtpParameterAlgorithm {
 
 enum OtpParameterDigitCount {
   "unspecified" = 0,
-  'six' = 1,
-  'eight' = 2,
+  "six" = 1,
+  "eight" = 2,
 };
 
 enum OtpParameterType {
@@ -58,22 +59,22 @@ export type AuthenticationMigrationProtobuf = {
 export const OtpMigration = {
   decode,
   encode,
-}
+};
 
 function decode(sourceUrl: string) {
   if (sourceUrl.indexOf("otpauth-migration://offline") !== 0) {
-    throw new BaseException('InvalidMigrationUrl');
+    throw new BaseException("InvalidMigrationUrl");
   }
-  const dataBase64 = new URL(sourceUrl).searchParams.get('data');
+  const dataBase64 = new URL(sourceUrl).searchParams.get("data");
   if (!dataBase64) {
-    throw new BaseException('MissingMigrationData');
+    throw new BaseException("MissingMigrationData");
   }
   const buffer = Buffer.from(dataBase64, "base64");
   const decodedOtpPayload = migrationPayload.decode(buffer) as unknown as MigrationPayload;
   const otpParameters: Authenticator[] = [];
-  for (let otpParameter of decodedOtpPayload.otpParameters) {
+  for (const otpParameter of decodedOtpPayload.otpParameters) {
     otpParameters.push({
-      secret: uint8ArrayToBase32(otpParameter.secret as any),
+      secret: uint8ArrayToBase32(otpParameter.secret as never),
       name: otpParameter.name,
       issuer: otpParameter.issuer,
       algorithm: OtpParameterAlgorithm[otpParameter.algorithm] as AuthenticatorAlgorithms,
@@ -87,7 +88,7 @@ function decode(sourceUrl: string) {
     batchSize: decodedOtpPayload.batchSize,
     otpParameters,
     version: decodedOtpPayload.version,
-  }
+  };
   return parsed;
 }
 
@@ -98,7 +99,7 @@ function encode(payload: Partial<ParsedMigrationPayload>) {
     batchSize = 1,
     version = 1,
     otpParameters: parsedOtpParameters = [],
-  } = payload
+  } = payload;
   const otpParameters: OtpParameter[] = [];
   for (const parsedOtpParameter of parsedOtpParameters) {
     const otpParameter: OtpParameter = {
@@ -108,12 +109,12 @@ function encode(payload: Partial<ParsedMigrationPayload>) {
       type: OtpParameterType[parsedOtpParameter.type],
     };
     if (parsedOtpParameter.name) {
-      otpParameter.name = parsedOtpParameter.name
+      otpParameter.name = parsedOtpParameter.name;
     }
     if (parsedOtpParameter.issuer) {
-      otpParameter.issuer = parsedOtpParameter.issuer
+      otpParameter.issuer = parsedOtpParameter.issuer;
     }
-    otpParameters.push(otpParameter)
+    otpParameters.push(otpParameter);
   }
   const serializedPayload = {
     batchId,
@@ -121,10 +122,10 @@ function encode(payload: Partial<ParsedMigrationPayload>) {
     batchSize,
     version,
     otpParameters,
-  }
-  const message = migrationPayload.fromObject(serializedPayload)
+  };
+  const message = migrationPayload.fromObject(serializedPayload);
   const encodedUint8Array = migrationPayload.encode(message).finish();
-  const dataBase64 = encodeURIComponent(Buffer.from(encodedUint8Array).toString('base64'));
+  const dataBase64 = encodeURIComponent(Buffer.from(encodedUint8Array).toString("base64"));
   const result = `otpauth-migration://offline?data=${dataBase64}`;
   return result;
 }
@@ -133,7 +134,7 @@ function parseDigitCount(value: OtpParameterDigitCount): AuthenticatorDigitCount
   switch (value) {
     case OtpParameterDigitCount.eight: return 8;
     case OtpParameterDigitCount.six: return 6;
-    case OtpParameterDigitCount.unspecified: return 'unspecified';
+    case OtpParameterDigitCount.unspecified: return "unspecified";
   }
 }
 
