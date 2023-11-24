@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1087918600841",
+    "project_id": "hauthenticator",
+    "storage_bucket": "hauthenticator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087918600841:android:8f48b55e754187c3a2cc58",
+        "android_client_info": {
+          "package_name": "com.hansyulian.hauthenticator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm43IDYIIX991m6LwCX8ni7xpfNxK7c4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

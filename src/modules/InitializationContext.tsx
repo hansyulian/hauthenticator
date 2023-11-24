@@ -2,8 +2,6 @@ import { useAppInfoContext } from "@hooks/useAppInfoContext";
 import { useAuthenticatorDataContext } from "@hooks/useAuthenticatorDataContext";
 import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
 import { SplashScreen } from "@screens/SplashScreen";
-import { uuid } from "@utils/uuid";
-import md5 from "md5";
 import React, { createContext, PropsWithChildren, useMemo, FC, useEffect, useState } from "react";
 
 export type InitializationContextValue = {
@@ -34,15 +32,6 @@ export const InitializationProvider: FC<PropsWithChildren> = ({ children }) => {
     }
     initialize();
   }, [authenticatorState, appInfoState, sensitiveDataState, sensitiveData]);
-
-  useEffect(() => {
-    if (sensitiveDataState === "LOADED" && !sensitiveData?.encryptionKey) {
-      setSensitiveData({
-        ...sensitiveData,
-        encryptionKey: md5(uuid()),
-      });
-    }
-  }, [sensitiveData, sensitiveDataState, setSensitiveData]);
 
   const value = useMemo(() => {
     return {

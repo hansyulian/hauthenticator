@@ -13,10 +13,12 @@ export const useLoadableAuthenticatorDataContext = () => {
     return data;
   }, []), {
     id: "authenticator",
-    onSet: useCallback(async (data: AuthenticatorStoreData) => {
-      for (const authenticatorExtended of data.authenticators) {
-        authenticatorExtended.createdAt = new Date(authenticatorExtended.createdAt).toISOString();
-        authenticatorExtended.updatedAt = new Date(authenticatorExtended.updatedAt).toISOString();
+    onSet: useCallback(async (data: Partial<AuthenticatorStoreData>) => {
+      if (data.authenticators) {
+        for (const authenticatorExtended of data.authenticators) {
+          authenticatorExtended.createdAt = new Date(authenticatorExtended.createdAt).toISOString();
+          authenticatorExtended.updatedAt = new Date(authenticatorExtended.updatedAt).toISOString();
+        }
       }
       await AuthenticatorStore.set(data);
     }, [])

@@ -9,7 +9,7 @@ export class BasicStoreBase<T extends object>{
     this.defaultValues = defaultValues;
   }
 
-  async set(values: T) {
+  async set(values: Partial<T>) {
     const storedValues = this.nativeGet();
     const setValues: T = {
       ...this.defaultValues,

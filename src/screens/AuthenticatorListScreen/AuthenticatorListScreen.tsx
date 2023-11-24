@@ -54,6 +54,16 @@ export const AuthenticatorListScreen = () => {
     rightSection={<>
       <AppBarAction icon='plus' onPress={() => navigate("AuthenticatorAdd", {})} />
     </>}
+    bottomComponent={authenticators.length > 0 &&
+      <>
+        <ViewE style={styles.timerContainer} padding>
+          <SecondsProgressCircle seconds={30 - seconds} max={30} />
+        </ViewE>
+        <ViewE padding style={styles.searchBarContainer}>
+          <SearchBarE value={searchText} onChangeText={setSearchText} />
+        </ViewE>
+      </>}
+    stickyBottomComponent
   >
     <FlatList
       ListFooterComponent={<ViewE style={styles.flatListFooter} />}
@@ -65,18 +75,6 @@ export const AuthenticatorListScreen = () => {
           seconds={seconds}
         />}
     />
-    {
-      authenticators.length > 0 &&
-      <>
-        <ViewE style={styles.timerContainer} padding>
-          <SecondsProgressCircle seconds={30 - seconds} max={30} />
-        </ViewE>
-        <ViewE padding style={styles.searchBarContainer}>
-          <SearchBarE value={searchText} onChangeText={setSearchText} />
-        </ViewE>
-      </>
-    }
-
   </ScreenLayout >;
 };
 

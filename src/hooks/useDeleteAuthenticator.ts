@@ -14,6 +14,7 @@ export const useDeleteAuthenticator = () => {
       throw new BaseException("AuthenticatorNotFound", { id });
     }
     authenticator.status = "DELETED";
+    authenticator.updatedAt = new Date().toISOString();
     await set({
       ...data,
       authenticators: [...data.authenticators]

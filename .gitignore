@@ -18,3 +18,5 @@ web-build/
 /src/config/config.override.ts
 .env*.local
 .env
+/src/screens/DevToolsScreen/DevPlayground.tsx
+/src/components

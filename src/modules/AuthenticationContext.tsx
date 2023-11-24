@@ -60,8 +60,6 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
         && lastAppState.current === "background"
         && appInfo?.authenticationEnabled
         && !authenticationMutex.current) {
-
-        console.log(lastAppState.current, nextState, appInfo?.authenticationEnabled, authenticationMutex.current);
         authenticate();
       }
       lastAppState.current = nextState;

@@ -20,3 +20,4 @@ type AuthenticatorExtended = {
   updatedAt: string;
 }
 type AuthenticatorExtendedFormData = Partial<AuthenticatorExtended> & Pick<AuthenticatorExtended, 'authenticator'>;
+

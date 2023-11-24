@@ -9,3 +9,4 @@ type JsonData = {
 };
 type AsyncLoadState = 'UNLOADED' | 'LOADING' | 'LOADED' | 'ERROR';
 type AsyncCallback<Returns> = () => (Promise<Returns> | Returns);
+type SignalType = 'danger'

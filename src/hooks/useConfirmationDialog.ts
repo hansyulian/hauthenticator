@@ -6,6 +6,7 @@ type ConfirmationDialogOptions = {
   content: string;
   onConfirm: AsyncCallback<void>;
   onCancel?: AsyncCallback<void>;
+  type?: SignalType;
 }
 
 export const useConfirmationDialog = () => {
@@ -15,9 +16,11 @@ export const useConfirmationDialog = () => {
     show({
       title: options.title,
       content: options.content,
+      hideCloseButton: true,
       buttons: [{
         text: "Confirm",
         onPress: options.onConfirm,
+        type: options.type,
       }, {
         text: "Cancel",
         onPress: () => options.onCancel?.(),

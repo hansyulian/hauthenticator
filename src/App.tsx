@@ -12,6 +12,8 @@ import { DataProvider } from "@modules/DataContext";
 import { AuthenticationProvider } from "@modules/AuthenticationContext";
 import { MenuProvider } from "@modules/MenuContext";
 import { DialogProvider } from "@modules/DialogContext";
+import { SyncProvider } from "@modules/SyncContext";
+import { SyncProgressBar } from "@components/SyncProgressBar";
 
 export function App() {
   return (
@@ -20,15 +22,18 @@ export function App() {
         <SnackbarProvider>
           <DialogProvider>
             <AuthenticationProvider>
-              <SafeAreaProvider>
-                <MenuProvider>
-                  <NavigationContainer>
-                    <InitializationProvider>
-                      <Navigation />
-                    </InitializationProvider>
-                  </NavigationContainer >
-                </MenuProvider>
-              </SafeAreaProvider>
+              <SyncProvider>
+                <SafeAreaProvider>
+                  <MenuProvider>
+                    <NavigationContainer>
+                      <InitializationProvider>
+                        <Navigation />
+                        <SyncProgressBar />
+                      </InitializationProvider>
+                    </NavigationContainer >
+                  </MenuProvider>
+                </SafeAreaProvider>
+              </SyncProvider>
             </AuthenticationProvider>
           </DialogProvider>
         </SnackbarProvider>

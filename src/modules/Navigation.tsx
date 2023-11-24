@@ -16,6 +16,7 @@ import { AuthenticatorEditScreen } from "@screens/AuthenticatorEditScreen/Authen
 import { AuthenticatorDetailScreen } from "@screens/AuthenticatorDetailScreen/AuthenticatorDetailScreen";
 import { ExportSelectionScreen } from "@screens/ExportSelectionScreen/ExportSelectionScreen";
 import { ExportScreen } from "@screens/ExportScreen/ExportScreen";
+import { SetupBackupPasswordScreen } from "@screens/SetupBackupPasswordScreen/SetupBackupPasswordScreen";
 
 export type NavigationParams = {
   AuthenticatorList: {},
@@ -38,6 +39,7 @@ export type NavigationParams = {
     authenticators: Authenticator[],
   },
   Settings: {},
+  SetupBackupPassword: {},
   DevTools: {},
 }
 export type NavigationTargets = keyof NavigationParams;
@@ -58,6 +60,7 @@ export const Navigation: FC<PropsWithChildren> = () => {
     <Stack.Screen name='Settings' component={SettingsScreen} />
     <Stack.Screen name="ExportSelection" component={ExportSelectionScreen} />
     <Stack.Screen name="Export" component={ExportScreen} />
+    <Stack.Screen name="SetupBackupPassword" component={SetupBackupPasswordScreen} />
     {config.isDevMode && <Stack.Screen name='DevTools' component={DevToolsScreen} />}
   </Stack.Navigator>;
 };

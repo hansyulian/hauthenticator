@@ -10,21 +10,27 @@ import { TextE } from "@components/TextE";
 import { SettingsScreenActionRow } from "./SettingsScreen.ActionRow";
 import { useNavigate } from "@hooks/useNavigate";
 import { useAuthenticate } from "@hooks/useAuthenticate";
+import { useSyncContext } from "@hooks/useSyncContext";
+import { GoogleDriveSync } from "@modules/GoogleDriveSync";
+import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
 
 export const SettingsScreen = () => {
-  const { data } = useAppInfoContext();
+  const { data: appInfo } = useAppInfoContext();
   const [authentication, setAuthentication] = useState(false);
+  const { set: setSensitiveDataContext } = useSensitiveDataContext();
+  const syncContext = useSyncContext();
   const authenticate = useAuthenticate();
   const setAppInfo = useSetAppInfo();
   const navigate = useNavigate();
 
   useFocusedEffect(() => {
-    if (!data) {
+    if (!appInfo) {
       return;
     }
-    setAuthentication(data.authenticationEnabled);
-  }, [data]);
-  const setAuthenticationExtended = (value: boolean) => {
+    setAuthentication(appInfo.authenticationEnabled);
+  }, [appInfo]);
+
+  const onAuthenticationChange = (value: boolean) => {
     setAppInfo({
       authenticationEnabled: value,
     });
@@ -35,8 +41,27 @@ export const SettingsScreen = () => {
     };
     navigate("ExportSelection", {});
   };
+
+  const onGoogleDriveChange = async (value: boolean) => {
+    if (value) {
+      await GoogleDriveSync.initialize();
+      navigate("SetupBackupPassword", {});
+    }
+    else {
+      setSensitiveDataContext({
+        backupPassword: "",
+      });
+      setAppInfo({
+        googleDriveSyncEnabled: false,
+      });
+      syncContext.setEnabled(false);
+    }
+
+  };
+
   return <ScreenLayout headerText='Settings'>
-    <SettingsScreenToggleRow icon='lock' text="Authentication" value={authentication} onChange={setAuthenticationExtended} />
+    <SettingsScreenToggleRow icon='lock' text="Authentication" value={authentication} onChange={onAuthenticationChange} />
+    <SettingsScreenToggleRow icon="link" text="Google drive sync" value={syncContext.enabled} onChange={onGoogleDriveChange} />
     <SettingsScreenActionRow icon='import' text="Import" onPress={() => navigate("Import", {})} />
     <SettingsScreenActionRow icon='export' text="Export" onPress={onExport} />
     <SettingsScreenRow justifyContent="space-between" row>

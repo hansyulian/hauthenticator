@@ -9,16 +9,19 @@ import { useBack } from "@hooks/useBack";
 import { useCanBack } from "@hooks/useCanBack";
 import { useIsFocused } from "@react-navigation/native";
 import { ViewE } from "./ViewE";
+import { FloatingBottomContainer } from "./FloatingBottomContainer";
 
 export type ScreenLayoutProps = PropsWithChildren & {
   headerText?: string;
   leftSection?: ReactNode;
   rightSection?: ReactNode;
   disableBack?: boolean;
+  bottomComponent?: ReactNode;
+  stickyBottomComponent?: boolean;
 }
 
 export const ScreenLayout = (props: ScreenLayoutProps) => {
-  const { disableBack = false, headerText, children, leftSection, rightSection } = props;
+  const { disableBack = false, headerText, children, leftSection, rightSection, bottomComponent, stickyBottomComponent } = props;
   const [headerLayout, setHeaderLayout] = useState<LayoutRectangle>();
   const [containerLayout, setContainerLayout] = useState<LayoutRectangle>();
   const contentHeight = useMemo(() => {
@@ -39,8 +42,18 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
   };
   const onHeaderLayout = (event: LayoutChangeEvent) => {
     setHeaderLayout(event.nativeEvent.layout);
-
   };
+
+  const calculatedBottomComponent = useMemo(() => {
+    if (!bottomComponent) {
+      return null;
+    }
+    if (stickyBottomComponent) {
+      return <FloatingBottomContainer>{bottomComponent}</FloatingBottomContainer>;
+    }
+    return <ViewE flex={1} justifyContent="flex-end">{bottomComponent}</ViewE>;
+  }, [bottomComponent, stickyBottomComponent]);
+
   if (!isFocused) {
     return null;
   }
@@ -54,6 +67,7 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
     </Appbar.Header>
     <View style={styles.contentContainer}>
       {children}
+      {calculatedBottomComponent}
     </View>
     <StatusBarE />
   </ViewE>;

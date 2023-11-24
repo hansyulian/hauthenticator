@@ -24,7 +24,8 @@ export const AuthenticatorEditScreen = (
         ...authenticatorExtended.authenticator,
         name,
         issuer,
-      }
+      },
+      updatedAt: new Date().toISOString(),
     });
     navigate("AuthenticatorList", {
 

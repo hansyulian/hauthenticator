@@ -11,8 +11,8 @@ export class SecureStoreBase<T extends object>{
     this.options = options;
   }
 
-  async set(values: T, options: SecureStore.SecureStoreOptions = {}) {
-    const storedValues = this.nativeGet(options);
+  async set(values: Partial<T>, options: SecureStore.SecureStoreOptions = {}) {
+    const storedValues = await this.nativeGet(options);
     const setValues: T = {
       ...this.defaultValues,
       ...storedValues,

@@ -4,7 +4,7 @@ export type LoadableData<DataType> = {
   data: DataType | undefined;
   error: unknown;
   state: AsyncLoadState;
-  set: (data: DataType) => Promise<void>;
+  set: (data: Partial<DataType>) => Promise<void>;
   reload: () => Promise<void>;
 }
 
@@ -12,7 +12,7 @@ export type LoadableOptions<DataType> = {
   id?: string;
   lazy?: boolean;
   clearDataOnError?: boolean;
-  onSet?: (data: DataType) => Promise<void> | void;
+  onSet?: (data: Partial<DataType>) => Promise<void> | void;
 }
 
 export const useLoadable = <DataType>(loadFunction: () => Promise<DataType>, options: LoadableOptions<DataType> = {}): LoadableData<DataType> => {
@@ -43,10 +43,11 @@ export const useLoadable = <DataType>(loadFunction: () => Promise<DataType>, opt
     reload();
   }, [reload, lazy]);
 
-  const set = useCallback(async (_data: DataType) => {
-    setData(_data);
+  const set = useCallback(async (_data: Partial<DataType>) => {
     await onSet?.(_data);
-  }, [onSet]);
+    const result = await loadFunction();
+    setData(result);
+  }, [onSet, loadFunction]);
 
   return useMemo(() => ({
     data,

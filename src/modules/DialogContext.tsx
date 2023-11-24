@@ -8,6 +8,7 @@ type DialogButton = {
   text: string;
   icon?: string;
   onPress: AsyncCallback<void>;
+  type?: SignalType;
 }
 
 export type ShowDialogOptions = {
@@ -29,6 +30,7 @@ export const DialogContext = createContext<DialogContextValue | undefined>(undef
 export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
   const [visible, setVisible] = useState(false);
   const [options, setOptions] = useState<ShowDialogOptions>();
+  const [loadingButtonIndex, setLoadingButtonIndex] = useState(-1);
 
   const show = useCallback((options: ShowDialogOptions) => {
     setVisible(true);
@@ -57,9 +59,11 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
     return result;
   }, [options?.buttons, options?.hideCloseButton, options?.closeButtonText, options?.closeButtonIcon, hide]);
 
-  const handleButtonPress = async (fn: AsyncCallback<void>) => {
+  const handleButtonPress = async (fn: AsyncCallback<void>, index: number) => {
+    setLoadingButtonIndex(index);
     await fn();
     hide();
+    setLoadingButtonIndex(-1);
   };
 
   return <DialogContext.Provider value={value}>
@@ -71,7 +75,15 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
           <TextE>{options?.content}</TextE>
         </Dialog.Content>
         <Dialog.Actions>
-          {buttonsCalculated.map((button, index) => <ButtonE mode="elevated" key={`dialog-provider-item-key-${index}`} icon={button.icon} onPress={() => handleButtonPress(button.onPress)}>
+          {buttonsCalculated.map((button, index) => <ButtonE
+            mode="elevated"
+            key={`dialog-provider-item-key-${index}`}
+            icon={button.icon}
+            onPress={() => handleButtonPress(button.onPress, index)}
+            type={button.type}
+            loading={loadingButtonIndex === index}
+            disabled={loadingButtonIndex !== -1}
+          >
             {button.text}
           </ButtonE>)}
         </Dialog.Actions>

@@ -3,7 +3,7 @@
     "name": "HAuthenticator",
     "slug": "hauthenticator",
     "jsEngine": "hermes",
-    "version": "0.9.1",
+    "version": "0.10.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -26,8 +26,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
+        "googleServicesFile": "./google-services.json"
       },
+      "GoogleServicesFile": "./google/google-services.json",
       "permissions": [
         "android.permission.CAMERA"
       ],
@@ -49,7 +51,8 @@
         {
           "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
         }
-      ]
+      ],
+      "@react-native-google-signin/google-signin"
     ],
     "extra": {
       "eas": {
