@@ -1,9 +1,11 @@
 import { useCallback } from "react";
 import { useAuthenticatorDataContext } from "./useAuthenticatorDataContext";
 import { BaseException } from "@modules/BaseException";
+import { useSync } from "./useSync";
 
 export const useUpdateAuthenticator = () => {
   const { data, set } = useAuthenticatorDataContext();
+  const sync = useSync();
   return useCallback(async (id: string, authenticatorExtended: AuthenticatorExtendedFormData) => {
     if (!data) {
       return;
@@ -17,5 +19,6 @@ export const useUpdateAuthenticator = () => {
     await set({
       ...data
     });
-  }, [data, set]);
+    sync();
+  }, [data, set, sync]);
 };

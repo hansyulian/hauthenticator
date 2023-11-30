@@ -8,6 +8,7 @@ import { useBack } from "@hooks/useBack";
 import { useConfirmationDialog } from "@hooks/useConfirmationDialog";
 import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
 import { useSetAppInfo } from "@hooks/useSetAppInfo";
+import { useSync } from "@hooks/useSync";
 import { useSyncContext } from "@hooks/useSyncContext";
 import { GoogleDriveSync } from "@modules/GoogleDriveSync";
 import { NavigationProps } from "@modules/Navigation";
@@ -23,7 +24,7 @@ export const SetupBackupPasswordScreen = (
   const setAppInfo = useSetAppInfo();
   const sensitiveDataContext = useSensitiveDataContext();
   const back = useBack();
-  const { sync } = useSyncContext();
+  const sync = useSync();
   const confirmationDialog = useConfirmationDialog();
 
   const isValid = password.length >= 8 && password === passwordConfirmation;

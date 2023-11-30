@@ -4,7 +4,7 @@ import { FlatList } from "react-native";
 import { AuthenticatorImportForm, ImportConfirmationScreenRow } from "./ImportConfirmationScreen.Row";
 import { useEffect, useState } from "react";
 import { AppBarAction } from "@components/AppBarAction";
-import { useAddAuthenticators } from "@hooks/useAddAuthenticator";
+import { useAddAuthenticators } from "@hooks/useAddAuthenticators";
 import { useNavigate } from "@hooks/useNavigate";
 
 export const ImportConfirmationScreen = (
