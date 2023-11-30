@@ -1,6 +1,7 @@
 import { AuthenticatorStoreData } from "@storage/AuthenticatorStore";
 import { GoogleDrive } from "./GoogleDrive";
 import { Aes } from "./Aes";
+import { sortAuthenticators } from "@utils/sortAuthenticators";
 const saveFileName = "sync.json";
 
 let googleDrive: GoogleDrive;
@@ -62,13 +63,8 @@ function syncProcessor(localRecords: AuthenticatorExtended[], syncRecords: Authe
     };
   });
   const values = Object.values(index);
-  values.sort((a, b) => {
-    if (a.authenticator.issuer === b.authenticator.issuer) {
-      return (a.authenticator.name || "") > (b.authenticator.name || "") ? 1 : -1;
-    }
-    return (a.authenticator.issuer || "") > (b.authenticator.issuer || "") ? 1 : -1;
-  });
-  return values;
+  const result = sortAuthenticators(values);
+  return result;
 }
 
 async function getSaveFileContent(): Promise<AuthenticatorBackupData> {

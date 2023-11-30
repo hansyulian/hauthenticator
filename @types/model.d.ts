@@ -16,8 +16,9 @@ type AuthenticatorExtended = {
   id: string;
   status: 'ACTIVE' | 'DELETED';
   encryptedSecret: string;
+  isFavourite: boolean;
   createdAt: string;
   updatedAt: string;
 }
-type AuthenticatorExtendedFormData = Partial<AuthenticatorExtended> & Pick<AuthenticatorExtended, 'authenticator'>;
+type AuthenticatorExtendedFormData = Partial<AuthenticatorExtended> & Pick<AuthenticatorExtended, 'authenticator' | 'isFavourite'>;
 

@@ -12,27 +12,33 @@ import { useFocusedEffect } from "@hooks/useFocusedEffect";
 import { useAuthenticators } from "@hooks/useAuthenticators";
 import { SecondsProgressCircle } from "@components/SecondsProgressCircle";
 import { useIsAppActive } from "@hooks/useIsAppActive";
+import { sortAuthenticators } from "@utils/sortAuthenticators";
 
 export const AuthenticatorListScreen = () => {
   const authenticators = useAuthenticators();
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const isAppActive = useIsAppActive();
+
+  const sortedAuthenticators = useMemo(() => {
+    return sortAuthenticators(authenticators);
+  }, [authenticators])
+
   const filteredAuthenticators = useMemo(() => {
-    if (!authenticators) {
+    if (!sortedAuthenticators) {
       return [];
     }
     if (!searchText) {
-      return authenticators;
+      return sortedAuthenticators;
     }
     const searchTextLowerCase = searchText.toLowerCase();
-    return authenticators.filter(record => {
+    return sortedAuthenticators.filter(record => {
       const issuerLowerCase = record.authenticator.issuer?.toLowerCase() || "";
       const nameLowerCase = record.authenticator.name?.toLowerCase() || "";
       return issuerLowerCase.includes(searchTextLowerCase) ||
         nameLowerCase.includes(searchTextLowerCase);
     });
-  }, [authenticators, searchText]);
+  }, [sortedAuthenticators, searchText]);
   const styles = useStyles();
   const { seconds, start, stop } = useSecondsTimer(30);
   useFocusedEffect((isFocused) => {
