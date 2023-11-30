@@ -1,5 +1,7 @@
 import { ViewE } from "@components/ViewE";
 
-export const DevPlayground = () => {
+const DevPlayground = () => {
   return <ViewE />;
 };
+
+export default DevPlayground;

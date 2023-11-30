@@ -4,7 +4,7 @@ import { ScrollViewE } from "@components/ScrollViewE";
 import { config } from "@config/config";
 import { useNavigate } from "@hooks/useNavigate";
 import React, { useCallback, useEffect, useState } from "react";
-import { DevPlayground } from "./DevPlayground";
+const DevPlayground = __DEV__ ? require("./DevPlayground") : null;
 
 export const DevToolsScreen = () => {
   const navigate = useNavigate();

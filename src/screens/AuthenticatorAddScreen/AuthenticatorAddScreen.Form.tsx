@@ -1,7 +1,7 @@
 import { ButtonE } from "@components/ButtonE";
 import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
 import { ViewE } from "@components/ViewE";
-import { useAddAuthenticators } from "@hooks/useAddAuthenticator";
+import { useAddAuthenticators } from "@hooks/useAddAuthenticators";
 import { useBack } from "@hooks/useBack";
 import { AuthenticatorForm } from "@screens/components/AuthenticatorForm";
 import { validateAuthenticatorForm } from "@utils/validateAuthenticatorForm";

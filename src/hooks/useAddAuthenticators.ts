@@ -5,10 +5,12 @@ import { uuid } from "@utils/uuid";
 import { withDefaultAuthenticatorExtendedValues } from "@utils/withDefaultAuthenticatorExtendedValues";
 import { useEncryption } from "./useEncryption";
 import { sortAuthenticators } from "@utils/sortAuthenticators";
+import { useSync } from "./useSync";
 
 export const useAddAuthenticators = () => {
   const { data, set } = useAuthenticatorDataContext();
   const encryption = useEncryption();
+  const sync = useSync();
   return useCallback(async (forms: AuthenticatorFormData[]) => {
     const newRecords = forms.map(form => withDefaultAuthenticatorExtendedValues({
       id: uuid() as string,
@@ -21,5 +23,6 @@ export const useAddAuthenticators = () => {
     await set({
       authenticators: sortedAuthenticators,
     });
-  }, [data?.authenticators, encryption, set]);
+    sync();
+  }, [data?.authenticators, encryption, set, sync]);
 };
