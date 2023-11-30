@@ -3,6 +3,10 @@ import { AuthenticatorStore, AuthenticatorStoreData } from "@storage/Authenticat
 import { useCallback } from "react";
 import { useLoadable } from "./useLoadable";
 
+const defaultAuthenticatorExtendedValues: Partial<AuthenticatorExtended> = {
+  isFavourite: false,
+}
+
 export const useLoadableAuthenticatorDataContext = () => {
   return useLoadable(useCallback(async () => {
     const data = await AuthenticatorStore.get();
@@ -10,7 +14,17 @@ export const useLoadableAuthenticatorDataContext = () => {
       console.log("devmode override authenticator data", !!config.authenticatorsDataReplacement);
       data.authenticators = config.authenticatorsDataReplacement;
     }
-    return data;
+    const processedData: AuthenticatorStoreData = {
+      ...data,
+      authenticators: [],
+    }
+    for (const record of data.authenticators) {
+      processedData.authenticators.push({
+        ...defaultAuthenticatorExtendedValues,
+        ...record,
+      })
+    }
+    return processedData;
   }, []), {
     id: "authenticator",
     onSet: useCallback(async (data: Partial<AuthenticatorStoreData>) => {

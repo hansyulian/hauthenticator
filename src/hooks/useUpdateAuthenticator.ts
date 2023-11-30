@@ -15,6 +15,7 @@ export const useUpdateAuthenticator = () => {
       throw new BaseException("AuthenticatorNotFound", { id });
     }
     record.authenticator = authenticatorExtended.authenticator;
+    record.isFavourite = authenticatorExtended.isFavourite;
     record.updatedAt = new Date().toString();
     await set({
       ...data

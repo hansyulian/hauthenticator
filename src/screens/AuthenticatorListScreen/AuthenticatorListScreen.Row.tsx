@@ -1,4 +1,5 @@
 import { DividerE } from "@components/DividerE";
+import { IconE } from "@components/IconE";
 import { TouchableE } from "@components/TouchableE";
 import { ViewE } from "@components/ViewE";
 import { useAuthenticate } from "@hooks/useAuthenticate";
@@ -7,6 +8,7 @@ import { useDeleteAuthenticator } from "@hooks/useDeleteAuthenticator";
 import { useMenu } from "@hooks/useMenu";
 import { useNavigate } from "@hooks/useNavigate";
 import { useSnackbar } from "@hooks/useSnackbar";
+import { useUpdateAuthenticator } from "@hooks/useUpdateAuthenticator";
 import { AuthenticatorPreview } from "@screens/components/AuthenticatorPreview";
 import { copyClipboard } from "@utils/copyClipboard";
 import { useState } from "react";
@@ -18,13 +20,14 @@ export type AuthenticatorListScreenRowProps = {
 
 export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProps) => {
   const { seconds, authenticatorExtended } = props;
-  const { authenticator } = authenticatorExtended;
+  const { authenticator, isFavourite } = authenticatorExtended;
   const authenticate = useAuthenticate();
   const [otp, setOtp] = useState("");
   const snackbar = useSnackbar();
   const navigate = useNavigate();
   const deleteAuthenticator = useDeleteAuthenticator();
   const confirmationDialog = useConfirmationDialog();
+  const updateAuthenticator = useUpdateAuthenticator();
   const { show } = useMenu();
 
   const onPress = () => {
@@ -36,6 +39,15 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
     show({
       title: `${authenticator.issuer} - ${authenticator.name}`,
       menu: [{
+        text: isFavourite ? "Unfavourite" : "Favourite",
+        icon: "star",
+        onPress: () => {
+          updateAuthenticator(authenticatorExtended.id, {
+            ...authenticatorExtended,
+            isFavourite: !isFavourite,
+          });
+        }
+      }, {
         text: "Edit",
         icon: "pencil",
         onPress: () => {
@@ -72,8 +84,11 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
 
   return <TouchableE onPress={onPress} onLongPress={onLongPress}>
     <>
-      <ViewE paddingHorizontal="medium" paddingVertical="small" >
-        <AuthenticatorPreview hideTimer onChangeOtp={setOtp} authenticatorExtended={authenticatorExtended} seconds={seconds} />
+      <ViewE paddingHorizontal="medium" paddingVertical="small" row alignItems="center">
+        <ViewE flex={1}>
+          <AuthenticatorPreview hideTimer onChangeOtp={setOtp} authenticatorExtended={authenticatorExtended} seconds={seconds} />
+        </ViewE>
+        {isFavourite && <IconE icon='star' color='primary' />}
       </ViewE>
       <DividerE />
     </>
