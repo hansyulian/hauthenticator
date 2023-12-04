@@ -1,4 +1,3 @@
-
 import CryptoJS from "crypto-js";
 import { BaseException } from "./BaseException";
 
@@ -12,11 +11,8 @@ function encrypt(payload: string, secret: string): string {
 }
 
 function decrypt(payload: string, secret: string): string {
-  const result = CryptoJS.AES.decrypt(payload, secret);
-  if (!result) {
-    throw new BaseException("DecryptionFailed", {}, "12989abvas9d8f7345nlksadf07");
-  }
   try {
+    const result = CryptoJS.AES.decrypt(payload, secret);
     const decryptedStringUtf8 = result.toString(CryptoJS.enc.Utf8);
     if (!decryptedStringUtf8) {
       throw new BaseException("DecryptionFailed", {}, "9324890bnk24lzcv091235lknh");
