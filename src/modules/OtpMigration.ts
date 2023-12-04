@@ -1,4 +1,4 @@
-import { Buffer } from "@craftzdog/react-native-buffer";
+import BufferLibrary from "@craftzdog/react-native-buffer";
 import protobuf from "protobufjs";
 import { BaseException } from "./BaseException";
 import { uint8ArrayToBase32 } from "@utils/uint8ArrayToBase32";
@@ -69,7 +69,7 @@ function decode(sourceUrl: string) {
   if (!dataBase64) {
     throw new BaseException("MissingMigrationData");
   }
-  const buffer = Buffer.from(dataBase64, "base64");
+  const buffer = BufferLibrary.Buffer.from(dataBase64, "base64");
   const decodedOtpPayload = migrationPayload.decode(buffer) as unknown as MigrationPayload;
   const otpParameters: Authenticator[] = [];
   for (const otpParameter of decodedOtpPayload.otpParameters) {
@@ -125,7 +125,7 @@ function encode(payload: Partial<ParsedMigrationPayload>) {
   };
   const message = migrationPayload.fromObject(serializedPayload);
   const encodedUint8Array = migrationPayload.encode(message).finish();
-  const dataBase64 = encodeURIComponent(Buffer.from(encodedUint8Array).toString("base64"));
+  const dataBase64 = encodeURIComponent(BufferLibrary.Buffer.from(encodedUint8Array).toString("base64"));
   const result = `otpauth-migration://offline?data=${dataBase64}`;
   return result;
 }

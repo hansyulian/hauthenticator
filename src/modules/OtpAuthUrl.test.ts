@@ -1,6 +1,6 @@
 import { OtpAuthUrl } from "./OtpAuthUrl";
 
-describe("OthAuthUrl", () => {
+describe("Module: OthAuthUrl", () => {
   describe("OthAuthUrl.decode", () => {
     it("1. should be able to decode otpauth://totp/AB-name%40test.com?secret=ABCDE12345", () => {
       const result = OtpAuthUrl.decode("otpauth://totp/AB-name%40test.com?secret=ABCDE12345");
@@ -46,11 +46,6 @@ describe("OthAuthUrl", () => {
         issuer: "issuertest",
         name: "nametest",
         secret: "secrettest",
-        counter: {
-          high: 0,
-          low: 0,
-          unsigned: false,
-        }
       });
       expect(result).toStrictEqual("otpauth://totp/issuertest%3Anametest?secret=secrettest&issuer=issuertest");
     });
