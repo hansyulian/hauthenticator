@@ -6,3 +6,26 @@ Today is the June of 2023. Recently `Google Authenticator` has just been updated
 - fingerprint authentication
 - proper cloud sync
 So I create this project to make my `dream authenticator` with the goal in mind while also learning `expo`. Right now I mainly a `react-native` developer and have already know expo for like 5 years, but haven't get any chance to use it yet. So for this personal project, I decided to use `expo` and build what I want while learning new things.
+
+# How to do run
+
+## Prerequisites
+- Node.JS (i used node.js 20)
+- [expo](https://expo.dev/)
+
+## Running android
+- `npm run build:android:local-dev`
+- install the `.apk` file to your emulator
+- `npm start`
+- press `a`
+
+# How to build
+
+## Prerequisites
+- Node.JS
+- Linux/Mac OS, windows isn't supported by `eas`
+
+## Building android
+- `npm run build:android:apk` to build using `eas` server
+or
+- `npm run build:android:local-apk` to build on your own machine

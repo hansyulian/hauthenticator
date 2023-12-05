@@ -11,7 +11,7 @@ export const SettingsScreenIconRow = (props: SettingsScreenIconRowProps) => {
   return <SettingsScreenRow onPress={onPress}>
     <ViewE row justifyContent="space-between" alignItems="center">
       <ViewE row alignItems="center">
-        <ViewE marginVertical='negativeMedium'>
+        <ViewE marginRight>
           <IconE icon={icon} />
         </ViewE>
         <ViewE flex>

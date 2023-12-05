@@ -11,14 +11,14 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { useUpdateAuthenticator } from "@hooks/useUpdateAuthenticator";
 import { AuthenticatorPreview } from "@screens/components/AuthenticatorPreview";
 import { copyClipboard } from "@utils/copyClipboard";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 export type AuthenticatorListScreenRowProps = {
   authenticatorExtended: AuthenticatorExtended;
   seconds: number;
 }
 
-export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProps) => {
+export const AuthenticatorListScreenRow = memo((props: AuthenticatorListScreenRowProps) => {
   const { seconds, authenticatorExtended } = props;
   const { authenticator, isFavourite } = authenticatorExtended;
   const authenticate = useAuthenticate();
@@ -93,4 +93,4 @@ export const AuthenticatorListScreenRow = (props: AuthenticatorListScreenRowProp
       <DividerE />
     </>
   </TouchableE>;
-};
+});
