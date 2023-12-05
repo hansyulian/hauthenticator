@@ -35,7 +35,8 @@ export const AuthenticatorAddScreenForm = () => {
       <ButtonE
         disabled={!valid}
         onPress={save}
-      >Confirm</ButtonE>
+      >Confirm
+      </ButtonE>
     </FloatingBottomContainer>
   </>;
 };

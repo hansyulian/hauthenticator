@@ -48,6 +48,7 @@ module.exports = {
         "react-hooks/rules-of-hooks": "error", // For checking rules of hooks
         "react-hooks/exhaustive-deps": "error", // For checking hook dependencies 
         "@typescript-eslint/ban-types": "off",
-        "@typescript-eslint/no-unused-vars": "off"
+        "@typescript-eslint/no-unused-vars": "off",
+        "react/display-name": "off",
     },
 };

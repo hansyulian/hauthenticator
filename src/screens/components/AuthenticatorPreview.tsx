@@ -1,3 +1,4 @@
+import { IconE } from "@components/IconE";
 import { SecondsProgressCircle } from "@components/SecondsProgressCircle";
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
@@ -13,10 +14,11 @@ export type AuthenticatorPreviewProps = {
   hideTimer?: boolean;
   onChangeOtp?: (value: string) => void;
   onChangeNextOtp?: (value: string) => void;
+  isFavourite?: boolean;
 }
 
 export const AuthenticatorPreview = (props: AuthenticatorPreviewProps) => {
-  const { seconds, authenticatorExtended, onChangeNextOtp, onChangeOtp, hideTimer = false } = props;
+  const { seconds, isFavourite, authenticatorExtended, onChangeNextOtp, onChangeOtp, hideTimer = false } = props;
   const { authenticator } = authenticatorExtended;
   const [otp, setOtp] = useState("");
   const [nextOtp, setNextOtp] = useState("");
@@ -67,7 +69,12 @@ export const AuthenticatorPreview = (props: AuthenticatorPreviewProps) => {
 
   return <ViewE row justifyContent="space-between" alignItems="center">
     <ViewE>
-      <TextE weight='bold'>{authenticator.issuer || "-"}</TextE>
+      <ViewE row>
+        {!!isFavourite && <ViewE marginRight='small'>
+          <IconE icon='star' color='primary' />
+        </ViewE>}
+        <TextE weight='bold'>{authenticator.issuer || "-"}</TextE>
+      </ViewE>
       <ViewE row>
         <TextE type='otpValue' style={styles.currentOtp}>{otp}</TextE>
         <TextE type='otpValue' style={styles.nextOtp}> - {nextOtp}</TextE>

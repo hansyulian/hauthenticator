@@ -41,6 +41,18 @@ export const AuthenticatorListScreen = () => {
   }, [sortedAuthenticators, searchText]);
   const styles = useStyles();
   const { seconds, start, stop } = useSecondsTimer(30);
+  const authenticatorSecondsStage = useMemo(() => {
+    if (seconds < 20) {
+      return 0; // for stage 0
+    }
+    if (seconds < 25) {
+      return 20; // for stage 1
+    }
+    if (seconds < 28) {
+      return 25; // for stage 2
+    }
+    return 28; // for stage 3;
+  }, [seconds])
   useFocusedEffect((isFocused) => {
     if (isFocused) {
       start();
@@ -78,7 +90,7 @@ export const AuthenticatorListScreen = () => {
         <AuthenticatorListScreenRow
           key={`authenticator-list-screen-row-${index}`}
           authenticatorExtended={item}
-          seconds={seconds}
+          seconds={authenticatorSecondsStage}
         />}
     />
   </ScreenLayout >;

@@ -1,22 +1,21 @@
 import { ColorTokens, useStyleConstants } from "@hooks/useStyleConstants";
 import { useMemo } from "react";
-import { IconButton, IconButtonProps } from "react-native-paper";
+import Icon from "react-native-paper/src/components/Icon";
 
-export type IconEProps = IconButtonProps & {
+export type IconEProps = {
   color?: ColorTokens;
+  icon: unknown;
+  size?: number; // undecided
 }
 
 export const IconE = (props: IconEProps) => {
-  const { color, iconColor, ...rest } = props;
+  const { color, size = 24, icon } = props;
   const styleConstants = useStyleConstants();
   const calculatedColor = useMemo(() => {
-    if (iconColor) {
-      return iconColor;
-    }
     if (color) {
       return styleConstants.colors[color] as string;
     }
     return undefined;
-  }, [color, iconColor, styleConstants]);
-  return <IconButton  {...rest} iconColor={calculatedColor} />;
+  }, [color, styleConstants]);
+  return <Icon source={icon} size={size} color={calculatedColor} />;
 };
