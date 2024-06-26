@@ -60,22 +60,26 @@ export const RestoreSyncScreen = () => {
           </ButtonE>
         </ViewE>
       }
-      stickyBottomComponent>
+      stickyBottomComponent
+    >
       <ViewE gap="large" padding fullSize>
         <TextE>
-          An encrypted backup has been detected in your google drive. Please enter the password used
-          to encrypt the data to decrypt them. Please remember that there is no way to restore this
-          password if you forget it
+          An encrypted backup has been detected in your google drive. Please
+          enter the password used to encrypt the data to decrypt them. Please
+          remember that there is no way to restore this password if you forget
+          it
         </TextE>
         <TextBox
           label="Password"
           secureTextEntry
           value={password}
-          onChangeText={setPassword}></TextBox>
+          onChangeText={setPassword}
+        ></TextBox>
 
         <ViewE gap="large" marginTop="large">
           <TextE>
-            Alternatively, if you completely forgot your password, you may reset your data
+            Alternatively, if you completely forgot your password, you may reset
+            your data
           </TextE>
           <ButtonE onPress={onReset} type="danger">
             Reset

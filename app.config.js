@@ -9,24 +9,24 @@ export default {
   expo: {
     name: name,
     slug: "hauthenticator",
-    jsEngine: "hermes",
-    version: "0.12.0",
+    version: "0.13.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
-    userInterfaceStyle: "light",
+    scheme: "myapp",
+    userInterfaceStyle: "automatic",
     splash: {
       image: "./assets/icon.png",
       resizeMode: "contain",
       backgroundColor: "#ffffff",
     },
-    assetBundlePatterns: ["**/*"],
     ios: {
       packageName,
       supportsTablet: true,
       jsEngine: "jsc",
       infoPlist: {
         NSCameraUsageDescription: "Allow $(PRODUCT_NAME) to access camera.",
-        NSMicrophoneUsageDescription: "Allow $(PRODUCT_NAME) to access your microphone",
+        NSMicrophoneUsageDescription:
+          "Allow $(PRODUCT_NAME) to access your microphone",
       },
     },
     android: {
@@ -47,7 +47,8 @@ export default {
         "expo-barcode-scanner",
         {
           cameraPermission: "Allow $(PRODUCT_NAME) to access camera.",
-          microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone",
+          microphonePermission:
+            "Allow $(PRODUCT_NAME) to access your microphone",
         },
       ],
       [
@@ -57,7 +58,11 @@ export default {
         },
       ],
       "@react-native-google-signin/google-signin",
+      "expo-secure-store",
     ],
+    experiments: {
+      typedRoutes: true,
+    },
     extra: {
       eas: {
         projectId: "efa31160-d975-4d8b-981b-479fb5a58cf6",

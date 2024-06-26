@@ -84,6 +84,7 @@ async function writeSaveFile(authenticators: AuthenticatorExtended[]) {
     ...getDefaultAuthenticatorData(),
     authenticators,
   });
+
 }
 
 function getDefaultAuthenticatorData(): AuthenticatorBackupData {
@@ -91,6 +92,5 @@ function getDefaultAuthenticatorData(): AuthenticatorBackupData {
     timestamp: new Date().getTime(),
     version: 1,
     authenticators: [],
-
   };
 }
