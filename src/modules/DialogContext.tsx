@@ -1,5 +1,13 @@
 import { TextE } from "@components/TextE";
-import React, { createContext, useState, PropsWithChildren, useMemo, FC, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  PropsWithChildren,
+  useMemo,
+  FC,
+  useCallback,
+  ReactNode,
+} from "react";
 import { Dialog, Portal } from "react-native-paper";
 import { ButtonE } from "@components/ButtonE";
 
@@ -9,16 +17,16 @@ type DialogButton = {
   icon?: string;
   onPress: AsyncCallback<void>;
   type?: SignalType;
-}
+};
 
 export type ShowDialogOptions = {
   title?: string;
-  content: string;
+  content: string | ReactNode;
   buttons?: DialogButton[];
   hideCloseButton?: boolean;
   closeButtonText?: string;
   closeButtonIcon?: string;
-}
+};
 
 export type DialogContextValue = {
   show: (options: ShowDialogOptions) => void;
@@ -48,7 +56,7 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [show, hide]);
 
   const buttonsCalculated = useMemo<DialogButton[]>(() => {
-    const result = [...options?.buttons || []];
+    const result = [...(options?.buttons || [])];
     if (!options?.hideCloseButton) {
       result.push({
         text: options?.closeButtonText || "Close",
@@ -57,7 +65,13 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
       });
     }
     return result;
-  }, [options?.buttons, options?.hideCloseButton, options?.closeButtonText, options?.closeButtonIcon, hide]);
+  }, [
+    options?.buttons,
+    options?.hideCloseButton,
+    options?.closeButtonText,
+    options?.closeButtonIcon,
+    hide,
+  ]);
 
   const handleButtonPress = async (fn: AsyncCallback<void>, index: number) => {
     setLoadingButtonIndex(index);
@@ -66,28 +80,39 @@ export const DialogProvider: FC<PropsWithChildren> = ({ children }) => {
     setLoadingButtonIndex(-1);
   };
 
-  return <DialogContext.Provider value={value}>
-    {children}
-    <Portal>
-      <Dialog visible={visible} onDismiss={hide}>
-        {options?.title && <Dialog.Title>{options.title}</Dialog.Title>}
-        <Dialog.Content>
-          <TextE>{options?.content}</TextE>
-        </Dialog.Content>
-        <Dialog.Actions>
-          {buttonsCalculated.map((button, index) => <ButtonE
-            mode="elevated"
-            key={`dialog-provider-item-key-${index}`}
-            icon={button.icon}
-            onPress={() => handleButtonPress(button.onPress, index)}
-            type={button.type}
-            loading={loadingButtonIndex === index}
-            disabled={loadingButtonIndex !== -1}
-          >
-            {button.text}
-          </ButtonE>)}
-        </Dialog.Actions>
-      </Dialog>
-    </Portal>
-  </DialogContext.Provider>;
+  return (
+    <DialogContext.Provider value={value}>
+      {children}
+      <Portal>
+        <Dialog visible={visible} onDismiss={hide}>
+          {options?.title && (
+            <Dialog.Title>
+              <TextE type="dialogHeader">{options.title}</TextE>
+            </Dialog.Title>
+          )}
+          <Dialog.Content>
+            {typeof options?.content === "string" ? (
+              <TextE type="dialogContent">{options?.content}</TextE>
+            ) : (
+              options?.content
+            )}
+          </Dialog.Content>
+          <Dialog.Actions>
+            {buttonsCalculated.map((button, index) => (
+              <ButtonE
+                mode="elevated"
+                key={`dialog-provider-item-key-${index}`}
+                icon={button.icon}
+                onPress={() => handleButtonPress(button.onPress, index)}
+                type={button.type}
+                loading={loadingButtonIndex === index}
+                disabled={loadingButtonIndex !== -1}>
+                {button.text}
+              </ButtonE>
+            ))}
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    </DialogContext.Provider>
+  );
 };

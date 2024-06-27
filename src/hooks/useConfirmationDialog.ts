@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { ReactNode, useCallback } from "react";
 import { useDialog } from "./useDialog";
 
 type ConfirmationDialogOptions = {
   title?: string;
-  content: string;
+  content: string | ReactNode;
   onConfirm: AsyncCallback<void>;
   onCancel?: AsyncCallback<void>;
   type?: SignalType;
