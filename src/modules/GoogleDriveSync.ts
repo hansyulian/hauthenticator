@@ -50,6 +50,7 @@ async function sync(authenticators: AuthenticatorExtended[]): Promise<Authentica
   const processedAuthenticators = syncProcessor(authenticators, saveFileContent.authenticators);
   await writeSaveFile(processedAuthenticators);
   return processedAuthenticators;
+
 }
 
 function syncProcessor(localRecords: AuthenticatorExtended[], syncRecords: AuthenticatorExtended[]): AuthenticatorExtended[] {

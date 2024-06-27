@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import React, { useEffect, useMemo, useState } from "react";
 import { ViewE } from "./ViewE";
-import { Dimensions, LayoutChangeEvent, StyleSheet } from "react-native";
+import { Dimensions, LayoutChangeEvent, StyleSheet, TouchableOpacity } from "react-native";
+import { BarcodeScanningResult, CameraType, CameraView, useCameraPermissions } from "expo-camera";
 import { useCommonStyles } from "@hooks/useCommonStyles";
 import { ButtonE } from "./ButtonE";
 import { useStyleConstants } from "@hooks/useStyleConstants";
@@ -12,12 +12,11 @@ export type QRScannerProps = {
   disabled?: boolean;
   onEnable?: () => void;
   size?: number;
-}
-
+};
 
 export const QRScanner = (props: QRScannerProps) => {
   const { disabled, onScan, onEnable, size } = props;
-  const [permissionResponse, requestPermission] = BarCodeScanner.usePermissions();
+  const [permissionResponse, requestPermission] = useCameraPermissions();
   const [isDisabled, setIsDisabled] = useState(false);
   const [width, setWidth] = useState(0);
   const styles = useStyles(size || width);
@@ -43,10 +42,7 @@ export const QRScanner = (props: QRScannerProps) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleScanned = ({ type, data }: any) => {
-    if (type !== 256) { // qr type code
-      return;
-    }
+  const handleScanned = ({ data }: BarcodeScanningResult) => {
     onScan(data);
     if (disabled === undefined) {
       setIsDisabled(true);
@@ -61,28 +57,34 @@ export const QRScanner = (props: QRScannerProps) => {
   };
 
   return (
-    <ViewE fullSize style={styles.container}
-      onLayout={handleLayout}
-    >
-      {!permissionResponse?.granted && <ViewE padding justifyContent="center" row><TextE>Please grant the camera access</TextE></ViewE>}
-      {permissionResponse?.granted && <>
-        <ViewE style={styles.scannerContainer}>
-          <BarCodeScanner
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-            onBarCodeScanned={isDisabled ? undefined : handleScanned}
-            style={styles.scanner}
-          />
+    <ViewE fullSize style={styles.container} onLayout={handleLayout}>
+      {!permissionResponse?.granted && (
+        <ViewE padding justifyContent="center" row>
+          <TextE>Please grant the camera access</TextE>
+          <ButtonE>Grant Permission</ButtonE>
         </ViewE>
-        {isDisabled && <ViewE style={styles.disableScannerOverlay}>
-          <ButtonE onPress={onEnableProxy} >Rescan</ButtonE>
-        </ViewE>
-        }
-      </>
-      }
+      )}
+      {permissionResponse?.granted && (
+        <>
+          <ViewE style={styles.scannerContainer}>
+            <CameraView
+              facing="back"
+              barcodeScannerSettings={{
+                barcodeTypes: ["qr"],
+              }}
+              onBarcodeScanned={handleScanned}
+              style={styles.camera}></CameraView>
+          </ViewE>
+          {isDisabled && (
+            <ViewE style={styles.disableScannerOverlay}>
+              <ButtonE onPress={onEnableProxy}>Rescan</ButtonE>
+            </ViewE>
+          )}
+        </>
+      )}
     </ViewE>
   );
 };
-
 
 const useStyles = (size?: number) => {
   const commonStyles = useCommonStyles();
@@ -115,7 +117,10 @@ const useStyles = (size?: number) => {
         ...commonStyles.fullSize,
         ...commonStyles.center,
         backgroundColor: styleConstants.colors.backdrop,
-      }
+      },
+      camera: {
+        height: "100%",
+      },
     });
   }, [size, commonStyles, styleConstants]);
 };

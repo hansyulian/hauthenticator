@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const isDebug = process.env.EAS_BUILD_PROFILE === "development";
 
 const name = isDebug ? "HAuth Debug" : "HAuthenticator";
@@ -12,7 +13,7 @@ export default {
     version: "0.13.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
-    scheme: "myapp",
+    scheme: "hauthenticator",
     userInterfaceStyle: "automatic",
     splash: {
       image: "./assets/icon.png",
@@ -25,8 +26,7 @@ export default {
       jsEngine: "jsc",
       infoPlist: {
         NSCameraUsageDescription: "Allow $(PRODUCT_NAME) to access camera.",
-        NSMicrophoneUsageDescription:
-          "Allow $(PRODUCT_NAME) to access your microphone",
+        NSMicrophoneUsageDescription: "Allow $(PRODUCT_NAME) to access your microphone",
       },
     },
     android: {
@@ -44,11 +44,11 @@ export default {
     },
     plugins: [
       [
-        "expo-barcode-scanner",
+        "expo-camera",
         {
-          cameraPermission: "Allow $(PRODUCT_NAME) to access camera.",
-          microphonePermission:
-            "Allow $(PRODUCT_NAME) to access your microphone",
+          cameraPermission: "Allow $(PRODUCT_NAME) to access your camera",
+          microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone",
+          recordAudioAndroid: true,
         },
       ],
       [

@@ -31,7 +31,7 @@
     "axios": "^1.7.2",
     "crypto-js": "3.3.0",
     "expo": "~51.0.14",
-    "expo-barcode-scanner": "~13.0.1",
+    "expo-camera": "~15.0.11",
     "expo-clipboard": "~6.0.3",
     "expo-constants": "~16.0.2",
     "expo-crypto": "~13.0.2",
