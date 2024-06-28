@@ -36,9 +36,9 @@ export const SettingsScreen = () => {
     });
   };
   const onExport = async () => {
-    if (!await authenticate()) {
+    if (!(await authenticate())) {
       return;
-    };
+    }
     navigate("ExportSelection", {});
   };
 
@@ -46,13 +46,12 @@ export const SettingsScreen = () => {
     if (value) {
       await GoogleDriveSync.initialize();
       const hasSaveFile = await GoogleDriveSync.hasSaveFile();
-      if (!hasSaveFile){
+      if (!hasSaveFile) {
         navigate("SetupBackupPassword", {});
       } else {
-        navigate("RestoreSync",{})
+        navigate("RestoreSync", {});
       }
-    }
-    else {
+    } else {
       setSensitiveDataContext({
         backupPassword: "",
       });
@@ -61,17 +60,27 @@ export const SettingsScreen = () => {
       });
       syncContext.setEnabled(false);
     }
-
   };
-
-  return <ScreenLayout headerText='Settings'>
-    <SettingsScreenToggleRow icon='lock' text="Authentication" value={authentication} onChange={onAuthenticationChange} />
-    <SettingsScreenToggleRow icon="link" text="Google drive sync" value={syncContext.enabled} onChange={onGoogleDriveChange} />
-    <SettingsScreenActionRow icon='import' text="Import" onPress={() => navigate("Import", {})} />
-    <SettingsScreenActionRow icon='export' text="Export" onPress={onExport} />
-    <SettingsScreenRow justifyContent="space-between" row>
-      <TextE>App version</TextE>
-      <TextE>{ExpoConstants.manifest?.version || "-"}</TextE>
-    </SettingsScreenRow>
-  </ScreenLayout>;
+  return (
+    <ScreenLayout headerText="Settings">
+      <SettingsScreenToggleRow
+        icon="lock"
+        text="Authentication"
+        value={authentication}
+        onChange={onAuthenticationChange}
+      />
+      <SettingsScreenToggleRow
+        icon="link"
+        text="Google drive sync"
+        value={syncContext.enabled}
+        onChange={onGoogleDriveChange}
+      />
+      <SettingsScreenActionRow icon="import" text="Import" onPress={() => navigate("Import", {})} />
+      <SettingsScreenActionRow icon="export" text="Export" onPress={onExport} />
+      <SettingsScreenRow justifyContent="space-between" row>
+        <TextE>App version</TextE>
+        <TextE>{ExpoConstants.expoConfig?.version || "-"}</TextE>
+      </SettingsScreenRow>
+    </ScreenLayout>
+  );
 };

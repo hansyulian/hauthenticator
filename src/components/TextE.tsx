@@ -1,4 +1,3 @@
-
 import { ColorTokens, useStyleConstants, StyleConstants } from "@hooks/useStyleConstants";
 import { useMemo } from "react";
 import { StyleSheet, Text as NativeText } from "react-native";
@@ -11,7 +10,7 @@ export type TextEProps = TextProps<NativeText> & {
   weight?: FontWeights;
   color?: ColorTokens;
   truncate?: number;
-}
+};
 export const TextE = (props: TextEProps) => {
   const { type = "normal", weight, style, color, truncate, children, ...rest } = props;
   const styles = useStyles(type, weight, color);
@@ -24,21 +23,35 @@ export const TextE = (props: TextEProps) => {
     }
     return children;
   }, [truncate, children]);
-  return <Text {...rest} style={memoedStyle} >
-    {processedChildren}
-  </Text>;
+  return (
+    <Text {...rest} style={memoedStyle}>
+      {processedChildren}
+    </Text>
+  );
 };
 
 const useStyles = (type: TextETypes, weight?: FontWeights, color?: ColorTokens) => {
   const constants = useStyleConstants();
 
-  return useMemo(() => StyleSheet.create({
-    text: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      color: color ? constants.colors[color] : undefined as any,
-      fontSize: constants.textSizes[type],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      fontWeight: weight ? constants.fontWeight[weight] : constants.textWeight[type] as any,
-    }
-  }), [color, constants.colors, constants.textSizes, constants.fontWeight, constants.textWeight, type, weight]);
+  return useMemo(
+    () =>
+      StyleSheet.create({
+        text: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          color: color ? constants.colors[color] : (undefined as any),
+          fontSize: constants.textSizes[type],
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          fontWeight: weight ? constants.fontWeight[weight] : (constants.textWeight[type] as any),
+        },
+      }),
+    [
+      color,
+      constants.colors,
+      constants.textSizes,
+      constants.fontWeight,
+      constants.textWeight,
+      type,
+      weight,
+    ]
+  );
 };

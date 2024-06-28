@@ -1,4 +1,3 @@
-
 import { useMemo } from "react";
 import { View, StyleSheet, ViewStyle, ViewProps } from "react-native";
 import { useCommonStyles } from "@hooks/useCommonStyles";
@@ -20,11 +19,8 @@ export type ViewEStyleProps = {
   alignItems?: "center" | "baseline" | "flex-end" | "flex-start" | "stretch";
   minHeight?: number;
   minWidth?: number;
-}
-export type ViewEProps = ViewProps & SpacingValues & ViewEStyleProps & {
-
-}
-
+};
+export type ViewEProps = ViewProps & SpacingValues & ViewEStyleProps & {};
 
 export const ViewE = (props: ViewEProps) => {
   const processedProps = useSpacingExtractor(props);
@@ -116,5 +112,21 @@ const useStyles = (props: ViewEStyleProps, padding?: ViewStyle, margin?: ViewSty
     return StyleSheet.create({
       view,
     });
-  }, [commonStyles.column, commonStyles.floatingBottomLeft, commonStyles.floatingBottomRight, commonStyles.floatingTopLeft, commonStyles.floatingTopRight, commonStyles.fullHeight, commonStyles.fullSize, commonStyles.fullWidth, commonStyles.row, commonStyles.shadow, margin, padding, props, styleConstants.colors, styleConstants.spacing]);
+  }, [
+    commonStyles.column,
+    commonStyles.floatingBottomLeft,
+    commonStyles.floatingBottomRight,
+    commonStyles.floatingTopLeft,
+    commonStyles.floatingTopRight,
+    commonStyles.fullHeight,
+    commonStyles.fullSize,
+    commonStyles.fullWidth,
+    commonStyles.row,
+    commonStyles.shadow,
+    margin,
+    padding,
+    props,
+    styleConstants.colors,
+    styleConstants.spacing,
+  ]);
 };

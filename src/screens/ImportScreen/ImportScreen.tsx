@@ -3,9 +3,9 @@ import { ImportScreenGoogleAuthenticator } from "./ImportScreen.GoogleAuthentica
 import { ScrollViewE } from "@components/ScrollViewE";
 
 export const ImportScreen = () => {
-  return <ScreenLayout headerText='Import'>
-    <ScrollViewE fullHeight>
+  return (
+    <ScreenLayout headerText="Import">
       <ImportScreenGoogleAuthenticator />
-    </ScrollViewE >
-  </ScreenLayout>;
-}; 
+    </ScreenLayout>
+  );
+};

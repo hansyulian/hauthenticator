@@ -50,6 +50,7 @@ async function sync(authenticators: AuthenticatorExtended[]): Promise<Authentica
   const processedAuthenticators = syncProcessor(authenticators, saveFileContent.authenticators);
   await writeSaveFile(processedAuthenticators);
   return processedAuthenticators;
+
 }
 
 function syncProcessor(localRecords: AuthenticatorExtended[], syncRecords: AuthenticatorExtended[]): AuthenticatorExtended[] {
@@ -84,6 +85,7 @@ async function writeSaveFile(authenticators: AuthenticatorExtended[]) {
     ...getDefaultAuthenticatorData(),
     authenticators,
   });
+
 }
 
 function getDefaultAuthenticatorData(): AuthenticatorBackupData {
@@ -91,6 +93,5 @@ function getDefaultAuthenticatorData(): AuthenticatorBackupData {
     timestamp: new Date().getTime(),
     version: 1,
     authenticators: [],
-
   };
 }

@@ -1,5 +1,4 @@
 import { ButtonE } from "@components/ButtonE";
-import { IconE } from "@components/IconE";
 import { QRCodeE } from "@components/QRCode";
 import { ScreenLayout } from "@components/ScreenLayout";
 import { TextE } from "@components/TextE";
@@ -12,12 +11,10 @@ import { NavigationProps } from "@modules/Navigation";
 import { OtpMigration } from "@modules/OtpMigration";
 import { copyClipboard } from "@utils/copyClipboard";
 import { useMemo, useState } from "react";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import GestureRecognizer from "react-native-swipe-gestures";
 import { IconButton } from "react-native-paper";
 
-export const ExportScreen = (
-  props: NavigationProps<"Export">
-) => {
+export const ExportScreen = (props: NavigationProps<"Export">) => {
   const { authenticatorExtendeds } = props.route.params;
   const totalPages = Math.ceil(authenticatorExtendeds.length / config.exportCountPerPage);
   const [page, setPage] = useState(0);
@@ -27,7 +24,12 @@ export const ExportScreen = (
   const authenticatorsSlice = useMemo(() => {
     const result: AuthenticatorExtended[][] = [];
     for (let i = 0; i < totalPages; i += 1) {
-      result.push(authenticatorExtendeds.slice(i * config.exportCountPerPage, (i + 1) * config.exportCountPerPage));
+      result.push(
+        authenticatorExtendeds.slice(
+          i * config.exportCountPerPage,
+          (i + 1) * config.exportCountPerPage
+        )
+      );
     }
     return result;
   }, [authenticatorExtendeds, totalPages]);
@@ -38,17 +40,19 @@ export const ExportScreen = (
     const batchId = Math.floor(Math.random() * 65535);
     for (let i = 0; i < authenticatorsSlice.length; i += 1) {
       const slice = authenticatorsSlice[i];
-      const authenticators: Authenticator[] = slice.map(record => ({
+      const authenticators: Authenticator[] = slice.map((record) => ({
         secret: encryption.decrypt(record.encryptedSecret),
         ...record.authenticator,
       }));
-      result.push(OtpMigration.encode({
-        batchId,
-        batchIndex: i,
-        batchSize: totalPages,
-        otpParameters: authenticators,
-        version: 1,
-      }));
+      result.push(
+        OtpMigration.encode({
+          batchId,
+          batchIndex: i,
+          batchSize: totalPages,
+          otpParameters: authenticators,
+          version: 1,
+        })
+      );
     }
     return result;
   }, [authenticatorsSlice, encryption, totalPages]);
@@ -69,33 +73,33 @@ export const ExportScreen = (
     navigate("Settings", {}, { popTo: true });
   };
 
-  const gesture = Gesture.Pan()
-    .onUpdate((event) => {
-      if (event.translationX < 0 && canPrevious) {
-        onPreviousPage();
-      } else if (event.translationX > 0 && canNext) {
-        onNextPage();
-      }
-    })
-  return <ScreenLayout headerText='Export'
-    rightSection={<IconButton icon='check' onPress={onFinished} />}
-  >
-    <ViewE gap='large' padding fullSize>
-      <GestureDetector gesture={gesture}>
-      <QRCodeE
-        value={exportUri[page]}
-      />
-      </GestureDetector>
-      <ButtonE icon='content-copy' onPress={onCopyToClipboard}>
-        Copy to clipboard
-      </ButtonE>
-      <ViewE justifyContent="center" row alignItems="flex-end" flex={1}>
-        <ViewE row justifyContent="center" alignItems="center">
-          <IconButton icon='chevron-left' onPress={onPreviousPage} disabled={!canPrevious} />
-          <TextE>Page {page + 1} of {totalPages}</TextE>
-          <IconButton icon='chevron-right' onPress={onNextPage} disabled={!canNext} />
+  return (
+    <ScreenLayout
+      headerText="Export"
+      bottomComponent={
+        <ViewE padding>
+          <ViewE gap>
+            <ViewE row justifyContent="center" alignItems="center">
+              <IconButton icon="chevron-left" onPress={onPreviousPage} disabled={!canPrevious} />
+              <TextE>
+                Page {page + 1} of {totalPages}
+              </TextE>
+              <IconButton icon="chevron-right" onPress={onNextPage} disabled={!canNext} />
+            </ViewE>
+            <ButtonE icon="content-copy" onPress={onCopyToClipboard}>
+              Copy to clipboard
+            </ButtonE>
+            <ButtonE type="secondary" onPress={onFinished}>
+              Finish
+            </ButtonE>
+          </ViewE>
         </ViewE>
+      }>
+      <ViewE gap="large" padding>
+        <GestureRecognizer onSwipeLeft={onNextPage} onSwipeRight={onPreviousPage}>
+          <QRCodeE value={exportUri[page]} />
+        </GestureRecognizer>
       </ViewE>
-    </ViewE>
-  </ScreenLayout>;
-}; 
+    </ScreenLayout>
+  );
+};

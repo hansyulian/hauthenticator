@@ -8,9 +8,7 @@ import { useNavigate } from "@hooks/useNavigate";
 import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useEffect, useState } from "react";
 
-export type AuthenticatorAddScreenScanProps = {
-
-}
+export type AuthenticatorAddScreenScanProps = {};
 
 export const AuthenticatorAddScreenScan = (props: AuthenticatorAddScreenScanProps) => {
   const [scanned, setScanned] = useState(false);
@@ -25,19 +23,21 @@ export const AuthenticatorAddScreenScan = (props: AuthenticatorAddScreenScanProp
   }, []);
 
   useEffect(() => {
-
-  }, [uri]);
-
-  const onScan = (value: string) => {
-    setUri(value);
-    setScanned(true);
+    if (uri === "") {
+      return;
+    }
     try {
-      const form = OtpAuthUrl.decode(value);
+      const form = OtpAuthUrl.decode(uri);
+      setScanned(true);
       setAuthenticator(form);
     } catch (err) {
       setAuthenticator(undefined);
       setErrors(["Invalid authenticator uri"]);
     }
+  }, [uri]);
+
+  const onScan = (value: string) => {
+    setUri(value);
   };
 
   const onContinue = () => {
@@ -49,12 +49,17 @@ export const AuthenticatorAddScreenScan = (props: AuthenticatorAddScreenScanProp
     });
   };
 
-  return <><ViewE paddingHorizontal gap>
-    <QRScanner onScan={onScan} disabled={scanned} />
-    <TextBox label='Authenticator uri' value={uri} onChangeText={setUri} />
-  </ViewE>
-    <FloatingBottomContainer padding>
-      <ButtonE onPress={onContinue} disabled={!canContinue}>Continue</ButtonE>
-    </FloatingBottomContainer>
-  </>;
+  return (
+    <>
+      <ViewE paddingHorizontal gap>
+        <QRScanner onScan={onScan} disabled={scanned} />
+        <TextBox label="Authenticator uri" value={uri} onChangeText={setUri} />
+      </ViewE>
+      <FloatingBottomContainer padding>
+        <ButtonE onPress={onContinue} disabled={!canContinue}>
+          Continue
+        </ButtonE>
+      </FloatingBottomContainer>
+    </>
+  );
 };

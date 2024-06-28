@@ -1,57 +1,71 @@
 import { ButtonE } from "@components/ButtonE";
-import { DividerE } from "@components/DividerE";
 import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
-import { IconE } from "@components/IconE";
-import { LabelValuePair } from "@components/LabelValuePair";
 import { QRScanner } from "@components/QRScanner";
 import { TextBox } from "@components/TextBox";
-import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
-import { useDialog } from "@hooks/useDialog";
 import { useNavigate } from "@hooks/useNavigate";
-import { useSnackbar } from "@hooks/useSnackbar";
 import { OtpMigration, ParsedMigrationPayload } from "@modules/OtpMigration";
 import { pasteClipboard } from "@utils/pasteClipboard";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Chip } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
-export type ImportScreenGoogleAuthenticatorProps = {
-
-}
+export type ImportScreenGoogleAuthenticatorProps = {};
 
 export const ImportScreenGoogleAuthenticator = (props: ImportScreenGoogleAuthenticatorProps) => {
   const [migrationString, setMigrationString] = useState("");
-  const [validatedMigrationPayloads, setValidatedMigrationPayloads] = useState<ParsedMigrationPayload[]>([]);
+  const [validatedMigrationPayloads, setValidatedMigrationPayloads] = useState<
+    ParsedMigrationPayload[]
+  >([]);
   const [errors, setErrors] = useState<string[]>([]);
-  const snackbar = useSnackbar();
-  const dialog = useDialog();
   const navigate = useNavigate();
   const canContinue = validatedMigrationPayloads.length > 0;
+  const stringReadCache = useRef<string[]>([]);
 
-  const validateString = useCallback((value: string) => {
-    if (!value) {
+  const importDetails = useMemo(() => {
+    if (validatedMigrationPayloads.length === 0) {
       return;
     }
-    try {
-      const newMigrationPayload = OtpMigration.decode(value);
-      let exists = false;
-      for (const validatedMigrationPayload of validatedMigrationPayloads) {
-        if (validatedMigrationPayload.batchId === newMigrationPayload.batchId && validatedMigrationPayload.batchIndex === newMigrationPayload.batchIndex) {
-          exists = true;
-          break;
-        }
-      }
-      if (!exists) {
-        setValidatedMigrationPayloads([...validatedMigrationPayloads, newMigrationPayload]);
-        snackbar.show(`Successfully parsed migration payload with id ${newMigrationPayload.batchId} and index ${newMigrationPayload.batchIndex + 1} from total of ${newMigrationPayload.batchSize}`);
-      } else {
-        snackbar.show(`Duplicated migration payload with id ${newMigrationPayload.batchId} and index ${newMigrationPayload.batchIndex + 1}`);
-      }
-      setMigrationString("");
-      setErrors([]);
-    } catch (err) {
-      setErrors(["Invalid authenticator migration"]);
+    const total = validatedMigrationPayloads[0].batchSize;
+    const state = new Array(total).fill(false);
+    for (const validatedMigrationPayload of validatedMigrationPayloads) {
+      state[validatedMigrationPayload.batchIndex] = true;
     }
-  }, [snackbar, validatedMigrationPayloads]);
+    return {
+      total,
+      state,
+    };
+  }, [validatedMigrationPayloads]);
+
+  const validateString = useCallback(
+    (value: string) => {
+      if (!value || stringReadCache.current.includes(value)) {
+        return;
+      }
+      stringReadCache.current.push(value);
+      try {
+        const newMigrationPayload = OtpMigration.decode(value);
+        let exists = false;
+        for (const validatedMigrationPayload of validatedMigrationPayloads) {
+          if (
+            validatedMigrationPayload.batchId === newMigrationPayload.batchId &&
+            validatedMigrationPayload.batchIndex === newMigrationPayload.batchIndex
+          ) {
+            exists = true;
+            break;
+          }
+        }
+        if (!exists) {
+          setValidatedMigrationPayloads([...validatedMigrationPayloads, newMigrationPayload]);
+        }
+        setMigrationString("");
+        setErrors([]);
+      } catch (err) {
+        setErrors(["Invalid authenticator migration"]);
+      }
+    },
+    [validatedMigrationPayloads]
+  );
 
   useEffect(() => {
     if (migrationString) {
@@ -64,21 +78,6 @@ export const ImportScreenGoogleAuthenticator = (props: ImportScreenGoogleAuthent
     setMigrationString(stringValue);
   };
 
-  const showDeleteConfirmation = (migrationPayload: ParsedMigrationPayload) => {
-    dialog.show({
-      title: "Delete confirmation",
-      content: `Are you sure to delete ${migrationPayload.batchId} index ${migrationPayload.batchIndex}?`,
-      buttons: [{
-        text: "Yes",
-        icon: "delete",
-        onPress: () => {
-          const filteredPayload = validatedMigrationPayloads.filter(record => record !== migrationPayload);
-          setValidatedMigrationPayloads(filteredPayload);
-        }
-      }]
-    });
-  };
-
   const onContinue = () => {
     const importRecords = [];
     for (const validatedMigrationPayload of validatedMigrationPayloads) {
@@ -89,40 +88,46 @@ export const ImportScreenGoogleAuthenticator = (props: ImportScreenGoogleAuthent
     });
   };
 
-  return <>
-    <ViewE fullSize>
-      <ViewE padding>
-        <ViewE marginBottom>
-          <QRScanner onScan={setMigrationString} />
-        </ViewE>
-        <TextBox errors={errors} value={migrationString} onChangeText={setMigrationString} label='Migration string' icon='content-paste' onIconPress={onPaste} />
-      </ViewE>
-      {validatedMigrationPayloads.length > 0 && <ViewE padding gap>
-        <ViewE marginBottom>
-          <TextE type='paragraphHeader'>Imported details</TextE>
-        </ViewE>
-        {validatedMigrationPayloads.map(migrationPayload => <ViewE gap key={`${migrationPayload.batchId}-${migrationPayload.batchIndex}`}>
-          <ViewE row>
-            <ViewE gap flex>
-              <LabelValuePair label='Batch ID'>
-                {migrationPayload.batchId}
-              </LabelValuePair>
-              <LabelValuePair label='Batch Index'>
-                {`${migrationPayload.batchIndex + 1} of ${migrationPayload.batchSize}`}
-              </LabelValuePair>
-            </ViewE>
-            <IconE icon='delete' color='error' onPress={() => showDeleteConfirmation(migrationPayload)} />
+  return (
+    <>
+      <ViewE fullSize padding>
+        <ViewE>
+          <ViewE marginBottom>
+            <QRScanner onScan={setMigrationString} />
           </ViewE>
-          <DividerE />
+          <TextBox
+            errors={errors}
+            value={migrationString}
+            onChangeText={setMigrationString}
+            label="Migration string"
+            icon="content-paste"
+            onIconPress={onPaste}
+          />
         </ViewE>
+        {importDetails && (
+          <ViewE row gap justifyContent="center" style={styles.chipContainer}>
+            {importDetails.state.map((importState, index) => (
+              <Chip
+                key={`import-${index}`}
+                icon={importState ? "check" : "minus"}
+                mode={importState ? "flat" : "outlined"}>
+                {index + 1}
+              </Chip>
+            ))}
+          </ViewE>
         )}
       </ViewE>
-      }
-    </ViewE >
-    <FloatingBottomContainer padding>
-      <ButtonE disabled={!canContinue} onPress={onContinue}>
-        Continue
-      </ButtonE>
-    </FloatingBottomContainer>
-  </>;
+      <FloatingBottomContainer padding>
+        <ButtonE disabled={!canContinue} onPress={onContinue}>
+          Continue
+        </ButtonE>
+      </FloatingBottomContainer>
+    </>
+  );
 };
+
+const styles = StyleSheet.create({
+  chipContainer: {
+    flexWrap: "wrap",
+  },
+});

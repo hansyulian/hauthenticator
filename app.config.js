@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const isDebug = process.env.EAS_BUILD_PROFILE === "development";
 
 const name = isDebug ? "HAuth Debug" : "HAuthenticator";
@@ -9,17 +10,16 @@ export default {
   expo: {
     name: name,
     slug: "hauthenticator",
-    jsEngine: "hermes",
-    version: "0.12.0",
+    version: "0.13.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
-    userInterfaceStyle: "light",
+    scheme: "hauthenticator",
+    userInterfaceStyle: "automatic",
     splash: {
       image: "./assets/icon.png",
       resizeMode: "contain",
       backgroundColor: "#ffffff",
     },
-    assetBundlePatterns: ["**/*"],
     ios: {
       packageName,
       supportsTablet: true,
@@ -44,10 +44,11 @@ export default {
     },
     plugins: [
       [
-        "expo-barcode-scanner",
+        "expo-camera",
         {
-          cameraPermission: "Allow $(PRODUCT_NAME) to access camera.",
+          cameraPermission: "Allow $(PRODUCT_NAME) to access your camera",
           microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone",
+          recordAudioAndroid: true,
         },
       ],
       [
@@ -57,7 +58,11 @@ export default {
         },
       ],
       "@react-native-google-signin/google-signin",
+      "expo-secure-store",
     ],
+    experiments: {
+      typedRoutes: true,
+    },
     extra: {
       eas: {
         projectId: "efa31160-d975-4d8b-981b-479fb5a58cf6",
