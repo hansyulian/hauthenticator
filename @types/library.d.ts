@@ -1,1 +1,1 @@
-declare module '@react-native-community/protobufjs';
+declare module "@react-native-community/protobufjs";

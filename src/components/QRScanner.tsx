@@ -44,16 +44,6 @@ export const QRScanner = (props: QRScannerProps) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleScanned = ({ data }: BarcodeScanningResult) => {
     onScan(data);
-    if (disabled === undefined) {
-      setIsDisabled(true);
-    }
-  };
-
-  const onEnableProxy = () => {
-    if (disabled === undefined) {
-      setIsDisabled(false);
-    }
-    onEnable?.();
   };
 
   return (
@@ -69,17 +59,16 @@ export const QRScanner = (props: QRScannerProps) => {
           <ViewE style={styles.scannerContainer}>
             <CameraView
               facing="back"
-              barcodeScannerSettings={{
-                barcodeTypes: ["qr"],
-              }}
+              barcodeScannerSettings={
+                disabled
+                  ? undefined
+                  : {
+                      barcodeTypes: ["qr"],
+                    }
+              }
               onBarcodeScanned={handleScanned}
               style={styles.camera}></CameraView>
           </ViewE>
-          {isDisabled && (
-            <ViewE style={styles.disableScannerOverlay}>
-              <ButtonE onPress={onEnableProxy}>Rescan</ButtonE>
-            </ViewE>
-          )}
         </>
       )}
     </ViewE>

@@ -13,7 +13,7 @@ export const AuthenticatorAddScreen = () => {
   return (
     <ScreenLayout headerText="Add Authenticator">
       <ScrollViewE fullHeight>
-        <ViewE paddingHorizontal marginBottom>
+        <ViewE padding>
           <SegmentedButtonsE
             buttons={[
               {

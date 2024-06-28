@@ -65,10 +65,6 @@ export const ScreenLayout = (props: ScreenLayoutProps) => {
     );
   }, [bottomComponent, stickyBottomComponent]);
 
-  if (!isFocused) {
-    return null;
-  }
-
   return (
     <ViewE fullSize onLayout={onContainerLayout}>
       <Appbar.Header onLayout={onHeaderLayout} elevated>

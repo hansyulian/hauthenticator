@@ -14,30 +14,33 @@ import { MenuProvider } from "@modules/MenuContext";
 import { DialogProvider } from "@modules/DialogContext";
 import { SyncProvider } from "@modules/SyncContext";
 import { SyncProgressBar } from "@components/SyncProgressBar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export function App() {
   return (
-    <DataProvider>
-      <ThemeProvider>
-        <SnackbarProvider>
-          <DialogProvider>
-            <AuthenticationProvider>
-              <SyncProvider>
-                <SafeAreaProvider>
-                  <MenuProvider>
-                    <NavigationContainer>
-                      <InitializationProvider>
-                        <Navigation />
-                        <SyncProgressBar />
-                      </InitializationProvider>
-                    </NavigationContainer >
-                  </MenuProvider>
-                </SafeAreaProvider>
-              </SyncProvider>
-            </AuthenticationProvider>
-          </DialogProvider>
-        </SnackbarProvider>
-      </ThemeProvider>
-    </DataProvider>
+    <GestureHandlerRootView>
+      <DataProvider>
+        <ThemeProvider>
+          <SnackbarProvider>
+            <DialogProvider>
+              <AuthenticationProvider>
+                <SyncProvider>
+                  <SafeAreaProvider>
+                    <MenuProvider>
+                      <NavigationContainer>
+                        <InitializationProvider>
+                          <Navigation />
+                          <SyncProgressBar />
+                        </InitializationProvider>
+                      </NavigationContainer>
+                    </MenuProvider>
+                  </SafeAreaProvider>
+                </SyncProvider>
+              </AuthenticationProvider>
+            </DialogProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </DataProvider>
+    </GestureHandlerRootView>
   );
 }

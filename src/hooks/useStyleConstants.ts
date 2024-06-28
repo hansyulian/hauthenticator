@@ -42,8 +42,8 @@ export function useStyleConstants() {
       pairLabel: "800",
       pairValue: "400",
       paragraphHeader: "700",
-      dialogHeader: '700',
-      dialogContent: '400',
+      dialogHeader: "700",
+      dialogContent: "400",
     },
     colors: {
       ...theme.colors,
