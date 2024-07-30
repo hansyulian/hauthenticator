@@ -18,3 +18,5 @@ web-build/
 
 expo-env.d.ts
 # @end expo-cli
+/google/google-services.json
+/src/config/config.override.ts
