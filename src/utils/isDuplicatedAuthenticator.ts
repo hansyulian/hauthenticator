@@ -1,9 +1,14 @@
-export function isDuplicatedAuthenticator(a: AuthenticatorExtended, b: AuthenticatorExtended) {
-  if (a.encryptedSecret === b.encryptedSecret) {
-    return true;
-  }
-  if (b.authenticator.issuer === b.authenticator.issuer && a.authenticator.name === b.authenticator.name) {
-    return true;
+export function isDuplicatedAuthenticator(
+  a: AuthenticatorComparisonDetail,
+  b: AuthenticatorComparisonDetail
+) {
+  if (a.issuer === b.issuer) {
+    if (a.secret === b.secret) {
+      return true;
+    }
+    if (a.name === b.name) {
+      return true;
+    }
   }
   return false;
 }

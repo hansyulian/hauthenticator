@@ -1,105 +1,91 @@
 import { isDuplicatedAuthenticator } from "@utils/isDuplicatedAuthenticator";
 
 describe("isDuplicatedAuthenticator", () => {
-  it("should return true if encryptedSecret matches", () => {
-    const a: AuthenticatorExtended = {
-      authenticator: {
-        name: "Test",
-        issuer: "Issuer",
-        algorithm: "sha256",
-        digits: 6,
-        type: "totp",
-      },
-      id: "1",
-      status: "ACTIVE",
-      encryptedSecret: "encryptedSecret1",
-      isFavourite: true,
-      createdAt: "2023-07-30T12:00:00Z",
-      updatedAt: "2023-07-30T12:00:00Z",
+  const baseAuthenticatorExtended: AuthenticatorExtended = {
+    authenticator: {
+      algorithm: "sha256",
+      digits: 6,
+      type: "totp",
+      name: "test",
+      issuer: "testIssuer",
+    },
+    id: "1",
+    status: "ACTIVE",
+    encryptedSecret: "encryptedSecret",
+    isFavourite: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  it("should return true if issuers and secrets are the same", () => {
+    const a: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name1",
+      secret: "secret1",
+      authenticatorExtended: baseAuthenticatorExtended,
     };
-    const b: AuthenticatorExtended = {
-      authenticator: {
-        name: "Test",
-        issuer: "Issuer",
-        algorithm: "sha256",
-        digits: 6,
-        type: "totp",
-      },
-      id: "2",
-      status: "ACTIVE",
-      encryptedSecret: "encryptedSecret1",
-      isFavourite: false,
-      createdAt: "2023-07-30T12:00:00Z",
-      updatedAt: "2023-07-30T12:00:00Z",
+
+    const b: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name2",
+      secret: "secret1",
+      authenticatorExtended: baseAuthenticatorExtended,
     };
+
     expect(isDuplicatedAuthenticator(a, b)).toBe(true);
   });
 
-  it("should return true if issuer and name match", () => {
-    const a: AuthenticatorExtended = {
-      authenticator: {
-        name: "Test",
-        issuer: "Issuer",
-        algorithm: "sha256",
-        digits: 6,
-        type: "totp",
-      },
-      id: "1",
-      status: "ACTIVE",
-      encryptedSecret: "encryptedSecret1",
-      isFavourite: true,
-      createdAt: "2023-07-30T12:00:00Z",
-      updatedAt: "2023-07-30T12:00:00Z",
+  it("should return true if issuers and names are the same", () => {
+    const a: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name1",
+      secret: "secret1",
+      authenticatorExtended: baseAuthenticatorExtended,
     };
-    const b: AuthenticatorExtended = {
-      authenticator: {
-        name: "Test",
-        issuer: "Issuer",
-        algorithm: "sha256",
-        digits: 6,
-        type: "totp",
-      },
-      id: "2",
-      status: "ACTIVE",
-      encryptedSecret: "encryptedSecret2",
-      isFavourite: false,
-      createdAt: "2023-07-30T12:00:00Z",
-      updatedAt: "2023-07-30T12:00:00Z",
+
+    const b: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name1",
+      secret: "secret2",
+      authenticatorExtended: baseAuthenticatorExtended,
     };
+
     expect(isDuplicatedAuthenticator(a, b)).toBe(true);
   });
 
-  it("should return false if neither encryptedSecret nor issuer and name match", () => {
-    const a: AuthenticatorExtended = {
-      authenticator: {
-        name: "Test1",
-        issuer: "Issuer1",
-        algorithm: "sha256",
-        digits: 6,
-        type: "totp",
-      },
-      id: "1",
-      status: "ACTIVE",
-      encryptedSecret: "encryptedSecret1",
-      isFavourite: true,
-      createdAt: "2023-07-30T12:00:00Z",
-      updatedAt: "2023-07-30T12:00:00Z",
+  it("should return false if neither issuers nor secrets or names are the same", () => {
+    const a: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name1",
+      secret: "secret1",
+      authenticatorExtended: baseAuthenticatorExtended,
     };
-    const b: AuthenticatorExtended = {
-      authenticator: {
-        name: "Test2",
-        issuer: "Issuer2",
-        algorithm: "sha256",
-        digits: 6,
-        type: "totp",
-      },
-      id: "2",
-      status: "ACTIVE",
-      encryptedSecret: "encryptedSecret2",
-      isFavourite: false,
-      createdAt: "2023-07-30T12:00:00Z",
-      updatedAt: "2023-07-30T12:00:00Z",
+
+    const b: AuthenticatorComparisonDetail = {
+      issuer: "issuer2",
+      name: "name2",
+      secret: "secret2",
+      authenticatorExtended: baseAuthenticatorExtended,
     };
+
+    expect(isDuplicatedAuthenticator(a, b)).toBe(false);
+  });
+
+  it("should return false if issuers are the same but neither secrets nor names are the same", () => {
+    const a: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name1",
+      secret: "secret1",
+      authenticatorExtended: baseAuthenticatorExtended,
+    };
+
+    const b: AuthenticatorComparisonDetail = {
+      issuer: "issuer1",
+      name: "name2",
+      secret: "secret2",
+      authenticatorExtended: baseAuthenticatorExtended,
+    };
+
     expect(isDuplicatedAuthenticator(a, b)).toBe(false);
   });
 });

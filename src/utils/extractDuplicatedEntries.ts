@@ -1,9 +1,9 @@
 import { isDuplicatedAuthenticator } from "@utils/isDuplicatedAuthenticator";
 
-export function extractDuplicatedEntries(authenticators: AuthenticatorExtended[]) {
-  const groups: AuthenticatorExtended[][] = [];
+export function extractDuplicatedEntries(authenticators: AuthenticatorComparisonDetail[]) {
+  const groups: AuthenticatorComparisonDetail[][] = [];
   for (const authenticator of authenticators) {
-    if (authenticator.status !== "ACTIVE") {
+    if (authenticator.authenticatorExtended.status !== "ACTIVE") {
       continue;
     }
     let isDuplicated = false;
