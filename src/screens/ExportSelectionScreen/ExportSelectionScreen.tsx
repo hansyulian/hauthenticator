@@ -1,13 +1,14 @@
-import { ScreenLayout } from "@components/ScreenLayout";
-import { useAuthenticators } from "@hooks/useAuthenticators";
-import { FlatList } from "react-native";
-import { ExportSelectionScreenItemRow } from "./ExportSelectionScreen.ItemRow";
 import { useEffect, useRef, useState } from "react";
-import { IconButton } from "react-native-paper";
-import { useSnackbar } from "@hooks/useSnackbar";
-import { useNavigate } from "@hooks/useNavigate";
-import { ViewE } from "@components/ViewE";
-import { ButtonE } from "@components/ButtonE";
+
+import { FlatList } from "react-native";
+import { ButtonE } from "~/components/ButtonE";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { ViewE } from "~/components/ViewE";
+import { useAuthenticators } from "~/hooks/useAuthenticators";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSnackbar } from "~/hooks/useSnackbar";
+
+import { ExportSelectionScreenItemRow } from "./ExportSelectionScreen.ItemRow";
 
 export const ExportSelectionScreen = () =>
   // props: NavigationProps<'ExportSelection'>

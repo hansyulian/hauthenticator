@@ -34,5 +34,4 @@ describe("validateAuthenticatorForm", () => {
 
     expect(result).toBe(true);
   });
-
 });

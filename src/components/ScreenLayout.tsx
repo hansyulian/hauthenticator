@@ -1,15 +1,18 @@
-import { useCommonStyles } from "@hooks/useCommonStyles";
 import { PropsWithChildren, ReactNode, useMemo, useState } from "react";
+
 import { LayoutChangeEvent, LayoutRectangle, StyleSheet, View } from "react-native";
-import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
-import { StatusBarE } from "./StatusBarE";
-import { useStyleConstants } from "@hooks/useStyleConstants";
 import { Appbar } from "react-native-paper";
-import { useBack } from "@hooks/useBack";
-import { useCanBack } from "@hooks/useCanBack";
+import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
+import { useBack } from "~/hooks/useBack";
+import { useCanBack } from "~/hooks/useCanBack";
+import { useCommonStyles } from "~/hooks/useCommonStyles";
+import { useStyleConstants } from "~/hooks/useStyleConstants";
+
 import { useIsFocused } from "@react-navigation/native";
-import { ViewE } from "./ViewE";
+
 import { FloatingBottomContainer } from "./FloatingBottomContainer";
+import { StatusBarE } from "./StatusBarE";
+import { ViewE } from "./ViewE";
 
 export type ScreenLayoutProps = PropsWithChildren & {
   headerText?: string;

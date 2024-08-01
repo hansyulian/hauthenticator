@@ -1,18 +1,19 @@
-import { DividerE } from "@components/DividerE";
-import { IconE } from "@components/IconE";
-import { TextE } from "@components/TextE";
-import { TouchableE } from "@components/TouchableE";
-import { ViewE } from "@components/ViewE";
-import { useAuthenticate } from "@hooks/useAuthenticate";
-import { useConfirmationDialog } from "@hooks/useConfirmationDialog";
-import { useDeleteAuthenticator } from "@hooks/useDeleteAuthenticator";
-import { useMenu } from "@hooks/useMenu";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSnackbar } from "@hooks/useSnackbar";
-import { useUpdateAuthenticator } from "@hooks/useUpdateAuthenticator";
-import { AuthenticatorPreview } from "@screens/components/AuthenticatorPreview";
-import { copyClipboard } from "@utils/copyClipboard";
 import { memo, useState } from "react";
+
+import { DividerE } from "~/components/DividerE";
+import { IconE } from "~/components/IconE";
+import { TextE } from "~/components/TextE";
+import { TouchableE } from "~/components/TouchableE";
+import { ViewE } from "~/components/ViewE";
+import { useAuthenticate } from "~/hooks/useAuthenticate";
+import { useConfirmationDialog } from "~/hooks/useConfirmationDialog";
+import { useDeleteAuthenticators } from "~/hooks/useDeleteAuthenticators";
+import { useMenu } from "~/hooks/useMenu";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSnackbar } from "~/hooks/useSnackbar";
+import { useUpdateAuthenticator } from "~/hooks/useUpdateAuthenticator";
+import { AuthenticatorPreview } from "~/screens/components/AuthenticatorPreview";
+import { copyClipboard } from "~/utils/copyClipboard";
 
 export type AuthenticatorListScreenRowProps = {
   authenticatorExtended: AuthenticatorExtended;
@@ -26,7 +27,7 @@ export const AuthenticatorListScreenRow = memo((props: AuthenticatorListScreenRo
   const [otp, setOtp] = useState("");
   const snackbar = useSnackbar();
   const navigate = useNavigate();
-  const deleteAuthenticator = useDeleteAuthenticator();
+  const deleteAuthenticator = useDeleteAuthenticators();
   const confirmationDialog = useConfirmationDialog();
   const updateAuthenticator = useUpdateAuthenticator();
   const { show } = useMenu();
@@ -83,7 +84,7 @@ export const AuthenticatorListScreenRow = memo((props: AuthenticatorListScreenRo
                 </ViewE>
               ),
               onConfirm: async () => {
-                await deleteAuthenticator(authenticatorExtended.id);
+                await deleteAuthenticator([authenticatorExtended.id]);
               },
               type: "danger",
             });

@@ -1,10 +1,12 @@
-import { uuid } from "@utils/uuid";
 import { useRef } from "react";
+
+import { uuid } from "~/utils/uuid";
+
 import { TextE } from "./TextE";
 
 export type FormErrorsProps = {
   errors?: string[];
-}
+};
 
 export const FormErrors = (props: FormErrorsProps) => {
   const { errors } = props;
@@ -12,8 +14,13 @@ export const FormErrors = (props: FormErrorsProps) => {
   if (!errors || errors.length === 0) {
     return null;
   }
-  return <>
-    {errors.map(error => <TextE key={`${id.current}-${error}`} color='error' type='error'>{error}</TextE>)}
-  </>;
+  return (
+    <>
+      {errors.map((error) => (
+        <TextE key={`${id.current}-${error}`} color="error" type="error">
+          {error}
+        </TextE>
+      ))}
+    </>
+  );
 };
-

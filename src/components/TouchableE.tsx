@@ -1,5 +1,10 @@
 import { PropsWithChildren } from "react";
-import { TouchableHighlight, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import {
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { TouchableRipple } from "react-native-paper";
 
 export type TouchableEProps = PropsWithChildren & {
@@ -21,8 +26,6 @@ export const TouchableE = (props: TouchableEProps) => {
       return <TouchableWithoutFeedback {...rest} />;
     case "ripple":
     default:
-      return <TouchableRipple {...rest}>
-
-      </TouchableRipple>;
+      return <TouchableRipple {...rest}></TouchableRipple>;
   }
 };

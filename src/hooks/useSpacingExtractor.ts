@@ -16,7 +16,7 @@ export type SpacingValues = {
   paddingBottom?: SpacingTokens | true;
   paddingVertical?: SpacingTokens | true;
   paddingHorizontal?: SpacingTokens | true;
-}
+};
 
 export const useSpacingExtractor = <T extends SpacingValues>(props: T) => {
   const constants = useStyleConstants();
@@ -38,17 +38,20 @@ export const useSpacingExtractor = <T extends SpacingValues>(props: T) => {
     ...rest
   } = props;
 
-  const spacingValuePriority = useCallback((values: (SpacingTokens | true | undefined)[]) => {
-    for (const value of values) {
-      if (value === true) {
-        return constants.spacing.medium;
+  const spacingValuePriority = useCallback(
+    (values: (SpacingTokens | true | undefined)[]) => {
+      for (const value of values) {
+        if (value === true) {
+          return constants.spacing.medium;
+        }
+        if (value) {
+          return constants.spacing[value];
+        }
       }
-      if (value) {
-        return constants.spacing[value];
-      }
-    }
-    return undefined;
-  }, [constants.spacing]);
+      return undefined;
+    },
+    [constants.spacing]
+  );
 
   const marginLeftC = spacingValuePriority([marginLeft, marginHorizontal, margin]);
   const marginRightC = spacingValuePriority([marginRight, marginHorizontal, margin]);
@@ -59,19 +62,27 @@ export const useSpacingExtractor = <T extends SpacingValues>(props: T) => {
   const paddingTopC = spacingValuePriority([paddingTop, paddingVertical, padding]);
   const paddingBottomC = spacingValuePriority([paddingBottom, paddingVertical, padding]);
 
-  const marginC = useMemo(() => ({
-    marginLeft: marginLeftC,
-    marginRight: marginRightC,
-    marginTop: marginTopC,
-    marginBottom: marginBottomC,
-  }), [marginLeftC, marginRightC, marginTopC, marginBottomC]);
-  const paddingC = useMemo(() => ({
-    paddingLeft: paddingLeftC,
-    paddingRight: paddingRightC,
-    paddingTop: paddingTopC,
-    paddingBottom: paddingBottomC,
-  }), [paddingLeftC, paddingRightC, paddingTopC, paddingBottomC]);
+  const marginC = useMemo(
+    () => ({
+      marginLeft: marginLeftC,
+      marginRight: marginRightC,
+      marginTop: marginTopC,
+      marginBottom: marginBottomC,
+    }),
+    [marginLeftC, marginRightC, marginTopC, marginBottomC]
+  );
+  const paddingC = useMemo(
+    () => ({
+      paddingLeft: paddingLeftC,
+      paddingRight: paddingRightC,
+      paddingTop: paddingTopC,
+      paddingBottom: paddingBottomC,
+    }),
+    [paddingLeftC, paddingRightC, paddingTopC, paddingBottomC]
+  );
 
-  return useMemo(() => ({ margin: marginC, padding: paddingC, props: rest }), [marginC, paddingC, rest]);
-
+  return useMemo(
+    () => ({ margin: marginC, padding: paddingC, props: rest }),
+    [marginC, paddingC, rest]
+  );
 };

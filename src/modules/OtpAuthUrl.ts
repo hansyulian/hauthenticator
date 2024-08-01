@@ -1,11 +1,11 @@
-import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorValues";
+import { withDefaultAuthenticatorValues } from "~/utils/withDefaultAuthenticatorValues";
+
 import { BaseException } from "./BaseException";
 
 export const OtpAuthUrl = {
   encode,
   decode,
 };
-
 
 function encode(authenticator: Authenticator): string {
   const userDomain = encodeURIComponent(`${authenticator.issuer}:${authenticator.name}`);
@@ -41,4 +41,3 @@ function decode(uriString: string): Authenticator {
     secret,
   });
 }
-

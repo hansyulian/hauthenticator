@@ -1,4 +1,4 @@
-import { ViewE } from "@components/ViewE";
+import { ViewE } from "~/components/ViewE";
 
 const DevPlayground = () => {
   return <ViewE />;

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export class BasicStoreBase<T extends object>{
+export class BasicStoreBase<T extends object> {
   public key: string;
   public defaultValues: T;
 
@@ -14,7 +14,7 @@ export class BasicStoreBase<T extends object>{
     const setValues: T = {
       ...this.defaultValues,
       ...storedValues,
-      ...values
+      ...values,
     };
     return this.nativeSet(setValues);
   }
@@ -43,5 +43,4 @@ export class BasicStoreBase<T extends object>{
     }
     return JSON.parse(result);
   }
-
 }

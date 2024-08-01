@@ -1,10 +1,11 @@
-
 import { useMemo, useState } from "react";
-import { Dimensions, LayoutChangeEvent, ScrollView, StyleSheet } from "react-native";
-import { useCommonStyles } from "@hooks/useCommonStyles";
-import { ViewE, ViewEProps } from "./ViewE";
-export type ScrollViewEProps = ViewEProps;
 
+import { LayoutChangeEvent, ScrollView, StyleSheet } from "react-native";
+import { useCommonStyles } from "~/hooks/useCommonStyles";
+
+import { ViewE, ViewEProps } from "./ViewE";
+
+export type ScrollViewEProps = ViewEProps;
 
 export const ScrollViewE = (props: ScrollViewEProps) => {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -15,9 +16,11 @@ export const ScrollViewE = (props: ScrollViewEProps) => {
     setScrollHeight(height);
   };
 
-  return <ScrollView onLayout={onLayout} style={styles.container}>
-    <ViewE minHeight={scrollHeight} {...props} />
-  </ScrollView>;
+  return (
+    <ScrollView onLayout={onLayout} style={styles.container}>
+      <ViewE minHeight={scrollHeight} {...props} />
+    </ScrollView>
+  );
 };
 
 const useStyles = () => {
@@ -26,8 +29,8 @@ const useStyles = () => {
   return useMemo(() => {
     return StyleSheet.create({
       container: {
-        ...commonStyles.fullSize
-      }
+        ...commonStyles.fullSize,
+      },
     });
   }, [commonStyles.fullSize]);
 };

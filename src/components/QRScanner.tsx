@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ViewE } from "./ViewE";
-import { Dimensions, LayoutChangeEvent, StyleSheet, TouchableOpacity } from "react-native";
-import { BarcodeScanningResult, CameraType, CameraView, useCameraPermissions } from "expo-camera";
-import { useCommonStyles } from "@hooks/useCommonStyles";
+
+import { BarcodeScanningResult, CameraView, useCameraPermissions } from "expo-camera";
+import { Dimensions, LayoutChangeEvent, StyleSheet } from "react-native";
+import { useCommonStyles } from "~/hooks/useCommonStyles";
+import { useStyleConstants } from "~/hooks/useStyleConstants";
+
 import { ButtonE } from "./ButtonE";
-import { useStyleConstants } from "@hooks/useStyleConstants";
 import { TextE } from "./TextE";
+import { ViewE } from "./ViewE";
 
 export type QRScannerProps = {
   onScan: (value: string) => void;

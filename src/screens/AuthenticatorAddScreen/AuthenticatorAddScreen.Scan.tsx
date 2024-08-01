@@ -1,12 +1,13 @@
-import { ButtonE } from "@components/ButtonE";
-import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
-import { QRScanner } from "@components/QRScanner";
-import { TextBox } from "@components/TextBox";
-import { ViewE } from "@components/ViewE";
-import { useFocusedEffect } from "@hooks/useFocusedEffect";
-import { useNavigate } from "@hooks/useNavigate";
-import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useEffect, useState } from "react";
+
+import { ButtonE } from "~/components/ButtonE";
+import { FloatingBottomContainer } from "~/components/FloatingBottomContainer";
+import { QRScanner } from "~/components/QRScanner";
+import { TextBox } from "~/components/TextBox";
+import { ViewE } from "~/components/ViewE";
+import { useFocusedEffect } from "~/hooks/useFocusedEffect";
+import { useNavigate } from "~/hooks/useNavigate";
+import { OtpAuthUrl } from "~/modules/OtpAuthUrl";
 
 export type AuthenticatorAddScreenScanProps = {};
 

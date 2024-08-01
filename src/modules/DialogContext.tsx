@@ -1,15 +1,16 @@
-import { TextE } from "@components/TextE";
 import React, {
   createContext,
-  useState,
-  PropsWithChildren,
-  useMemo,
   FC,
-  useCallback,
+  PropsWithChildren,
   ReactNode,
+  useCallback,
+  useMemo,
+  useState,
 } from "react";
+
 import { Dialog, Portal } from "react-native-paper";
-import { ButtonE } from "@components/ButtonE";
+import { ButtonE } from "~/components/ButtonE";
+import { TextE } from "~/components/TextE";
 
 // name: Dialog
 type DialogButton = {

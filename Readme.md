@@ -1,50 +1,34 @@
-# Welcome to your Expo app 👋
+# HAuthenticator
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+On July 2023, Google released a new update in Authenticator app that enable cloud save. The problem is that it causes a lot of duplicated records and it's a nightmare to cleanup. As a person who enable 2FA whenever available, it causes me to have around 1000 records of 4-5 duplicated entries each. The updated Authenticator also lack of search function that makes finding a single record among thousands duplicated entries a nightmare.
 
-## Get started
+Then I started this personal project to create my own "Dream Authenticator" app. This app have the following features:
 
-1. Install dependencies
+- Search record by name/issuer
+- Sort by favourite -> name
+- Export/Import compatible with Google's Authenticator protocol
+- Export/Import by string input
+- Add authenticator by scanning QR code
+- Add authenticator manually by form
+- Duplication removal
+- Biometric authentication
+- Google drive sync
 
-   ```bash
-   npm install
-   ```
+# Prerequisites
 
-2. Start the app
+- NodeJS (tested with v22)
+-
 
-   ```bash
-    npx expo start
-   ```
+# Development setup
 
-In the output, you'll find options to open the app in a
+1. `cp .env.example .env.local`
+1. `npm -g i eas-cli` then `eas login`
+1. `npm i`
+1. build the debug apk, then install to emulator/device
+1. `npm start`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+# How To Build
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Cloud build: `eas build -p android`
+- Local debug build: `eas build -p android --profile development --local`
+- Local production build: `eas build -p android --profile apk --local`

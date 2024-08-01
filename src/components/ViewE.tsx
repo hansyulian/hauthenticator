@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-import { View, StyleSheet, ViewStyle, ViewProps } from "react-native";
-import { useCommonStyles } from "@hooks/useCommonStyles";
-import { SpacingValues, useSpacingExtractor } from "@hooks/useSpacingExtractor";
-import { ColorTokens, SpacingTokens, useStyleConstants } from "@hooks/useStyleConstants";
+
+import { StyleSheet, View, ViewProps, ViewStyle } from "react-native";
+import { useCommonStyles } from "~/hooks/useCommonStyles";
+import { SpacingValues, useSpacingExtractor } from "~/hooks/useSpacingExtractor";
+import { ColorTokens, SpacingTokens, useStyleConstants } from "~/hooks/useStyleConstants";
+
 export type ViewEFloating = "top-left" | "bottom-left" | "top-right" | "bottom-right";
 export type ViewEStyleProps = {
   flex?: number | true;

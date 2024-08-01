@@ -16,7 +16,7 @@ export class SecureStoreBase<T extends object> {
     const setValues: T = {
       ...this.defaultValues,
       ...storedValues,
-      ...values
+      ...values,
     };
     return this.nativeSet(setValues, options);
   }
@@ -26,8 +26,8 @@ export class SecureStoreBase<T extends object> {
     if (!readValues) {
       const data = {
         ...this.defaultValues,
-      }
-      this.nativeSet(data)
+      };
+      this.nativeSet(data);
       return data;
     }
     return {

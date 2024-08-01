@@ -4,10 +4,9 @@ import { IconSource } from "react-native-paper/lib/typescript/src/components/Ico
 type AppBarActionProps = {
   icon: IconSource;
   onPress: () => void;
-}
+};
 
 export const AppBarAction = (props: AppBarActionProps) => {
   const { icon, onPress } = props;
   return <Appbar.Action icon={icon} onPress={onPress} />;
 };
-

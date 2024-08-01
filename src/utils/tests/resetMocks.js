@@ -5,5 +5,5 @@ import * as SecureStore from "expo-secure-store";
 export function resetMocks() {
   jest.clearAllMocks();
   AsyncStorage.__clearJestMock();
-  SecureStore.__clearJestMock()
+  SecureStore.__clearJestMock();
 }

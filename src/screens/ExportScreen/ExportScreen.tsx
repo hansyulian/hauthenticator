@@ -1,18 +1,19 @@
-import { ButtonE } from "@components/ButtonE";
-import { QRCodeE } from "@components/QRCode";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { config } from "@config/config";
-import { useEncryption } from "@hooks/useEncryption";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSnackbar } from "@hooks/useSnackbar";
-import { NavigationProps } from "@modules/Navigation";
-import { OtpMigration } from "@modules/OtpMigration";
-import { copyClipboard } from "@utils/copyClipboard";
 import { useMemo, useState } from "react";
-import GestureRecognizer from "react-native-swipe-gestures";
+
 import { IconButton } from "react-native-paper";
+import GestureRecognizer from "react-native-swipe-gestures";
+import { ButtonE } from "~/components/ButtonE";
+import { QRCodeE } from "~/components/QRCode";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { config } from "~/config/config";
+import { useEncryption } from "~/hooks/useEncryption";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSnackbar } from "~/hooks/useSnackbar";
+import { NavigationProps } from "~/modules/Navigation";
+import { OtpMigration } from "~/modules/OtpMigration";
+import { copyClipboard } from "~/utils/copyClipboard";
 
 export const ExportScreen = (props: NavigationProps<"Export">) => {
   const { authenticatorExtendeds } = props.route.params;

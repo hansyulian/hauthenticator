@@ -11,6 +11,10 @@ export class BaseException extends Error {
   }
 
   public get message() {
-    return JSON.stringify({ type: this.type, details: this.details, referenceCode: this.referenceCode });
+    return JSON.stringify({
+      type: this.type,
+      details: this.details,
+      referenceCode: this.referenceCode,
+    });
   }
 }

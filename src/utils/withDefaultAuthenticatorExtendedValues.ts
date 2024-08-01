@@ -1,6 +1,8 @@
 import { uuid } from "./uuid";
 
-export function withDefaultAuthenticatorExtendedValues(values: AuthenticatorExtendedFormData): AuthenticatorExtended {
+export function withDefaultAuthenticatorExtendedValues(
+  values: AuthenticatorExtendedFormData
+): AuthenticatorExtended {
   const nowString = new Date().toString();
   return {
     createdAt: nowString,

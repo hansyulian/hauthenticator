@@ -1,6 +1,4 @@
-const virtualStorage = {
-
-}
+const virtualStorage = {};
 
 const mock = {
   getItem: jest.fn().mockImplementation((key) => {
@@ -12,6 +10,6 @@ const mock = {
   __clearJestMock: jest.fn().mockImplementation(() => {
     Object.keys(virtualStorage).forEach((key) => delete virtualStorage[key]);
   }),
-}
+};
 
 export default mock;

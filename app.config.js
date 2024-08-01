@@ -1,16 +1,14 @@
 // eslint-disable-next-line no-undef
-const isDebug = process.env.EAS_BUILD_PROFILE === "development";
-
-const name = isDebug ? "HAuth Debug" : "HAuthenticator";
-const packageName = isDebug
-  ? "com.hansyulian.hauthenticator.debug"
-  : "com.hansyulian.hauthenticator";
+const env = process.env;
+const name = env.EXPO_APP_NAME;
+const packageName = env.EXPO_PACKAGE_NAME;
+console.log(name, packageName);
 
 export default {
   expo: {
     name: name,
     slug: "hauthenticator",
-    version: "0.13.0",
+    version: "0.14.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
     scheme: "hauthenticator",

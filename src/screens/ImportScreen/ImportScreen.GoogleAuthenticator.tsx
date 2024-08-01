@@ -1,14 +1,15 @@
-import { ButtonE } from "@components/ButtonE";
-import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
-import { QRScanner } from "@components/QRScanner";
-import { TextBox } from "@components/TextBox";
-import { ViewE } from "@components/ViewE";
-import { useNavigate } from "@hooks/useNavigate";
-import { OtpMigration, ParsedMigrationPayload } from "@modules/OtpMigration";
-import { pasteClipboard } from "@utils/pasteClipboard";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Chip } from "react-native-paper";
+
 import { StyleSheet } from "react-native";
+import { Chip } from "react-native-paper";
+import { ButtonE } from "~/components/ButtonE";
+import { FloatingBottomContainer } from "~/components/FloatingBottomContainer";
+import { QRScanner } from "~/components/QRScanner";
+import { TextBox } from "~/components/TextBox";
+import { ViewE } from "~/components/ViewE";
+import { useNavigate } from "~/hooks/useNavigate";
+import { OtpMigration, ParsedMigrationPayload } from "~/modules/OtpMigration";
+import { pasteClipboard } from "~/utils/pasteClipboard";
 
 export type ImportScreenGoogleAuthenticatorProps = {};
 

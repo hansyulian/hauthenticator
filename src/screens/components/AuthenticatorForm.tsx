@@ -1,18 +1,20 @@
-import { TextBox } from "@components/TextBox";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useSecondsTimer } from "@hooks/useSecondsTimer";
 import { useEffect, useMemo, useState } from "react";
+
+import { TextBox } from "~/components/TextBox";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useEncryption } from "~/hooks/useEncryption";
+import { useSecondsTimer } from "~/hooks/useSecondsTimer";
+import { withDefaultAuthenticatorExtendedValues } from "~/utils/withDefaultAuthenticatorExtendedValues";
+import { withDefaultAuthenticatorValues } from "~/utils/withDefaultAuthenticatorValues";
+
 import { AuthenticatorPreview } from "./AuthenticatorPreview";
-import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorValues";
-import { withDefaultAuthenticatorExtendedValues } from "@utils/withDefaultAuthenticatorExtendedValues";
-import { useEncryption } from "@hooks/useEncryption";
 
 export type AuthenticatorFormProps = {
   form?: AuthenticatorFormData;
   onChange?: (values: AuthenticatorFormData) => void;
   hidePreview?: boolean;
-}
+};
 
 export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
   const { form, onChange, hidePreview = false } = props;
@@ -43,41 +45,40 @@ export const AuthenticatorForm = (props: AuthenticatorFormProps) => {
     return stop;
   }, [showPreview, start, stop]);
 
-  return <ViewE>
-    <TextBox
-      value={name}
-      label='Name'
-      placeholder="Alice Bob Charlie"
-      onChangeText={setName}
-    />
-    <TextBox
-      value={issuer}
-      label='Issuer'
-      placeholder="app from hansyulian.com"
-      onChangeText={setIssuer}
-    />
-    <TextBox
-      value={secret}
-      label='Secret'
-      placeholder="minimum 16 characters"
-      onChangeText={setSecret}
-    />
-    {showPreview && <ViewE marginBottom="medium">
-      <ViewE marginBottom>
-        <TextE weight="bold">Authenticator preview:</TextE>
-      </ViewE>
-      <AuthenticatorPreview
-        authenticatorExtended={withDefaultAuthenticatorExtendedValues(({
-          authenticator: withDefaultAuthenticatorValues({
-            issuer,
-            name,
-            secret,
-          }),
-          encryptedSecret,
-          isFavourite: false,
-        }))}
-        seconds={seconds}
+  return (
+    <ViewE>
+      <TextBox value={name} label="Name" placeholder="Alice Bob Charlie" onChangeText={setName} />
+      <TextBox
+        value={issuer}
+        label="Issuer"
+        placeholder="app from hansyulian.com"
+        onChangeText={setIssuer}
       />
-    </ViewE>}
-  </ViewE>;
+      <TextBox
+        value={secret}
+        label="Secret"
+        placeholder="minimum 16 characters"
+        onChangeText={setSecret}
+      />
+      {showPreview && (
+        <ViewE marginBottom="medium">
+          <ViewE marginBottom>
+            <TextE weight="bold">Authenticator preview:</TextE>
+          </ViewE>
+          <AuthenticatorPreview
+            authenticatorExtended={withDefaultAuthenticatorExtendedValues({
+              authenticator: withDefaultAuthenticatorValues({
+                issuer,
+                name,
+                secret,
+              }),
+              encryptedSecret,
+              isFavourite: false,
+            })}
+            seconds={seconds}
+          />
+        </ViewE>
+      )}
+    </ViewE>
+  );
 };

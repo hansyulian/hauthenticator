@@ -2,21 +2,26 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_APP_NAME": "HAuth Debug",
+        "EXPO_PACKAGE_NAME": "com.hansyulian.hauthenticator.debug"
+      }
     },
     "apk": {
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_APP_NAME": "HAuthenticator",
+        "EXPO_PACKAGE_NAME": "com.hansyulian.hauthenticator"
       }
     },
-    "preview": {
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
+    "production": {
+      "env": {
+        "EXPO_APP_NAME": "HAuthenticator",
+        "EXPO_PACKAGE_NAME": "com.hansyulian.hauthenticator"
       }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "production": {}
+    }
   }
 }
