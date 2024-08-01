@@ -1,18 +1,21 @@
-import { ScreenLayout } from "@components/ScreenLayout";
-import { SettingsScreenToggleRow } from "./SettingsScreen.ToggleRow";
 import { useState } from "react";
-import { useAppInfoContext } from "@hooks/useAppInfoContext";
-import { useFocusedEffect } from "@hooks/useFocusedEffect";
-import { useSetAppInfo } from "@hooks/useSetAppInfo";
-import { SettingsScreenRow } from "./SettingsScreen.Row";
+
 import ExpoConstants from "expo-constants";
+
+import { ScreenLayout } from "@components/ScreenLayout";
 import { TextE } from "@components/TextE";
-import { SettingsScreenActionRow } from "./SettingsScreen.ActionRow";
-import { useNavigate } from "@hooks/useNavigate";
+import { useAppInfoContext } from "@hooks/useAppInfoContext";
 import { useAuthenticate } from "@hooks/useAuthenticate";
+import { useFocusedEffect } from "@hooks/useFocusedEffect";
+import { useNavigate } from "@hooks/useNavigate";
+import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
+import { useSetAppInfo } from "@hooks/useSetAppInfo";
 import { useSyncContext } from "@hooks/useSyncContext";
 import { GoogleDriveSync } from "@modules/GoogleDriveSync";
-import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
+
+import { SettingsScreenActionRow } from "./SettingsScreen.ActionRow";
+import { SettingsScreenRow } from "./SettingsScreen.Row";
+import { SettingsScreenToggleRow } from "./SettingsScreen.ToggleRow";
 
 export const SettingsScreen = () => {
   const { data: appInfo } = useAppInfoContext();
@@ -74,6 +77,11 @@ export const SettingsScreen = () => {
         text="Google drive sync"
         value={syncContext.enabled}
         onChange={onGoogleDriveChange}
+      />
+      <SettingsScreenActionRow
+        icon="content-copy"
+        text="Process Duplicated Entries"
+        onPress={() => navigate("ProcessDuplicated", {})}
       />
       <SettingsScreenActionRow icon="import" text="Import" onPress={() => navigate("Import", {})} />
       <SettingsScreenActionRow icon="export" text="Export" onPress={onExport} />

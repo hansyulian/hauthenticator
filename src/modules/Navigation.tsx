@@ -1,23 +1,25 @@
+import { FC, PropsWithChildren } from "react";
+
 import { config } from "@config/config";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthenticatorAddFormConfirmationScreen } from "@screens/AuthenticatorAddFormConfirmationScreen/AuthenticatorAddFormConfirmationScreen";
 import { AuthenticatorAddScreen } from "@screens/AuthenticatorAddScreen/AuthenticatorAddScreen";
+import { AuthenticatorDetailScreen } from "@screens/AuthenticatorDetailScreen/AuthenticatorDetailScreen";
+import { AuthenticatorEditScreen } from "@screens/AuthenticatorEditScreen/AuthenticatorEditScreen";
 import { AuthenticatorListScreen } from "@screens/AuthenticatorListScreen/AuthenticatorListScreen";
 import { DevToolsScreen } from "@screens/DevToolsScreen/DevToolsScreen";
+import { ExportScreen } from "@screens/ExportScreen/ExportScreen";
+import { ExportSelectionScreen } from "@screens/ExportSelectionScreen/ExportSelectionScreen";
 import { ImportConfirmationScreen } from "@screens/ImportConfirmationScreen/ImportConfirmationScreen";
 import { ImportScreen } from "@screens/ImportScreen/ImportScreen";
+import { ProcessDuplicatedScreen } from "@screens/ProcessDuplicatedScreen/ProcessDuplicatedScreen";
+import { RestoreSyncScreen } from "@screens/RestoreSyncScreen/RestoreSyncScreen";
 import { SettingsScreen } from "@screens/SettingsScreen/SettingsScreen";
-import { FC, PropsWithChildren } from "react";
+import { SetupBackupPasswordScreen } from "@screens/SetupBackupPasswordScreen/SetupBackupPasswordScreen";
+
 const Stack = createNativeStackNavigator<NavigationParams>();
 
 const initialScreen = config.devTools ? "DevTools" : "AuthenticatorList";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AuthenticatorEditScreen } from "@screens/AuthenticatorEditScreen/AuthenticatorEditScreen";
-import { AuthenticatorDetailScreen } from "@screens/AuthenticatorDetailScreen/AuthenticatorDetailScreen";
-import { ExportSelectionScreen } from "@screens/ExportSelectionScreen/ExportSelectionScreen";
-import { ExportScreen } from "@screens/ExportScreen/ExportScreen";
-import { SetupBackupPasswordScreen } from "@screens/SetupBackupPasswordScreen/SetupBackupPasswordScreen";
-import { RestoreSyncScreen } from "@screens/RestoreSyncScreen/RestoreSyncScreen";
 
 export type NavigationParams = {
   AuthenticatorList: {};
@@ -43,6 +45,7 @@ export type NavigationParams = {
   SetupBackupPassword: {};
   RestoreSync: {};
   DevTools: {};
+  ProcessDuplicated: {};
 };
 export type NavigationTargets = keyof NavigationParams;
 export type NavigationProps<RouteName extends NavigationTargets> = NativeStackScreenProps<
@@ -72,6 +75,7 @@ export const Navigation: FC<PropsWithChildren> = () => {
       <Stack.Screen name="Export" component={ExportScreen} />
       <Stack.Screen name="SetupBackupPassword" component={SetupBackupPasswordScreen} />
       <Stack.Screen name="RestoreSync" component={RestoreSyncScreen} />
+      <Stack.Screen name="ProcessDuplicated" component={ProcessDuplicatedScreen} />
       {config.isDevMode && <Stack.Screen name="DevTools" component={DevToolsScreen} />}
     </Stack.Navigator>
   );
