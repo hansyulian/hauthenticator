@@ -1,4 +1,5 @@
-import { NavigationTargets, NavigationParams } from "@modules/Navigation";
+import { NavigationParams, NavigationTargets } from "~/modules/Navigation";
+
 import { useRoute } from "@react-navigation/native";
 
 export function usePageParams<

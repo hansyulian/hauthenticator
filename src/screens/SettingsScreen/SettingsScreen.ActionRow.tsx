@@ -1,5 +1,6 @@
-import { ViewE } from "@components/ViewE";
-import { TextE } from "@components/TextE";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+
 import { SettingsScreenIconRow, SettingsScreenIconRowProps } from "./SettingsScreen.IconRow";
 
 export type SettingsScreenActionRowProps = SettingsScreenIconRowProps & {

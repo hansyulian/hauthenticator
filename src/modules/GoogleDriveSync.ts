@@ -1,6 +1,8 @@
-import { GoogleDrive } from "./GoogleDrive";
+import { sortAuthenticators } from "~/utils/sortAuthenticators";
+
 import { Aes } from "./Aes";
-import { sortAuthenticators } from "@utils/sortAuthenticators";
+import { GoogleDrive } from "./GoogleDrive";
+
 const saveFileName = "sync.json";
 
 let googleDrive: GoogleDrive;

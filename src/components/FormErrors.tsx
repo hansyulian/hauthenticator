@@ -1,5 +1,7 @@
-import { uuid } from "@utils/uuid";
 import { useRef } from "react";
+
+import { uuid } from "~/utils/uuid";
+
 import { TextE } from "./TextE";
 
 export type FormErrorsProps = {

@@ -1,7 +1,8 @@
-import { ColorTokens, useStyleConstants, StyleConstants } from "@hooks/useStyleConstants";
 import { useMemo } from "react";
+
 import { StyleSheet, Text as NativeText } from "react-native";
 import { Text, TextProps } from "react-native-paper";
+import { ColorTokens, StyleConstants, useStyleConstants } from "~/hooks/useStyleConstants";
 
 type FontWeights = "bold" | "normal";
 export type TextETypes = keyof StyleConstants["textSizes"];

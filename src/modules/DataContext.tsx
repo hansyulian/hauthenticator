@@ -1,11 +1,12 @@
-import { LoadableData } from "@hooks/useLoadable";
-import { useLoadableAppInfoDataContext } from "@hooks/useLoadableAppInfoDataContext";
-import { useLoadableAuthenticatorDataContext } from "@hooks/useLoadableAuthenticatorDataContext";
-import { useLoadableSensitiveDataDataContext } from "@hooks/useLoadableSensitiveDataDataContext";
-import { AppInfoStoreData } from "@storage/AppInfoStore";
-import { AuthenticatorStoreData } from "@storage/AuthenticatorStore";
-import { SensitiveDataStoreData } from "@storage/SensitiveDataStore";
-import React, { createContext, PropsWithChildren, useMemo, FC } from "react";
+import React, { createContext, FC, PropsWithChildren, useMemo } from "react";
+
+import { LoadableData } from "~/hooks/useLoadable";
+import { useLoadableAppInfoDataContext } from "~/hooks/useLoadableAppInfoDataContext";
+import { useLoadableAuthenticatorDataContext } from "~/hooks/useLoadableAuthenticatorDataContext";
+import { useLoadableSensitiveDataDataContext } from "~/hooks/useLoadableSensitiveDataDataContext";
+import { AppInfoStoreData } from "~/storage/AppInfoStore";
+import { AuthenticatorStoreData } from "~/storage/AuthenticatorStore";
+import { SensitiveDataStoreData } from "~/storage/SensitiveDataStore";
 
 export type DataContextValue = {
   authenticator: LoadableData<AuthenticatorStoreData>;

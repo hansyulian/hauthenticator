@@ -1,10 +1,13 @@
-import BufferLibrary from "@craftzdog/react-native-buffer";
 import protobuf from "protobufjs";
+import { base32ToUint8Array } from "~/utils/base32ToUint8Array";
+import { uint8ArrayToBase32 } from "~/utils/uint8ArrayToBase32";
+
+import BufferLibrary from "@craftzdog/react-native-buffer";
+
 import { BaseException } from "./BaseException";
-import { uint8ArrayToBase32 } from "@utils/uint8ArrayToBase32";
-import { base32ToUint8Array } from "@utils/base32ToUint8Array";
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const jsonDescriptor = require("@assets/authenticatorProto.json");
+const jsonDescriptor = require("~/assets/authenticatorProto.json");
 const protobufRoot = protobuf.Root.fromJSON(jsonDescriptor);
 const migrationPayload = protobufRoot.lookupType("MigrationPayload");
 

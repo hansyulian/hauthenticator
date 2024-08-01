@@ -1,7 +1,8 @@
-import { DividerE } from "@components/DividerE";
-import { TouchableE } from "@components/TouchableE";
-import { ViewE, ViewEProps } from "@components/ViewE";
 import React from "react";
+
+import { DividerE } from "~/components/DividerE";
+import { TouchableE } from "~/components/TouchableE";
+import { ViewE, ViewEProps } from "~/components/ViewE";
 
 export type SettingsScreenRowProps = ViewEProps & {
   onPress?: () => void;

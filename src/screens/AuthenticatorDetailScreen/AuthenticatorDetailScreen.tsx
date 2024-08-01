@@ -1,13 +1,14 @@
-import { ButtonE } from "@components/ButtonE";
-import { QRCodeE } from "@components/QRCode";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { ScrollViewE } from "@components/ScrollViewE";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useEncryption } from "@hooks/useEncryption";
-import { NavigationProps } from "@modules/Navigation";
-import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useMemo } from "react";
+
+import { ButtonE } from "~/components/ButtonE";
+import { QRCodeE } from "~/components/QRCode";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { ScrollViewE } from "~/components/ScrollViewE";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useEncryption } from "~/hooks/useEncryption";
+import { NavigationProps } from "~/modules/Navigation";
+import { OtpAuthUrl } from "~/modules/OtpAuthUrl";
 
 export const AuthenticatorDetailScreen = (props: NavigationProps<"AuthenticatorDetail">) => {
   const { authenticatorExtended } = props.route.params;

@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { ButtonE } from "@components/ButtonE";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useAsyncCallback } from "@hooks/useAsyncCallback";
-import { useAuthenticators } from "@hooks/useAuthenticators";
-import { useDeleteAuthenticators } from "@hooks/useDeleteAuthenticators";
-import { useEncryption } from "@hooks/useEncryption";
-import { useFocusedEffect } from "@hooks/useFocusedEffect";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSecondsTimer } from "@hooks/useSecondsTimer";
-import { ProcessDuplicatedGroup } from "@screens/ProcessDuplicatedScreen/ProcessDuplicatedScreen.Group";
-import { extractDuplicatedEntries } from "@utils/extractDuplicatedEntries";
+import { ButtonE } from "~/components/ButtonE";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useAsyncCallback } from "~/hooks/useAsyncCallback";
+import { useAuthenticators } from "~/hooks/useAuthenticators";
+import { useDeleteAuthenticators } from "~/hooks/useDeleteAuthenticators";
+import { useEncryption } from "~/hooks/useEncryption";
+import { useFocusedEffect } from "~/hooks/useFocusedEffect";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSecondsTimer } from "~/hooks/useSecondsTimer";
+import { ProcessDuplicatedGroup } from "~/screens/ProcessDuplicatedScreen/ProcessDuplicatedScreen.Group";
+import { extractDuplicatedEntries } from "~/utils/extractDuplicatedEntries";
 
 export const ProcessDuplicatedScreen = () => {
   const authenticators = useAuthenticators();

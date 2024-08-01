@@ -1,10 +1,12 @@
 import { useCallback } from "react";
+
+import { sortAuthenticators } from "~/utils/sortAuthenticators";
+import { uuid } from "~/utils/uuid";
+import { withDefaultAuthenticatorExtendedValues } from "~/utils/withDefaultAuthenticatorExtendedValues";
+import { withDefaultAuthenticatorValues } from "~/utils/withDefaultAuthenticatorValues";
+
 import { useAuthenticatorDataContext } from "./useAuthenticatorDataContext";
-import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorValues";
-import { uuid } from "@utils/uuid";
-import { withDefaultAuthenticatorExtendedValues } from "@utils/withDefaultAuthenticatorExtendedValues";
 import { useEncryption } from "./useEncryption";
-import { sortAuthenticators } from "@utils/sortAuthenticators";
 import { useSync } from "./useSync";
 
 export const useAddAuthenticators = () => {

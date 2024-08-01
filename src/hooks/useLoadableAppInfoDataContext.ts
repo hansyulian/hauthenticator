@@ -1,5 +1,7 @@
-import { AppInfoStore, AppInfoStoreData } from "@storage/AppInfoStore";
 import { useCallback } from "react";
+
+import { AppInfoStore, AppInfoStoreData } from "~/storage/AppInfoStore";
+
 import { useLoadable } from "./useLoadable";
 
 export const useLoadableAppInfoDataContext = () => {

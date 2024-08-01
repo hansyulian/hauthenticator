@@ -1,4 +1,4 @@
-import { isDuplicatedAuthenticator } from "@utils/isDuplicatedAuthenticator";
+import { isDuplicatedAuthenticator } from "~/utils/isDuplicatedAuthenticator";
 
 describe("isDuplicatedAuthenticator", () => {
   const baseAuthenticatorExtended: AuthenticatorExtended = {

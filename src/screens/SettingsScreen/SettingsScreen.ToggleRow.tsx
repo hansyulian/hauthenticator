@@ -1,6 +1,7 @@
-import { ViewE } from "@components/ViewE";
-import { TextE } from "@components/TextE";
-import { SwitchE } from "@components/SwitchE";
+import { SwitchE } from "~/components/SwitchE";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+
 import { SettingsScreenIconRow, SettingsScreenIconRowProps } from "./SettingsScreen.IconRow";
 
 export type SettingsScreenToggleRowProps = SettingsScreenIconRowProps & {

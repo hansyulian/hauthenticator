@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 
 import { Icon } from "react-native-paper";
-
-import { ColorTokens, useStyleConstants } from "@hooks/useStyleConstants";
+import { ColorTokens, useStyleConstants } from "~/hooks/useStyleConstants";
 
 export type IconEProps = {
   color?: ColorTokens;

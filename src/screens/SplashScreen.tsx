@@ -1,6 +1,7 @@
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
 import { PropsWithChildren } from "react";
+
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
 
 export const SplashScreen = (props: PropsWithChildren) => {
   return (

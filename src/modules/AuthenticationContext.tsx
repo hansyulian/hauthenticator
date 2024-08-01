@@ -1,22 +1,23 @@
 import React, {
   createContext,
-  PropsWithChildren,
-  useMemo,
   FC,
-  useEffect,
-  useState,
+  PropsWithChildren,
   useCallback,
+  useEffect,
+  useMemo,
   useRef,
+  useState,
 } from "react";
+
 import {
+  authenticateAsync,
   LocalAuthenticationOptions,
   SecurityLevel,
-  authenticateAsync,
 } from "expo-local-authentication";
-import { useAppInfoContext } from "@hooks/useAppInfoContext";
-import { ViewE } from "@components/ViewE";
-import { checkDeviceAuthentication } from "@utils/checkDeviceAuthentication";
 import { AppState, AppStateStatus } from "react-native";
+import { ViewE } from "~/components/ViewE";
+import { useAppInfoContext } from "~/hooks/useAppInfoContext";
+import { checkDeviceAuthentication } from "~/utils/checkDeviceAuthentication";
 
 export type AuthenticationContextValue = {
   authenticate: () => Promise<boolean>;

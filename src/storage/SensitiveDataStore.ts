@@ -1,5 +1,6 @@
-import { uuid } from "@utils/uuid";
 import md5 from "md5";
+import { uuid } from "~/utils/uuid";
+
 import { SecureStoreBase } from "./SecureStoreBase";
 
 export type SensitiveDataStoreData = {

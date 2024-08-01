@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { FlatList } from "react-native";
-
-import { AppBarAction } from "@components/AppBarAction";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { useAddAuthenticators } from "@hooks/useAddAuthenticators";
-import { useNavigate } from "@hooks/useNavigate";
-import { NavigationProps } from "@modules/Navigation";
+import { AppBarAction } from "~/components/AppBarAction";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { useAddAuthenticators } from "~/hooks/useAddAuthenticators";
+import { useNavigate } from "~/hooks/useNavigate";
+import { NavigationProps } from "~/modules/Navigation";
 
 import { ImportConfirmationScreenRow } from "./ImportConfirmationScreen.Row";
 

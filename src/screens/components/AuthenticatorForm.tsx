@@ -1,12 +1,14 @@
-import { TextBox } from "@components/TextBox";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useSecondsTimer } from "@hooks/useSecondsTimer";
 import { useEffect, useMemo, useState } from "react";
+
+import { TextBox } from "~/components/TextBox";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useEncryption } from "~/hooks/useEncryption";
+import { useSecondsTimer } from "~/hooks/useSecondsTimer";
+import { withDefaultAuthenticatorExtendedValues } from "~/utils/withDefaultAuthenticatorExtendedValues";
+import { withDefaultAuthenticatorValues } from "~/utils/withDefaultAuthenticatorValues";
+
 import { AuthenticatorPreview } from "./AuthenticatorPreview";
-import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorValues";
-import { withDefaultAuthenticatorExtendedValues } from "@utils/withDefaultAuthenticatorExtendedValues";
-import { useEncryption } from "@hooks/useEncryption";
 
 export type AuthenticatorFormProps = {
   form?: AuthenticatorFormData;

@@ -1,5 +1,6 @@
-import { SyncContext } from "@modules/SyncContext";
 import { useContext } from "react";
+
+import { SyncContext } from "~/modules/SyncContext";
 
 export const useSyncContext = () => {
   const context = useContext(SyncContext);

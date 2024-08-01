@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { StyleSheet } from "react-native";
-
-import { IconE } from "@components/IconE";
-import { SecondsProgressCircle } from "@components/SecondsProgressCircle";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useEncryption } from "@hooks/useEncryption";
-import { useStyleConstants } from "@hooks/useStyleConstants";
-import { calculateOtp } from "@utils/calculateOtp";
+import { IconE } from "~/components/IconE";
+import { SecondsProgressCircle } from "~/components/SecondsProgressCircle";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useEncryption } from "~/hooks/useEncryption";
+import { useStyleConstants } from "~/hooks/useStyleConstants";
+import { calculateOtp } from "~/utils/calculateOtp";
 
 export type AuthenticatorPreviewProps = {
   authenticatorExtended: AuthenticatorExtended;

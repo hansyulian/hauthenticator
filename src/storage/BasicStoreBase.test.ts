@@ -1,6 +1,8 @@
+import { resetMocks } from "~/utils/tests/resetMocks";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { BasicStoreBase } from "./BasicStoreBase";
-import { resetMocks } from "@utils/tests/resetMocks";
 
 type TestStructure = {
   defaultValue: string;

@@ -1,4 +1,4 @@
-import { NavigationTargets } from "@modules/Navigation";
+import { NavigationTargets } from "~/modules/Navigation";
 
 export const config = {
   isDevMode: false,

@@ -1,7 +1,9 @@
 import { useCallback, useMemo } from "react";
+
+import { Aes } from "~/modules/Aes";
+import { BaseException } from "~/modules/BaseException";
+
 import { useSensitiveDataContext } from "./useSensitiveDataContext";
-import { BaseException } from "@modules/BaseException";
-import { Aes } from "@modules/Aes";
 
 export const useEncryption = () => {
   const { data: sensitiveData } = useSensitiveDataContext();

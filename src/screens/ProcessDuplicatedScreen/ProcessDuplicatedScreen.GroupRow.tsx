@@ -1,6 +1,6 @@
-import { CheckboxE } from "@components/CheckboxE";
-import { ViewE } from "@components/ViewE";
-import { AuthenticatorPreview } from "@screens/components/AuthenticatorPreview";
+import { CheckboxE } from "~/components/CheckboxE";
+import { ViewE } from "~/components/ViewE";
+import { AuthenticatorPreview } from "~/screens/components/AuthenticatorPreview";
 
 export type ProcessDuplicatedGroupRowProps = {
   entry: SelectableAuthenticatorExtended;

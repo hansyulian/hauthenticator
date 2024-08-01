@@ -1,10 +1,11 @@
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import React, { createContext, useState, PropsWithChildren, useMemo, FC, useCallback } from "react";
-import { Menu, Modal, Portal } from "react-native-paper";
+import React, { createContext, FC, PropsWithChildren, useCallback, useMemo, useState } from "react";
+
 import { StyleSheet } from "react-native";
-import { useStyleConstants } from "@hooks/useStyleConstants";
-import { DividerE } from "@components/DividerE";
+import { Menu, Modal, Portal } from "react-native-paper";
+import { DividerE } from "~/components/DividerE";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useStyleConstants } from "~/hooks/useStyleConstants";
 
 // name: Menu
 export type MenuContextValue = {

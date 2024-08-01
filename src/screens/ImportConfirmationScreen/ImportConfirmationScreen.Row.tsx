@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { CheckboxE } from "@components/CheckboxE";
-import { DividerE } from "@components/DividerE";
-import { TextBox } from "@components/TextBox";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
+import { CheckboxE } from "~/components/CheckboxE";
+import { DividerE } from "~/components/DividerE";
+import { TextBox } from "~/components/TextBox";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
 
 export type ImportConfirmationScreenRowProps = {
   authenticatorForm: AuthenticatorImportForm;

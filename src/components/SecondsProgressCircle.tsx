@@ -1,6 +1,5 @@
-import { useStyleConstants } from "@hooks/useStyleConstants";
 import * as Progress from "react-native-progress";
-import { TextE } from "./TextE";
+import { useStyleConstants } from "~/hooks/useStyleConstants";
 
 export type SecondsProgressCircleProps = {
   seconds: number;

@@ -1,4 +1,4 @@
-import { extractDuplicatedEntries } from "@utils/extractDuplicatedEntries";
+import { extractDuplicatedEntries } from "~/utils/extractDuplicatedEntries";
 
 describe("extractDuplicatedEntries", () => {
   const baseAuthenticatorExtended: AuthenticatorExtended = {

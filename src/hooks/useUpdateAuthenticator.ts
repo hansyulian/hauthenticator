@@ -1,6 +1,8 @@
 import { useCallback } from "react";
+
+import { BaseException } from "~/modules/BaseException";
+
 import { useAuthenticatorDataContext } from "./useAuthenticatorDataContext";
-import { BaseException } from "@modules/BaseException";
 import { useSync } from "./useSync";
 
 export const useUpdateAuthenticator = () => {

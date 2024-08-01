@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
-import { Dimensions, LayoutChangeEvent, ScrollView, StyleSheet } from "react-native";
-import { useCommonStyles } from "@hooks/useCommonStyles";
+
+import { LayoutChangeEvent, ScrollView, StyleSheet } from "react-native";
+import { useCommonStyles } from "~/hooks/useCommonStyles";
+
 import { ViewE, ViewEProps } from "./ViewE";
+
 export type ScrollViewEProps = ViewEProps;
 
 export const ScrollViewE = (props: ScrollViewEProps) => {

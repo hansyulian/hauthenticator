@@ -1,5 +1,7 @@
-import { AppInfoStoreData } from "@storage/AppInfoStore";
 import { useCallback } from "react";
+
+import { AppInfoStoreData } from "~/storage/AppInfoStore";
+
 import { useAppInfoContext } from "./useAppInfoContext";
 
 export function useSetAppInfo() {

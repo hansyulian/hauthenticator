@@ -1,5 +1,6 @@
 import * as SecureStore from "expo-secure-store";
-import { resetMocks } from "@utils/tests/resetMocks";
+import { resetMocks } from "~/utils/tests/resetMocks";
+
 import { SecureStoreBase } from "./SecureStoreBase";
 
 type TestStructure = {

@@ -1,8 +1,9 @@
-import { CheckboxE } from "@components/CheckboxE";
-import { DividerE } from "@components/DividerE";
-import { LabelValuePair } from "@components/LabelValuePair";
-import { ViewE } from "@components/ViewE";
 import { useEffect, useState } from "react";
+
+import { CheckboxE } from "~/components/CheckboxE";
+import { DividerE } from "~/components/DividerE";
+import { LabelValuePair } from "~/components/LabelValuePair";
+import { ViewE } from "~/components/ViewE";
 
 export type ExportSelectionScreenItemRowProps = {
   authenticatorExtended: AuthenticatorExtended;

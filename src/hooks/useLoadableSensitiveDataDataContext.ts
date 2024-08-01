@@ -1,5 +1,7 @@
-import { SensitiveDataStore, SensitiveDataStoreData } from "@storage/SensitiveDataStore";
 import { useCallback } from "react";
+
+import { SensitiveDataStore, SensitiveDataStoreData } from "~/storage/SensitiveDataStore";
+
 import { useLoadable } from "./useLoadable";
 
 export const useLoadableSensitiveDataDataContext = () => {

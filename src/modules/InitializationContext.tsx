@@ -1,8 +1,9 @@
-import { useAppInfoContext } from "@hooks/useAppInfoContext";
-import { useAuthenticatorDataContext } from "@hooks/useAuthenticatorDataContext";
-import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
-import { SplashScreen } from "@screens/SplashScreen";
-import React, { createContext, PropsWithChildren, useMemo, FC, useEffect, useState } from "react";
+import React, { createContext, FC, PropsWithChildren, useEffect, useMemo, useState } from "react";
+
+import { useAppInfoContext } from "~/hooks/useAppInfoContext";
+import { useAuthenticatorDataContext } from "~/hooks/useAuthenticatorDataContext";
+import { useSensitiveDataContext } from "~/hooks/useSensitiveDataContext";
+import { SplashScreen } from "~/screens/SplashScreen";
 
 export type InitializationContextValue = {};
 

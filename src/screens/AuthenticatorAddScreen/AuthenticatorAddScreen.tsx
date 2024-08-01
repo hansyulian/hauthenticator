@@ -1,10 +1,12 @@
-import { SegmentedButtonsE } from "@components/SegmentedButtonsE";
-import { ScreenLayout } from "@components/ScreenLayout";
 import React, { useState } from "react";
-import { ViewE } from "@components/ViewE";
-import { AuthenticatorAddScreenScan } from "./AuthenticatorAddScreen.Scan";
+
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { ScrollViewE } from "~/components/ScrollViewE";
+import { SegmentedButtonsE } from "~/components/SegmentedButtonsE";
+import { ViewE } from "~/components/ViewE";
+
 import { AuthenticatorAddScreenForm } from "./AuthenticatorAddScreen.Form";
-import { ScrollViewE } from "@components/ScrollViewE";
+import { AuthenticatorAddScreenScan } from "./AuthenticatorAddScreen.Scan";
 
 export type AuthenticatorAddScreenProps = {};
 export const AuthenticatorAddScreen = () => {

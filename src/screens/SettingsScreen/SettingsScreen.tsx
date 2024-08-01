@@ -1,17 +1,16 @@
 import { useState } from "react";
 
 import ExpoConstants from "expo-constants";
-
-import { ScreenLayout } from "@components/ScreenLayout";
-import { TextE } from "@components/TextE";
-import { useAppInfoContext } from "@hooks/useAppInfoContext";
-import { useAuthenticate } from "@hooks/useAuthenticate";
-import { useFocusedEffect } from "@hooks/useFocusedEffect";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
-import { useSetAppInfo } from "@hooks/useSetAppInfo";
-import { useSyncContext } from "@hooks/useSyncContext";
-import { GoogleDriveSync } from "@modules/GoogleDriveSync";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { TextE } from "~/components/TextE";
+import { useAppInfoContext } from "~/hooks/useAppInfoContext";
+import { useAuthenticate } from "~/hooks/useAuthenticate";
+import { useFocusedEffect } from "~/hooks/useFocusedEffect";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSensitiveDataContext } from "~/hooks/useSensitiveDataContext";
+import { useSetAppInfo } from "~/hooks/useSetAppInfo";
+import { useSyncContext } from "~/hooks/useSyncContext";
+import { GoogleDriveSync } from "~/modules/GoogleDriveSync";
 
 import { SettingsScreenActionRow } from "./SettingsScreen.ActionRow";
 import { SettingsScreenRow } from "./SettingsScreen.Row";

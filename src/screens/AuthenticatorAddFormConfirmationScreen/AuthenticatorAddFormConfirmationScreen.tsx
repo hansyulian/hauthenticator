@@ -1,13 +1,14 @@
-import { ButtonE } from "@components/ButtonE";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { ViewE } from "@components/ViewE";
-import { NavigationProps } from "@modules/Navigation";
-import { useAddAuthenticators } from "@hooks/useAddAuthenticators";
-import { useNavigate } from "@hooks/useNavigate";
-import { AuthenticatorForm } from "@screens/components/AuthenticatorForm";
-import { validateAuthenticatorForm } from "@utils/validateAuthenticatorForm";
 import { useState } from "react";
-import { useSync } from "@hooks/useSync";
+
+import { ButtonE } from "~/components/ButtonE";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { ViewE } from "~/components/ViewE";
+import { useAddAuthenticators } from "~/hooks/useAddAuthenticators";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSync } from "~/hooks/useSync";
+import { NavigationProps } from "~/modules/Navigation";
+import { AuthenticatorForm } from "~/screens/components/AuthenticatorForm";
+import { validateAuthenticatorForm } from "~/utils/validateAuthenticatorForm";
 
 export const AuthenticatorAddFormConfirmationScreen = (
   props: NavigationProps<"AuthenticatorAddFormConfirmation">

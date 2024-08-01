@@ -1,4 +1,5 @@
-import { withDefaultAuthenticatorValues } from "@utils/withDefaultAuthenticatorValues";
+import { withDefaultAuthenticatorValues } from "~/utils/withDefaultAuthenticatorValues";
+
 import { BaseException } from "./BaseException";
 
 export const OtpAuthUrl = {

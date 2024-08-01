@@ -1,17 +1,17 @@
-import { ButtonE } from "@components/ButtonE";
-import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { TextBox } from "@components/TextBox";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useAsyncCallback } from "@hooks/useAsyncCallback";
-import { useBack } from "@hooks/useBack";
-import { useConfirmationDialog } from "@hooks/useConfirmationDialog";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
-import { useSetAppInfo } from "@hooks/useSetAppInfo";
-import { GoogleDriveSync } from "@modules/GoogleDriveSync";
 import { useCallback, useState } from "react";
+
+import { ButtonE } from "~/components/ButtonE";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { TextBox } from "~/components/TextBox";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useAsyncCallback } from "~/hooks/useAsyncCallback";
+import { useBack } from "~/hooks/useBack";
+import { useConfirmationDialog } from "~/hooks/useConfirmationDialog";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSensitiveDataContext } from "~/hooks/useSensitiveDataContext";
+import { useSetAppInfo } from "~/hooks/useSetAppInfo";
+import { GoogleDriveSync } from "~/modules/GoogleDriveSync";
 
 export const RestoreSyncScreen = () => {
   const [password, setPassword] = useState("");

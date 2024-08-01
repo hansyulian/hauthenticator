@@ -1,6 +1,6 @@
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { ProcessDuplicatedGroupRow } from "@screens/ProcessDuplicatedScreen/ProcessDuplicatedScreen.GroupRow";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { ProcessDuplicatedGroupRow } from "~/screens/ProcessDuplicatedScreen/ProcessDuplicatedScreen.GroupRow";
 
 export type ProcessDuplicatedGroupProps = {
   group: DuplicatedGroup;

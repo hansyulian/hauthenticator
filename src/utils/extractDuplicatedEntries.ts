@@ -1,4 +1,4 @@
-import { isDuplicatedAuthenticator } from "@utils/isDuplicatedAuthenticator";
+import { isDuplicatedAuthenticator } from "~/utils/isDuplicatedAuthenticator";
 
 export function extractDuplicatedEntries(authenticators: AuthenticatorComparisonDetail[]) {
   const groups: AuthenticatorComparisonDetail[][] = [];

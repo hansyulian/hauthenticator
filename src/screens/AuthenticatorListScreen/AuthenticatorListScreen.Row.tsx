@@ -1,19 +1,19 @@
 import { memo, useState } from "react";
 
-import { DividerE } from "@components/DividerE";
-import { IconE } from "@components/IconE";
-import { TextE } from "@components/TextE";
-import { TouchableE } from "@components/TouchableE";
-import { ViewE } from "@components/ViewE";
-import { useAuthenticate } from "@hooks/useAuthenticate";
-import { useConfirmationDialog } from "@hooks/useConfirmationDialog";
-import { useDeleteAuthenticators } from "@hooks/useDeleteAuthenticators";
-import { useMenu } from "@hooks/useMenu";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSnackbar } from "@hooks/useSnackbar";
-import { useUpdateAuthenticator } from "@hooks/useUpdateAuthenticator";
-import { AuthenticatorPreview } from "@screens/components/AuthenticatorPreview";
-import { copyClipboard } from "@utils/copyClipboard";
+import { DividerE } from "~/components/DividerE";
+import { IconE } from "~/components/IconE";
+import { TextE } from "~/components/TextE";
+import { TouchableE } from "~/components/TouchableE";
+import { ViewE } from "~/components/ViewE";
+import { useAuthenticate } from "~/hooks/useAuthenticate";
+import { useConfirmationDialog } from "~/hooks/useConfirmationDialog";
+import { useDeleteAuthenticators } from "~/hooks/useDeleteAuthenticators";
+import { useMenu } from "~/hooks/useMenu";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSnackbar } from "~/hooks/useSnackbar";
+import { useUpdateAuthenticator } from "~/hooks/useUpdateAuthenticator";
+import { AuthenticatorPreview } from "~/screens/components/AuthenticatorPreview";
+import { copyClipboard } from "~/utils/copyClipboard";
 
 export type AuthenticatorListScreenRowProps = {
   authenticatorExtended: AuthenticatorExtended;

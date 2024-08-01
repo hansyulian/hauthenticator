@@ -1,7 +1,8 @@
-import { useSyncContext } from "@hooks/useSyncContext";
 import { useEffect } from "react";
-import { ProgressBar } from "react-native-paper";
+
 import { StyleSheet } from "react-native";
+import { ProgressBar } from "react-native-paper";
+import { useSyncContext } from "~/hooks/useSyncContext";
 
 export const SyncProgressBar = () => {
   const { state } = useSyncContext();

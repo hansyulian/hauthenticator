@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import { ButtonE } from "@components/ButtonE";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { ScrollViewE } from "@components/ScrollViewE";
-import { config } from "@config/config";
-import { useNavigate } from "@hooks/useNavigate";
-import DevPlayground from "@screens/DevToolsScreen/DevPlayground.example";
+import { ButtonE } from "~/components/ButtonE";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { ScrollViewE } from "~/components/ScrollViewE";
+import { config } from "~/config/config";
+import { useNavigate } from "~/hooks/useNavigate";
+import DevPlayground from "~/screens/DevToolsScreen/DevPlayground.example";
 
 export const DevToolsScreen = () => {
   const navigate = useNavigate();

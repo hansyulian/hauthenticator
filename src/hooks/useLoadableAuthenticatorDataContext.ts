@@ -1,6 +1,8 @@
-import { config } from "@config/config";
-import { AuthenticatorStore, AuthenticatorStoreData } from "@storage/AuthenticatorStore";
 import { useCallback } from "react";
+
+import { config } from "~/config/config";
+import { AuthenticatorStore, AuthenticatorStoreData } from "~/storage/AuthenticatorStore";
+
 import { useLoadable } from "./useLoadable";
 
 const defaultAuthenticatorExtendedValues: Partial<AuthenticatorExtended> = {

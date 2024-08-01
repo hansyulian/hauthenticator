@@ -1,5 +1,6 @@
-import { waitNextSecond } from "@utils/waitNextSecond";
 import { useCallback, useEffect, useState } from "react";
+
+import { waitNextSecond } from "~/utils/waitNextSecond";
 
 export function useSecondsTimer(mod: number = 60, lazy: boolean = true) {
   const [seconds, setSeconds] = useState(new Date().getSeconds());

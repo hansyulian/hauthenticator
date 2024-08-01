@@ -1,7 +1,9 @@
-import { NavigationParams, NavigationTargets } from "@modules/Navigation";
+import { useCallback } from "react";
+
+import { NavigationParams, NavigationTargets } from "~/modules/Navigation";
+
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useCallback } from "react";
 
 type NavigateOptions = {
   pop?: number;

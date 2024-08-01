@@ -1,7 +1,9 @@
-import { useStyleConstants } from "@hooks/useStyleConstants";
 import { PropsWithChildren, useMemo } from "react";
+
 import { StyleSheet } from "react-native";
 import { Modal, Portal } from "react-native-paper";
+import { useStyleConstants } from "~/hooks/useStyleConstants";
+
 import { ViewE } from "./ViewE";
 
 export type ModalEProps = PropsWithChildren & {

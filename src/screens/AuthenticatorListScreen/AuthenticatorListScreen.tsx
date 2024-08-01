@@ -1,19 +1,18 @@
 import { useMemo, useState } from "react";
 
 import { FlatList, StyleSheet } from "react-native";
-
-import { AppBarAction } from "@components/AppBarAction";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { SearchBarE } from "@components/SearchBarE";
-import { SecondsProgressCircle } from "@components/SecondsProgressCircle";
-import { ViewE } from "@components/ViewE";
-import { useAuthenticators } from "@hooks/useAuthenticators";
-import { useCommonStyles } from "@hooks/useCommonStyles";
-import { useFocusedEffect } from "@hooks/useFocusedEffect";
-import { useIsAppActive } from "@hooks/useIsAppActive";
-import { useNavigate } from "@hooks/useNavigate";
-import { useSecondsTimer } from "@hooks/useSecondsTimer";
-import { sortAuthenticators } from "@utils/sortAuthenticators";
+import { AppBarAction } from "~/components/AppBarAction";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { SearchBarE } from "~/components/SearchBarE";
+import { SecondsProgressCircle } from "~/components/SecondsProgressCircle";
+import { ViewE } from "~/components/ViewE";
+import { useAuthenticators } from "~/hooks/useAuthenticators";
+import { useCommonStyles } from "~/hooks/useCommonStyles";
+import { useFocusedEffect } from "~/hooks/useFocusedEffect";
+import { useIsAppActive } from "~/hooks/useIsAppActive";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useSecondsTimer } from "~/hooks/useSecondsTimer";
+import { sortAuthenticators } from "~/utils/sortAuthenticators";
 
 import { AuthenticatorListScreenRow } from "./AuthenticatorListScreen.Row";
 

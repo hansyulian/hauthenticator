@@ -1,12 +1,13 @@
-import { ButtonE } from "@components/ButtonE";
-import { FloatingBottomContainer } from "@components/FloatingBottomContainer";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { TextBox } from "@components/TextBox";
-import { ViewE } from "@components/ViewE";
-import { useNavigate } from "@hooks/useNavigate";
-import { useUpdateAuthenticator } from "@hooks/useUpdateAuthenticator";
-import { NavigationProps } from "@modules/Navigation";
 import { useEffect, useState } from "react";
+
+import { ButtonE } from "~/components/ButtonE";
+import { FloatingBottomContainer } from "~/components/FloatingBottomContainer";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { TextBox } from "~/components/TextBox";
+import { ViewE } from "~/components/ViewE";
+import { useNavigate } from "~/hooks/useNavigate";
+import { useUpdateAuthenticator } from "~/hooks/useUpdateAuthenticator";
+import { NavigationProps } from "~/modules/Navigation";
 
 export const AuthenticatorEditScreen = (props: NavigationProps<"AuthenticatorEdit">) => {
   const { authenticatorExtended } = props.route.params;

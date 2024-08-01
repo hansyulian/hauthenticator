@@ -1,17 +1,18 @@
-import { ButtonE } from "@components/ButtonE";
-import { ScreenLayout } from "@components/ScreenLayout";
-import { TextBox } from "@components/TextBox";
-import { TextE } from "@components/TextE";
-import { ViewE } from "@components/ViewE";
-import { useAsyncCallback } from "@hooks/useAsyncCallback";
-import { useBack } from "@hooks/useBack";
-import { useConfirmationDialog } from "@hooks/useConfirmationDialog";
-import { useSensitiveDataContext } from "@hooks/useSensitiveDataContext";
-import { useSetAppInfo } from "@hooks/useSetAppInfo";
-import { useSync } from "@hooks/useSync";
-import { GoogleDriveSync } from "@modules/GoogleDriveSync";
-import { NavigationProps } from "@modules/Navigation";
 import { useCallback, useState } from "react";
+
+import { ButtonE } from "~/components/ButtonE";
+import { ScreenLayout } from "~/components/ScreenLayout";
+import { TextBox } from "~/components/TextBox";
+import { TextE } from "~/components/TextE";
+import { ViewE } from "~/components/ViewE";
+import { useAsyncCallback } from "~/hooks/useAsyncCallback";
+import { useBack } from "~/hooks/useBack";
+import { useConfirmationDialog } from "~/hooks/useConfirmationDialog";
+import { useSensitiveDataContext } from "~/hooks/useSensitiveDataContext";
+import { useSetAppInfo } from "~/hooks/useSetAppInfo";
+import { useSync } from "~/hooks/useSync";
+import { GoogleDriveSync } from "~/modules/GoogleDriveSync";
+import { NavigationProps } from "~/modules/Navigation";
 
 export const SetupBackupPasswordScreen = (props: NavigationProps<"SetupBackupPassword">) => {
   const [password, setPassword] = useState("");
