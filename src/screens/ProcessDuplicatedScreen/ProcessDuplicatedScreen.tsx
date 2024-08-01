@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { ButtonE } from "~/components/ButtonE";
 import { ScreenLayout } from "~/components/ScreenLayout";
+import { ScrollViewE } from "~/components/ScrollViewE";
 import { TextE } from "~/components/TextE";
 import { ViewE } from "~/components/ViewE";
 import { useAsyncCallback } from "~/hooks/useAsyncCallback";
@@ -81,6 +82,7 @@ export const ProcessDuplicatedScreen = () => {
   return (
     <ScreenLayout
       headerText="Process Duplicated Entries"
+      stickyBottomComponent
       bottomComponent={
         <ViewE padding>
           <ButtonE onPress={onFinish} loading={isLoading}>
@@ -88,7 +90,7 @@ export const ProcessDuplicatedScreen = () => {
           </ButtonE>
         </ViewE>
       }>
-      <ViewE padding gap>
+      <ScrollViewE padding gap>
         {duplicatedGroups.map((duplicatedGroup, index) => (
           <ViewE gap key={`duplicated-group-${index}`}>
             <TextE type="paragraphHeader" weight="bold">
@@ -101,7 +103,7 @@ export const ProcessDuplicatedScreen = () => {
             />
           </ViewE>
         ))}
-      </ViewE>
+      </ScrollViewE>
     </ScreenLayout>
   );
 };

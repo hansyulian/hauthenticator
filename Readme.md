@@ -13,3 +13,22 @@ Then I started this personal project to create my own "Dream Authenticator" app.
 - Duplication removal
 - Biometric authentication
 - Google drive sync
+
+# Prerequisites
+
+- NodeJS (tested with v22)
+-
+
+# Development setup
+
+1. `cp .env.example .env.local`
+1. `npm -g i eas-cli` then `eas login`
+1. `npm i`
+1. build the debug apk, then install to emulator/device
+1. `npm start`
+
+# How To Build
+
+- Cloud build: `eas build -p android`
+- Local debug build: `eas build -p android --profile development --local`
+- Local production build: `eas build -p android --profile apk --local`
