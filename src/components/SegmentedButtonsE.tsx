@@ -12,12 +12,12 @@ export type SegmentedButtonsEOptions<T = string> = {
   style?: ViewStyle;
   uncheckedColor?: string;
   checkedColor?: string;
-}
+};
 export type SegmentedButtonsEProps<T = string> = {
   value: T;
   onChange: (value: T) => void;
   buttons: SegmentedButtonsEOptions<T>[];
-}
+};
 
 export function SegmentedButtonsE<T = string>(props: SegmentedButtonsEProps<T>) {
   const { buttons, onChange, value } = props;
@@ -32,9 +32,11 @@ export function SegmentedButtonsE<T = string>(props: SegmentedButtonsEProps<T>) 
     return buttons;
   }, [buttons, constants]);
 
-  return <SegmentedButtons
-    value={value as any}
-    onValueChange={onChange as any}
-    buttons={buttonsExtended as any}
-  />;
+  return (
+    <SegmentedButtons
+      value={value as any}
+      onValueChange={onChange as any}
+      buttons={buttonsExtended as any}
+    />
+  );
 }

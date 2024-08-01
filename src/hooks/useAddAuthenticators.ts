@@ -11,18 +11,23 @@ export const useAddAuthenticators = () => {
   const { data, set } = useAuthenticatorDataContext();
   const encryption = useEncryption();
   const sync = useSync();
-  return useCallback(async (forms: AuthenticatorFormData[]) => {
-    const newRecords = forms.map(form => withDefaultAuthenticatorExtendedValues({
-      id: uuid() as string,
-      status: "ACTIVE",
-      authenticator: withDefaultAuthenticatorValues(form),
-      encryptedSecret: encryption.encrypt(form.secret),
-    }));
-    const newAuthenticators = [...(data?.authenticators || []), ...newRecords];
-    const sortedAuthenticators = sortAuthenticators(newAuthenticators);
-    await set({
-      authenticators: sortedAuthenticators,
-    });
-    sync();
-  }, [data?.authenticators, encryption, set, sync]);
+  return useCallback(
+    async (forms: AuthenticatorFormData[]) => {
+      const newRecords = forms.map((form) =>
+        withDefaultAuthenticatorExtendedValues({
+          id: uuid() as string,
+          status: "ACTIVE",
+          authenticator: withDefaultAuthenticatorValues(form),
+          encryptedSecret: encryption.encrypt(form.secret),
+        })
+      );
+      const newAuthenticators = [...(data?.authenticators || []), ...newRecords];
+      const sortedAuthenticators = sortAuthenticators(newAuthenticators);
+      await set({
+        authenticators: sortedAuthenticators,
+      });
+      sync();
+    },
+    [data?.authenticators, encryption, set, sync]
+  );
 };

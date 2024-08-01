@@ -28,18 +28,14 @@ export const AuthenticatorAddFormConfirmationScreen = (
     });
   };
 
-  return <ScreenLayout headerText='Confirmation' >
-    <ViewE padding='medium'>
-      <AuthenticatorForm
-        form={props.route.params.form}
-        onChange={setForm}
-      />
-      <ButtonE
-        disabled={!valid}
-        onPress={save}
-      >
-        Confirm
-      </ButtonE>
-    </ViewE>
-  </ScreenLayout>;
-}; 
+  return (
+    <ScreenLayout headerText="Confirmation">
+      <ViewE padding="medium">
+        <AuthenticatorForm form={props.route.params.form} onChange={setForm} />
+        <ButtonE disabled={!valid} onPress={save}>
+          Confirm
+        </ButtonE>
+      </ViewE>
+    </ScreenLayout>
+  );
+};

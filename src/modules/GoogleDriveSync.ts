@@ -20,7 +20,7 @@ async function initialize() {
 }
 
 async function hasSaveFile() {
-  return !!await googleDrive.getFile(saveFileName);
+  return !!(await googleDrive.getFile(saveFileName));
 }
 
 async function reset() {
@@ -44,19 +44,20 @@ async function testPassword(password: string) {
   }
 }
 
-
 async function sync(authenticators: AuthenticatorExtended[]): Promise<AuthenticatorExtended[]> {
   const saveFileContent = await getSaveFileContent();
   const processedAuthenticators = syncProcessor(authenticators, saveFileContent.authenticators);
   await writeSaveFile(processedAuthenticators);
   return processedAuthenticators;
-
 }
 
-function syncProcessor(localRecords: AuthenticatorExtended[], syncRecords: AuthenticatorExtended[]): AuthenticatorExtended[] {
+function syncProcessor(
+  localRecords: AuthenticatorExtended[],
+  syncRecords: AuthenticatorExtended[]
+): AuthenticatorExtended[] {
   const index: Record<string, AuthenticatorExtended> = {};
-  localRecords.forEach(record => index[record.id] = record);
-  syncRecords.forEach(record => {
+  localRecords.forEach((record) => (index[record.id] = record));
+  syncRecords.forEach((record) => {
     const id = record.id;
     if (!index[id]) {
       index[id] = record;
@@ -65,7 +66,7 @@ function syncProcessor(localRecords: AuthenticatorExtended[], syncRecords: Authe
     if (index[id].updatedAt < record.updatedAt) {
       index[id] = record;
       return;
-    };
+    }
   });
   const values = Object.values(index);
   const result = sortAuthenticators(values);
@@ -85,7 +86,6 @@ async function writeSaveFile(authenticators: AuthenticatorExtended[]) {
     ...getDefaultAuthenticatorData(),
     authenticators,
   });
-
 }
 
 function getDefaultAuthenticatorData(): AuthenticatorBackupData {

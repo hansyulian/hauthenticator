@@ -4,11 +4,11 @@ import { Snackbar } from "react-native-paper";
 type ShowSnackbarOptions = {
   onDismiss?: () => void;
   action?: {
-    label: string,
+    label: string;
     onPress: () => void;
-  },
-  duration?: number
-}
+  };
+  duration?: number;
+};
 export type SnackbarContextValue = {
   visible: boolean;
   show: (text: string, options?: ShowSnackbarOptions) => void;
@@ -40,15 +40,16 @@ export const SnackbarProvider: FC<PropsWithChildren> = ({ children }) => {
     };
   }, [visible, show, dismiss]);
 
-  return <SnackbarContext.Provider value={value}>
-    {children}
-    <Snackbar
-      visible={visible}
-      onDismiss={dismiss}
-      action={options.action}
-      duration={options.duration || 3000}
-    >{
-        text
-      }</Snackbar>
-  </SnackbarContext.Provider>;
+  return (
+    <SnackbarContext.Provider value={value}>
+      {children}
+      <Snackbar
+        visible={visible}
+        onDismiss={dismiss}
+        action={options.action}
+        duration={options.duration || 3000}>
+        {text}
+      </Snackbar>
+    </SnackbarContext.Provider>
+  );
 };

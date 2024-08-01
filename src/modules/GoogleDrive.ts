@@ -6,7 +6,7 @@ type GoogleDriveFileMetadata = {
   kind: string;
   mimeType: string;
   name: string;
-}
+};
 
 export class GoogleDrive {
   public driveInstance: GDrive;
@@ -30,14 +30,16 @@ export class GoogleDrive {
   }
 
   public async listFiles() {
-    return (await this.driveInstance.files.list({
-      spaces: "appDataFolder",
-    })).files as GoogleDriveFileMetadata[];
+    return (
+      await this.driveInstance.files.list({
+        spaces: "appDataFolder",
+      })
+    ).files as GoogleDriveFileMetadata[];
   }
 
   public async getFile(name: string) {
     const files = await this.listFiles();
-    return files.find(record => record.name === name);
+    return files.find((record) => record.name === name);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -52,7 +54,9 @@ export class GoogleDrive {
 
   public async delete(name: string) {
     const files = await this.listFiles();
-    const promises = files.filter(file => file.name === name).map(file => this.driveInstance.files.delete(file.id));
+    const promises = files
+      .filter((file) => file.name === name)
+      .map((file) => this.driveInstance.files.delete(file.id));
     await Promise.all(promises);
     return true;
   }
@@ -63,12 +67,13 @@ export class GoogleDrive {
     if (existingFile) {
       await this.delete(name);
     }
-    return this.driveInstance.files.newResumableUploader().setRequestBody({
-      name: name,
-      parents: ["appDataFolder"]
-    }).setData(
-      JSON.stringify(content), MimeTypes.JSON
-    ).execute();
+    return this.driveInstance.files
+      .newResumableUploader()
+      .setRequestBody({
+        name: name,
+        parents: ["appDataFolder"],
+      })
+      .setData(JSON.stringify(content), MimeTypes.JSON)
+      .execute();
   }
-
 }

@@ -1,18 +1,14 @@
+import React, { useEffect, useState } from "react";
+
 import { CheckboxE } from "@components/CheckboxE";
 import { DividerE } from "@components/DividerE";
 import { TextBox } from "@components/TextBox";
 import { TextE } from "@components/TextE";
 import { ViewE } from "@components/ViewE";
-import React, { useEffect, useState } from "react";
-
-export type AuthenticatorImportForm = {
-  authenticator: Authenticator;
-  selected: boolean;
-}
 
 export type ImportConfirmationScreenRowProps = {
   authenticatorForm: AuthenticatorImportForm;
-}
+};
 
 export const ImportConfirmationScreenRow = (props: ImportConfirmationScreenRowProps) => {
   const [issuer, setIssuer] = useState(props.authenticatorForm.authenticator.issuer);
@@ -33,19 +29,23 @@ export const ImportConfirmationScreenRow = (props: ImportConfirmationScreenRowPr
     props.authenticatorForm.selected = selected;
   }, [props.authenticatorForm, selected]);
 
-  return <ViewE>
-    <ViewE padding row>
-      <ViewE column flex>
-        <ViewE row flex gap>
-          <TextBox flex label='Issuer' value={issuer} onChangeText={setIssuer}></TextBox>
-          <TextBox flex label='Name' value={name} onChangeText={setName}></TextBox>
+  return (
+    <ViewE>
+      <ViewE padding row>
+        <ViewE column flex>
+          <ViewE row flex gap>
+            <TextBox flex label="Issuer" value={issuer} onChangeText={setIssuer}></TextBox>
+            <TextBox flex label="Name" value={name} onChangeText={setName}></TextBox>
+          </ViewE>
+          <TextE>
+            Secret: <TextE weight="bold">{props.authenticatorForm.authenticator.secret}</TextE>
+          </TextE>
         </ViewE>
-        <TextE>Secret: <TextE weight="bold">{props.authenticatorForm.authenticator.secret}</TextE></TextE>
+        <ViewE justifyContent="center">
+          <CheckboxE checked={selected} onPress={onToggleSelected} />
+        </ViewE>
       </ViewE>
-      <ViewE justifyContent="center">
-        <CheckboxE checked={selected} onPress={onToggleSelected} />
-      </ViewE>
+      <DividerE />
     </ViewE>
-    <DividerE />
-  </ViewE>;
+  );
 };

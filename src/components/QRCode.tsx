@@ -6,7 +6,7 @@ import { ViewE } from "./ViewE";
 export type QRCodeProps = {
   value: string;
   size?: number;
-}
+};
 
 export const QRCodeE = (props: QRCodeProps) => {
   const { value, size } = props;
@@ -14,10 +14,9 @@ export const QRCodeE = (props: QRCodeProps) => {
   const onLayout = (event: LayoutChangeEvent) => {
     setWidth(event.nativeEvent.layout.width);
   };
-  return <ViewE fullWidth onLayout={onLayout}>
-    <QRCode
-      size={size || width}
-      value={value}
-    />
-  </ViewE>;
+  return (
+    <ViewE fullWidth onLayout={onLayout}>
+      <QRCode size={size || width} value={value} />
+    </ViewE>
+  );
 };

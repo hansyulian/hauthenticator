@@ -7,9 +7,7 @@ import { AuthenticatorForm } from "@screens/components/AuthenticatorForm";
 import { validateAuthenticatorForm } from "@utils/validateAuthenticatorForm";
 import { useState } from "react";
 
-export type AuthenticatorAddScreenFormProps = {
-
-}
+export type AuthenticatorAddScreenFormProps = {};
 
 export const AuthenticatorAddScreenForm = () => {
   const [form, setForm] = useState<AuthenticatorFormData>();
@@ -25,18 +23,16 @@ export const AuthenticatorAddScreenForm = () => {
     back(1);
   };
 
-  return <>
-    <ViewE paddingHorizontal>
-      <AuthenticatorForm
-        onChange={setForm}
-      />
-    </ViewE>
-    <FloatingBottomContainer padding>
-      <ButtonE
-        disabled={!valid}
-        onPress={save}
-      >Confirm
-      </ButtonE>
-    </FloatingBottomContainer>
-  </>;
+  return (
+    <>
+      <ViewE paddingHorizontal>
+        <AuthenticatorForm onChange={setForm} />
+      </ViewE>
+      <FloatingBottomContainer padding>
+        <ButtonE disabled={!valid} onPress={save}>
+          Confirm
+        </ButtonE>
+      </FloatingBottomContainer>
+    </>
+  );
 };

@@ -3,10 +3,13 @@ import { useCallback } from "react";
 import { useLoadable } from "./useLoadable";
 
 export const useLoadableSensitiveDataDataContext = () => {
-  return useLoadable(useCallback(async () => SensitiveDataStore.get(), []), {
-    id: "sensitiveData",
-    onSet: useCallback(async (data: Partial<SensitiveDataStoreData>) => {
-      await SensitiveDataStore.set(data);
-    }, [])
-  });
+  return useLoadable(
+    useCallback(async () => SensitiveDataStore.get(), []),
+    {
+      id: "sensitiveData",
+      onSet: useCallback(async (data: Partial<SensitiveDataStoreData>) => {
+        await SensitiveDataStore.set(data);
+      }, []),
+    }
+  );
 };

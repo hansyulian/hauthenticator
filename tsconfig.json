@@ -20,13 +20,8 @@
       "@storage": ["src/storage"],
       "@storage/*": ["src/storage/*"],
       "@hooks": ["src/hooks"],
-      "@hooks/*": ["src/hooks/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

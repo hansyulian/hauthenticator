@@ -6,7 +6,6 @@ export const OtpAuthUrl = {
   decode,
 };
 
-
 function encode(authenticator: Authenticator): string {
   const userDomain = encodeURIComponent(`${authenticator.issuer}:${authenticator.name}`);
   return `otpauth://${authenticator.type}/${userDomain}?secret=${authenticator.secret}&issuer=${authenticator.issuer}`;
@@ -41,4 +40,3 @@ function decode(uriString: string): Authenticator {
     secret,
   });
 }
-

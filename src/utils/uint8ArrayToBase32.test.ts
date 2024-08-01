@@ -38,18 +38,17 @@ describe("Utils: uint8ArrayToBase32", () => {
     expect(result).toEqual(expectedBase32);
   });
 
-
   it("5. should be able to work well with the uint8ArrayToBase32", () => {
     const base32String = "KFVHG23MOJ6Q";
     const uint8Array = base32ToUint8Array(base32String);
     const returnedString = uint8ArrayToBase32(uint8Array);
     expect(returnedString).toEqual(base32String);
-  })
+  });
   it("6. should be able to work well with the uint8ArrayToBase32", () => {
     const uint8Array = new Uint8Array([81, 106, 115, 107, 108, 114, 125]);
     const base32String = uint8ArrayToBase32(uint8Array);
     const returnedUint8Array = base32ToUint8Array(base32String);
     expect(returnedUint8Array).toEqual(uint8Array);
-  })
+  });
   // Add more it cases as needed
 });

@@ -1,4 +1,3 @@
-
 const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 const base32Lookup: { [key: string]: number } = {};
 for (let i = 0; i < base32Chars.length; i++) {
@@ -6,7 +5,6 @@ for (let i = 0; i < base32Chars.length; i++) {
 }
 
 export function base32ToUint8Array(base32String: string) {
-
   // Create a lookup table for decoding Base32 characters
 
   // Remove any padding characters

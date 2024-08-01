@@ -5,7 +5,7 @@ import { SecureStoreBase } from "./SecureStoreBase";
 type TestStructure = {
   defaultValue: string;
   newValue?: string;
-}
+};
 
 describe("Storage: SecureStoreBase", () => {
   const mockKey = "testKey";
@@ -22,7 +22,11 @@ describe("Storage: SecureStoreBase", () => {
 
     await secureStore.set(mockValues);
 
-    expect(SecureStore.setItemAsync).toHaveBeenCalledWith(mockKey, JSON.stringify({ ...mockDefaultValues, ...mockValues }), {});
+    expect(SecureStore.setItemAsync).toHaveBeenCalledWith(
+      mockKey,
+      JSON.stringify({ ...mockDefaultValues, ...mockValues }),
+      {}
+    );
   });
 
   it("2. get method should call AsyncStorage.getItem with the correct arguments", async () => {

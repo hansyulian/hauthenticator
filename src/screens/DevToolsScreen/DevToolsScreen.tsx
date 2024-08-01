@@ -1,10 +1,11 @@
+import React, { useCallback, useEffect, useState } from "react";
+
 import { ButtonE } from "@components/ButtonE";
 import { ScreenLayout } from "@components/ScreenLayout";
 import { ScrollViewE } from "@components/ScrollViewE";
 import { config } from "@config/config";
 import { useNavigate } from "@hooks/useNavigate";
-import React, { useCallback, useEffect, useState } from "react";
-const DevPlayground = __DEV__ ? require("./DevPlayground") : null;
+import DevPlayground from "@screens/DevToolsScreen/DevPlayground.example";
 
 export const DevToolsScreen = () => {
   const navigate = useNavigate();
@@ -24,12 +25,12 @@ export const DevToolsScreen = () => {
     }
   }, [goToHome, navigate, shouldTriggerNavigate]);
 
-  return <ScreenLayout headerText='Dev Tools'>
-    <ScrollViewE padding>
-      <ButtonE onPress={goToHome}>
-        Go to home screen
-      </ButtonE>
-      <DevPlayground />
-    </ScrollViewE>
-  </ScreenLayout>;
-}; 
+  return (
+    <ScreenLayout headerText="Dev Tools">
+      <ScrollViewE padding>
+        <ButtonE onPress={goToHome}>Go to home screen</ButtonE>
+        <DevPlayground />
+      </ScrollViewE>
+    </ScreenLayout>
+  );
+};

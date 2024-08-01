@@ -1,7 +1,5 @@
-export type TemplateComponentProps = {
-
-}
+export type TemplateComponentProps = {};
 
 export const TemplateComponent = (props: TemplateComponentProps) => {
-  return <>    </>;
+  return <> </>;
 };

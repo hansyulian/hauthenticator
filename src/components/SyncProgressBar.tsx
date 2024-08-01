@@ -1,6 +1,6 @@
-import { useSyncContext } from "@hooks/useSyncContext"
+import { useSyncContext } from "@hooks/useSyncContext";
 import { useEffect } from "react";
-import { ProgressBar } from "react-native-paper"
+import { ProgressBar } from "react-native-paper";
 import { StyleSheet } from "react-native";
 
 export const SyncProgressBar = () => {
@@ -8,17 +8,17 @@ export const SyncProgressBar = () => {
 
   useEffect(() => {
     console.log("sync state", state);
-  }, [state])
+  }, [state]);
   if (state !== "SYNCING") {
     return null;
   }
-  return <ProgressBar indeterminate style={styles.progressBar} />
-}
+  return <ProgressBar indeterminate style={styles.progressBar} />;
+};
 
 const styles = StyleSheet.create({
   progressBar: {
     position: "absolute",
     bottom: 0,
     left: 0,
-  }
-})
+  },
+});

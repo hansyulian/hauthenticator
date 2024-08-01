@@ -1,7 +1,7 @@
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 GoogleSignin.configure({
-  scopes: ["https://www.googleapis.com/auth/drive.appdata"]
+  scopes: ["https://www.googleapis.com/auth/drive.appdata"],
 });
 
 export const GoogleLogin = {
@@ -14,7 +14,7 @@ async function getTokens() {
 }
 
 async function login() {
-  if (!await GoogleSignin.isSignedIn()) {
+  if (!(await GoogleSignin.isSignedIn())) {
     await GoogleSignin.signIn();
   }
   const userInfo = await GoogleSignin.getCurrentUser();

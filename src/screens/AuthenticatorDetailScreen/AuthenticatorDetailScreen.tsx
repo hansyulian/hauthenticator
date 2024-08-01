@@ -9,9 +9,7 @@ import { NavigationProps } from "@modules/Navigation";
 import { OtpAuthUrl } from "@modules/OtpAuthUrl";
 import { useMemo } from "react";
 
-export const AuthenticatorDetailScreen = (
-  props: NavigationProps<"AuthenticatorDetail">
-) => {
+export const AuthenticatorDetailScreen = (props: NavigationProps<"AuthenticatorDetail">) => {
   const { authenticatorExtended } = props.route.params;
   const encryption = useEncryption();
 
@@ -28,39 +26,43 @@ export const AuthenticatorDetailScreen = (
     });
   }, [displaySecret, authenticatorExtended.authenticator]);
 
-  return <ScreenLayout headerText='Authenticator Detail'>
-    <ScrollViewE>
-      <ViewE padding gap fullWidth>
-        <ViewE paddingHorizontal='large' marginBottom gap>
-          <QRCodeE value={otpUrl} />
-          <TextE type='code' color='tertiary'>{otpUrl}</TextE>
-          <ButtonE icon={"content-copy"}>Copy</ButtonE>
+  return (
+    <ScreenLayout headerText="Authenticator Detail">
+      <ScrollViewE>
+        <ViewE padding gap fullWidth>
+          <ViewE paddingHorizontal="large" marginBottom gap>
+            <QRCodeE value={otpUrl} />
+            <TextE type="code" color="tertiary">
+              {otpUrl}
+            </TextE>
+            <ButtonE icon={"content-copy"}>Copy</ButtonE>
+          </ViewE>
+          <ViewE row justifyContent="space-between">
+            <ViewE flex>
+              <TextE type="pairLabel">Issuer</TextE>
+            </ViewE>
+            <ViewE flex={3} alignItems="flex-end">
+              <TextE type="pairValue">{authenticatorExtended.authenticator.issuer}</TextE>
+            </ViewE>
+          </ViewE>
+          <ViewE row justifyContent="space-between">
+            <ViewE flex>
+              <TextE type="pairLabel">Name</TextE>
+            </ViewE>
+            <ViewE flex={3} alignItems="flex-end">
+              <TextE type="pairValue">{authenticatorExtended.authenticator.name}</TextE>
+            </ViewE>
+          </ViewE>
+          <ViewE row justifyContent="space-between" gap>
+            <ViewE flex>
+              <TextE type="pairLabel">Secret</TextE>
+            </ViewE>
+            <ViewE flex={3} alignItems="flex-end">
+              <TextE type="pairValue">{displaySecret}</TextE>
+            </ViewE>
+          </ViewE>
         </ViewE>
-        <ViewE row justifyContent='space-between'>
-          <ViewE flex>
-            <TextE type='pairLabel'>Issuer</TextE>
-          </ViewE>
-          <ViewE flex={3} alignItems="flex-end">
-            <TextE type='pairValue'>{authenticatorExtended.authenticator.issuer}</TextE>
-          </ViewE>
-        </ViewE>
-        <ViewE row justifyContent='space-between'>
-          <ViewE flex>
-            <TextE type='pairLabel'>Name</TextE>
-          </ViewE>
-          <ViewE flex={3} alignItems="flex-end">
-            <TextE type='pairValue'>{authenticatorExtended.authenticator.name}</TextE>
-          </ViewE>
-        </ViewE>
-        <ViewE row justifyContent='space-between' gap>
-          <ViewE flex>
-            <TextE type='pairLabel'>Secret</TextE>
-          </ViewE>
-          <ViewE flex={3} alignItems="flex-end">
-            <TextE type='pairValue'>{displaySecret}</TextE>
-          </ViewE>
-        </ViewE>
-      </ViewE>
-    </ScrollViewE>
-  </ScreenLayout>;
-}; 
+      </ScrollViewE>
+    </ScreenLayout>
+  );
+};

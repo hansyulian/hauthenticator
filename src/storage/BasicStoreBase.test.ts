@@ -5,7 +5,7 @@ import { resetMocks } from "@utils/tests/resetMocks";
 type TestStructure = {
   defaultValue: string;
   newValue?: string;
-}
+};
 
 describe("Storage: BasicStoreBase", () => {
   const mockKey = "testKey";
@@ -22,7 +22,10 @@ describe("Storage: BasicStoreBase", () => {
 
     await basicStore.set(mockValues);
 
-    expect(AsyncStorage.setItem).toHaveBeenCalledWith(mockKey, JSON.stringify({ ...mockDefaultValues, ...mockValues }));
+    expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+      mockKey,
+      JSON.stringify({ ...mockDefaultValues, ...mockValues })
+    );
   });
 
   it("2. get method should call AsyncStorage.getItem with the correct arguments", async () => {

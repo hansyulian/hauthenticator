@@ -1,4 +1,3 @@
-
 export function withDefaultAuthenticatorValues(values: AuthenticatorFormData): Authenticator {
   return {
     algorithm: "sha1",

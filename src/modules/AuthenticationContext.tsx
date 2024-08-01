@@ -1,5 +1,18 @@
-import React, { createContext, PropsWithChildren, useMemo, FC, useEffect, useState, useCallback, useRef } from "react";
-import { LocalAuthenticationOptions, SecurityLevel, authenticateAsync } from "expo-local-authentication";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useMemo,
+  FC,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+} from "react";
+import {
+  LocalAuthenticationOptions,
+  SecurityLevel,
+  authenticateAsync,
+} from "expo-local-authentication";
 import { useAppInfoContext } from "@hooks/useAppInfoContext";
 import { ViewE } from "@components/ViewE";
 import { checkDeviceAuthentication } from "@utils/checkDeviceAuthentication";
@@ -8,11 +21,13 @@ import { AppState, AppStateStatus } from "react-native";
 export type AuthenticationContextValue = {
   authenticate: () => Promise<boolean>;
   deviceAuthenticationLevel: SecurityLevel | undefined;
-  preventAuthenticate: <T>(callback: AsyncCallback<T>) => Promise<T>
+  preventAuthenticate: <T>(callback: AsyncCallback<T>) => Promise<T>;
 };
 
-export const AuthenticationContext = createContext<AuthenticationContextValue | undefined>(undefined);
-export type AuthenticateOptions = LocalAuthenticationOptions & { privacyGuard: boolean }
+export const AuthenticationContext = createContext<AuthenticationContextValue | undefined>(
+  undefined
+);
+export type AuthenticateOptions = LocalAuthenticationOptions & { privacyGuard: boolean };
 
 export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
   const [requireInitialization, setRequireInitialization] = useState(true);
@@ -22,22 +37,25 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data: appInfo, state: appInfoState } = useAppInfoContext();
   const authenticationMutex = useRef<boolean>(false);
 
-  const authenticate = useCallback(async (options: Partial<AuthenticateOptions> = {}) => {
-    const { privacyGuard = true, ...rest } = options;
-    if (!deviceAuthenticationLevel || deviceAuthenticationLevel < 1) {
-      return true;
-    }
-    if (privacyGuard) {
-      setPrivacyGuard(true);
-    }
-    const result = await authenticateAsync({
-      ...rest,
-    });
-    if (result.success) {
-      setPrivacyGuard(false);
-    }
-    return result.success;
-  }, [deviceAuthenticationLevel]);
+  const authenticate = useCallback(
+    async (options: Partial<AuthenticateOptions> = {}) => {
+      const { privacyGuard = true, ...rest } = options;
+      if (!deviceAuthenticationLevel || deviceAuthenticationLevel < 1) {
+        return true;
+      }
+      if (privacyGuard) {
+        setPrivacyGuard(true);
+      }
+      const result = await authenticateAsync({
+        ...rest,
+      });
+      if (result.success) {
+        setPrivacyGuard(false);
+      }
+      return result.success;
+    },
+    [deviceAuthenticationLevel]
+  );
 
   const preventAuthenticate = useCallback(async function <T>(fn: AsyncCallback<T>) {
     authenticationMutex.current = true;
@@ -49,17 +67,17 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
   const initializeAuthenticated = useCallback(async () => {
     setRequireInitialization(false);
     setPrivacyGuard(false);
-    return await Promise.all([
-
-    ]);
+    return await Promise.all([]);
   }, []);
 
   useEffect(() => {
     return AppState.addEventListener("change", async (nextState: AppStateStatus) => {
-      if (nextState === "active"
-        && lastAppState.current === "background"
-        && appInfo?.authenticationEnabled
-        && !authenticationMutex.current) {
+      if (
+        nextState === "active" &&
+        lastAppState.current === "background" &&
+        appInfo?.authenticationEnabled &&
+        !authenticationMutex.current
+      ) {
         authenticate();
       }
       lastAppState.current = nextState;
@@ -69,10 +87,11 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     init();
     async function init() {
-      if (deviceAuthenticationLevel === undefined
-        || appInfoState !== "LOADED"
-        || !requireInitialization
-        || !appInfo
+      if (
+        deviceAuthenticationLevel === undefined ||
+        appInfoState !== "LOADED" ||
+        !requireInitialization ||
+        !appInfo
       ) {
         return;
       }
@@ -85,10 +104,17 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
       }
       initializeAuthenticated();
     }
-  }, [authenticate, requireInitialization, deviceAuthenticationLevel, initializeAuthenticated, appInfo, appInfoState]);
+  }, [
+    authenticate,
+    requireInitialization,
+    deviceAuthenticationLevel,
+    initializeAuthenticated,
+    appInfo,
+    appInfoState,
+  ]);
 
   useEffect(() => {
-    checkDeviceAuthentication().then(result => {
+    checkDeviceAuthentication().then((result) => {
       setDeviceAuthenticationLevel(result);
     });
   }, []);
@@ -103,12 +129,10 @@ export const AuthenticationProvider: FC<PropsWithChildren> = ({ children }) => {
   if (appInfoState !== "LOADED") {
     return null;
   }
-  return <AuthenticationContext.Provider value={value}>
-    {children}
-    {privacyGuard && <ViewE
-      floating="top-left"
-      fullSize
-      backgroundColor="surface"
-    />}
-  </AuthenticationContext.Provider>;
+  return (
+    <AuthenticationContext.Provider value={value}>
+      {children}
+      {privacyGuard && <ViewE floating="top-left" fullSize backgroundColor="surface" />}
+    </AuthenticationContext.Provider>
+  );
 };
