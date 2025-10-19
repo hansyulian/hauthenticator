@@ -19,6 +19,7 @@ export class GoogleDrive {
   constructor(accessToken: string) {
     this.driveInstance = new GDrive();
     this.driveInstance.accessToken = accessToken;
+    this.driveInstance.fetchTimeout = 3000;
   }
 
   public get accessToken() {
